@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import * as firebase from 'firebase';
 @Component({
   templateUrl: 'app.html'
 })
@@ -12,11 +13,39 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+
+      let firebaseConfig = {
+      apiKey: "AIzaSyBd1xGDso154dUpM1j6bQto0X5zNyrezKA",
+      authDomain: "lebondoc-eisti.firebaseapp.com",
+      databaseURL: "https://lebondoc-eisti.firebaseio.com",
+      projectId: "lebondoc-eisti",
+      storageBucket: "lebondoc-eisti.appspot.com",
+      messagingSenderId: "56679413695",
+      appId: "1:56679413695:web:6613f6373e1958e643d30a",
+      measurementId: "G-VQ1JENQ81S"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      firebase.auth().onAuthStateChanged(
+       (user) => {
+         if (user) {
+           this.isAuth = true;
+           this.content.push(DashboardPage);
+         } else {
+           this.isAuth = false;
+           this.content.push(HomePage);
+         }
+       }
+     );
+
     });
   }
-}
 
+  onDisconnect() {
+    firebase.auth().signOut();
+    this.menuCtrl.close();
+  }
+}
