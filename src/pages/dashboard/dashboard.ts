@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {ModalController, NavController, NavParams} from 'ionic-angular';
+import {OffreSimplePage} from "../offres/offre-simple/offre-simple";
+import {OffresPage} from "../offres/offres";
 
 /**
  * Generated class for the DashboardPage page.
@@ -14,7 +16,8 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class DashboardPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+
   }
 
   ionViewDidLoad() {

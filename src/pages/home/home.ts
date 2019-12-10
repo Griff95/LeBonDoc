@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {ModalController, NavController} from 'ionic-angular';
 import { ConnexionPage } from '../connexion/connexion';
 import {InscriptionPage } from '../inscription/inscription'
+import {OffresPage} from "../offres/offres";
 
 
 @Component({
@@ -10,13 +11,15 @@ import {InscriptionPage } from '../inscription/inscription'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public modalCtrl: ModalController) {}
 
   onGoToConnexion() {
-    this.navCtrl.push(ConnexionPage);
+    let modal = this.modalCtrl.create(ConnexionPage);
+    modal.present();
   }
   onGoToInsciption(){
-    this.navCtrl.push(InscriptionPage);
+    let modal = this.modalCtrl.create(InscriptionPage);
+    modal.present();
   }
 
 }

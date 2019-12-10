@@ -18,6 +18,7 @@ export class InscriptionPage {
 
   connexionForm: FormGroup;
   errorMessage: string;
+  private authForm: FormGroup;
 
   constructor(private navParams: NavParams, public navCtrl: NavController, private formBuilder: FormBuilder,private connexionService: ConnexionService) {
   }

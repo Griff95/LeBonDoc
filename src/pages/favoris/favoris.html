@@ -1,0 +1,12 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Favoris</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>  
+    <button ion-item *ngFor="let offre of offres" (click)="onLoadOffre(offre)">
+      {{ offre.name }}
+  </button>
+  
+  </ion-content>

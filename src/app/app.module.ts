@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import * as firebase from 'firebase';
-import { HttpModule } from '@angular/http'
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -13,6 +13,15 @@ import { InscriptionPage } from '../pages/inscription/inscription';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 
 import { ConnexionService } from '../services/connexion.service';
+import {CalendrierPage} from "../pages/calendrier/calendrier";
+import {DeposerPage} from "../pages/deposer/deposer";
+import {FavorisPage} from "../pages/favoris/favoris";
+import {MessagesPage} from "../pages/messages/messages";
+import {MonComptePage} from "../pages/moncompte/moncompte";
+import {OffresPage} from "../pages/offres/offres";
+import {TabsPage} from "../pages/tabs/tabs";
+import {IonicStorageModule} from "@ionic/storage";
+import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
 
 
 
@@ -23,11 +32,20 @@ import { ConnexionService } from '../services/connexion.service';
     HomePage,
     ConnexionPage,
     InscriptionPage,
-    DashboardPage
+    DashboardPage,
+    CalendrierPage,
+    DeposerPage,
+    FavorisPage,
+    MessagesPage,
+    MonComptePage,
+    OffresPage,
+    TabsPage,
+    OffreSimplePage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,7 +53,15 @@ import { ConnexionService } from '../services/connexion.service';
     HomePage,
     ConnexionPage,
     InscriptionPage,
-    DashboardPage
+    DashboardPage,
+    CalendrierPage,
+    DeposerPage,
+    FavorisPage,
+    MessagesPage,
+    MonComptePage,
+    OffresPage,
+    TabsPage,
+    OffreSimplePage
   ],
   providers: [
     StatusBar,

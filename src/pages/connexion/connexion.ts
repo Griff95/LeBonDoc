@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ConnexionService } from '../../services/connexion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardPage } from '../dashboard/dashboard';
+import {OffresPage} from "../offres/offres";
 
 
 
@@ -48,7 +49,7 @@ export class ConnexionPage implements OnInit{
 
     this.connexionService.signInUser(email, password).then(
       () => {
-        this.navCtrl.push(DashboardPage);
+        this.navCtrl.push(OffresPage);
       },
       (error) => {
         this.errorMessage = error;
