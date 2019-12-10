@@ -21,9 +21,9 @@ export class ConnexionPage implements OnInit{
 
   connexionForm: FormGroup;
   errorMessage: string;
+  private authForm: FormGroup;
 
   constructor(private navParams: NavParams, public navCtrl: NavController, private formBuilder: FormBuilder,private connexionService: ConnexionService ) {
-
   }
 
   ionViewDidLoad() {
