@@ -10,7 +10,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ConnexionPage } from '../pages/connexion/connexion';
 import { InscriptionPage } from '../pages/inscription/inscription';
-import { DashboardPage } from '../pages/dashboard/dashboard';
+
 
 import { ConnexionService } from '../services/connexion.service';
 import {CalendrierPage} from "../pages/calendrier/calendrier";
@@ -24,6 +24,8 @@ import {IonicStorageModule} from "@ionic/storage";
 import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
 
 import { OffresFav} from '../pages/favoris/offresfav';
+import {Offre} from "../models/Offre";
+import {OffresService} from "../services/offres.service";
 
 
 
@@ -34,7 +36,6 @@ import { OffresFav} from '../pages/favoris/offresfav';
     HomePage,
     ConnexionPage,
     InscriptionPage,
-    DashboardPage,
     CalendrierPage,
     DeposerPage,
     FavorisPage,
@@ -55,7 +56,6 @@ import { OffresFav} from '../pages/favoris/offresfav';
     HomePage,
     ConnexionPage,
     InscriptionPage,
-    DashboardPage,
     CalendrierPage,
     DeposerPage,
     FavorisPage,
@@ -70,7 +70,9 @@ import { OffresFav} from '../pages/favoris/offresfav';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConnexionService,
-    OffresFav
+    OffresFav,
+    Offre,
+    OffresService
   ]
 })
 export class AppModule {}

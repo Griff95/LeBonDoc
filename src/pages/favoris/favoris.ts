@@ -7,6 +7,7 @@ import { OffresFav } from './offresfav';
 
 
 import { Storage } from '@ionic/storage';
+import {Offre} from "../../models/Offre";
 
 @Component({
   selector: 'page-favoris',
@@ -14,7 +15,7 @@ import { Storage } from '@ionic/storage';
 })
 export class FavorisPage {
 
-  offres = null;
+  offres = Offre;
 
   constructor(public navParams: NavParams, public viewCtrl: ViewController, public storage : Storage, private modalCtrl: ModalController,  public global: OffresFav) {
 

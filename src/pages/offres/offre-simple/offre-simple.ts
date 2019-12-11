@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { FavorisPage } from '../../favoris/favoris';
 import { OffresPage } from '../offres';
 import { OffresFav } from '../../favoris/offresfav';
+import {Offre} from "../../../models/Offre";
 
 
 
@@ -14,11 +15,7 @@ import { OffresFav } from '../../favoris/offresfav';
 export class OffreSimplePage implements OnInit {
 
 
-  offre: {
-    name: string,
-    description: string[],
-    isFav: boolean
-  };
+  offre: Offre;
   constructor(public navParams: NavParams, public viewCtrl: ViewController, public storage : Storage, public global: OffresFav) {
 
   }

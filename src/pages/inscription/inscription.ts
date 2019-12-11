@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ConnexionService } from '../../services/connexion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DashboardPage } from '../dashboard/dashboard';
+import {TabsPage} from "../tabs/tabs";
+
 /**
  * Generated class for the InscriptionPage page.
  *
@@ -44,7 +45,7 @@ export class InscriptionPage {
 
     this.connexionService.signUpUser(email, password).then(
       () => {
-        this.navCtrl.push(DashboardPage);
+        this.navCtrl.push(TabsPage);
       },
       (error) => {
         this.errorMessage = error;

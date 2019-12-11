@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ConnexionService } from '../../services/connexion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DashboardPage } from '../dashboard/dashboard';
-import {OffresPage} from "../offres/offres";
 import {TabsPage} from "../tabs/tabs"
 
 

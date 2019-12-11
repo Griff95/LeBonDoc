@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { OffreSimplePage } from './offre-simple/offre-simple';
 import { Storage } from '@ionic/storage';
+import {Offre} from "../../models/Offre";
+import {OffresService} from "../../services/offres.service";
 
 @Component({
   selector: 'page-offres',
@@ -9,35 +11,17 @@ import { Storage } from '@ionic/storage';
 })
 export class OffresPage {
 
-  offresList = [
-    {
-      name: 'Medecin generaliste , Corse',
-      description: [
-        'Nous recherchons un medecin generaliste disponible afin de remplacer un medecin'
-      ],
-      isFav: false
-    },
-    {
-      name: 'Dentiste, Toulouse',
-      description: [
-        'Nous recherchons un dentiste pour remplacer un depart a la retraite'
-      ],
-      isFav: false
-    },
-    {
-      name: 'Psychologue, Toulouse',
-      description: [
-        'Nous recherchons un Psychologue pour rejoindre l équipe de l hopital XXX'
-      ],
-      isFav: false
-    }
-  ];
+  offresList: Offre[];
 
-  constructor(private modalCtrl: ModalController, public storage : Storage) {
+  constructor(private modalCtrl: ModalController, public storage : Storage,private offresService: OffresService) {
   storage.set('offres', this.offresList);
   }
 
-  onLoadOffre(offre: {name: string, description: string[]}) {
+  ionViewWillEnter(){
+    this.offresList = this.offresService.offresList.slice();
+  }
+
+  onLoadOffre(offre: {name: string, description: string[], lieux: string}) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
   }

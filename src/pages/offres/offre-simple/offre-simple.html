@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-card-header>{{ offre.name }}</ion-card-header>
+    <ion-card-header>{{ offre.name }}, {{offre.lieux}}</ion-card-header>
     <ion-card-content>
       <p *ngFor="let line of offre.description">{{ line }}</p>
     </ion-card-content>
