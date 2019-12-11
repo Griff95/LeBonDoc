@@ -1,6 +1,9 @@
 import {Offre} from "../models/Offre";
+import {Subject} from "rxjs";
 
 export class OffresService{
+
+  offres$ = new Subject<Offre[]>()
 
   offresList: Offre[] = [
     {
@@ -28,5 +31,17 @@ export class OffresService{
       isFav: false
     }
   ];
+
+  addOffre(offre: Offre) {
+    this.offresList.push(offre);
+    this.emitOffres();
+  }
+
+  emitOffres() {
+    this.offres$.next(this.offresList.slice());
+  }
+
+
+
 }
 
