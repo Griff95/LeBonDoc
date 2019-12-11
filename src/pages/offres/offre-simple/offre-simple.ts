@@ -3,6 +3,8 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FavorisPage } from '../../favoris/favoris';
 import { OffresPage } from '../offres';
+import { OffresFav } from '../../favoris/offresfav';
+
 
 
 @Component({
@@ -10,14 +12,14 @@ import { OffresPage } from '../offres';
   templateUrl: 'offre-simple.html',
 })
 export class OffreSimplePage implements OnInit {
-  
+
 
   offre: {
     name: string,
     description: string[],
     isFav: boolean
   };
-  constructor(public navParams: NavParams, public viewCtrl: ViewController, public storage : Storage) {
+  constructor(public navParams: NavParams, public viewCtrl: ViewController, public storage : Storage, public global: OffresFav) {
 
   }
 
@@ -32,12 +34,11 @@ export class OffreSimplePage implements OnInit {
   fav(offre) {
     if (offre.isFav == false) {
       offre.isFav = true;
-      
-      
+      this.global.offresfav.push(offre);
     }
     else {
       offre.isFav = false;
+      this.global.offresfav.splice(this.global.offresfav.indexOf(offre.name),1);
     }
-    
   }
 }

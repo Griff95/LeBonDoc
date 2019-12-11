@@ -3,10 +3,10 @@
       <ion-title>Favoris</ion-title>
     </ion-navbar>
   </ion-header>
-  
-  <ion-content padding>  
-    <button ion-item *ngFor="let offre of offres" (click)="onLoadOffre(offre)">
+
+  <ion-content padding>
+    <button ion-item *ngFor="let offre of global.offresfav"(click)="onLoadOffre(offre)">
       {{ offre.name }}
   </button>
-  
+
   </ion-content>

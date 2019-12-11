@@ -23,6 +23,8 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {IonicStorageModule} from "@ionic/storage";
 import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
 
+import { OffresFav} from '../pages/favoris/offresfav';
+
 
 
 
@@ -67,7 +69,8 @@ import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ConnexionService
+    ConnexionService,
+    OffresFav
   ]
 })
 export class AppModule {}

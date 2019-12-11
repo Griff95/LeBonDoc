@@ -11,23 +11,23 @@ export class OffresPage {
 
   offresList = [
     {
-      name: 'Chips , Corse',
+      name: 'Medecin generaliste , Corse',
       description: [
-        'Nous recherchons un chômeur disponible afin de tester nos installations le 13/13/113 après 14h par contre'
+        'Nous recherchons un medecin generaliste disponible afin de remplacer un medecin'
       ],
       isFav: false
     },
     {
-      name: 'Pingouin, 94',
+      name: 'Dentiste, Toulouse',
       description: [
-        'Nous recherchons un talentueux pilote qui participera au grand prix de France le 01/01/2020 all night long'
+        'Nous recherchons un dentiste pour remplacer un depart a la retraite'
       ],
       isFav: false
     },
     {
       name: 'Psychologue, Toulouse',
       description: [
-        'Nous attendons un miracle afin de soigner T-Bur, notre DJ national de son incurable démence le vendredi 13 à 8h30'
+        'Nous recherchons un Psychologue pour rejoindre l équipe de l hopital XXX'
       ],
       isFav: false
     }

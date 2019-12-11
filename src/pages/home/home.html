@@ -1,30 +1,22 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      LeBonDoc
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
   <ion-grid>
-    <ion-row >
-      <ion-col>
-      </ion-col>
+    <ion-row>
       <ion-col align-self-center>
-        <button ion-button full (click)="onGoToConnexion()" >Connexion</button>
-      </ion-col>
-      <ion-col>
+        <ion-icon><img class="title-image" src="/assets/imgs/lebondocez.png" alt="logo" /></ion-icon>
+
       </ion-col>
     </ion-row>
-    <ion-row >
-      <ion-col>
-      </ion-col>
+    <ion-row>
       <ion-col align-self-center>
-        <button ion-button full (click)="onGoToInsciption()" >Inscription</button>
+        <button ion-button block color="light" (click)="onGoToConnexion()">Connexion</button>
       </ion-col>
-      <ion-col>
+    </ion-row>
+    <ion-row>
+
+      <ion-col align-self-center>
+        <button ion-button block color="light" (click)="onGoToInsciption()">Inscription</button>
       </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>
