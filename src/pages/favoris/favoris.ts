@@ -17,7 +17,7 @@ export class FavorisPage {
 
   offres = Offre;
 
-  constructor(public navParams: NavParams, public viewCtrl: ViewController, public storage : Storage, private modalCtrl: ModalController,  public global: OffresFav) {
+  constructor(public storage : Storage, private modalCtrl: ModalController,  public global: OffresFav) {
 
     storage.get('offres').then((val) => {
     this.offres = val;

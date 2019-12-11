@@ -1,14 +1,17 @@
 import * as firebase from 'firebase';
+import {User} from "firebase";
 
 export class ConnexionService {
-  isAuth = false;
+  user: User;
+
+
 
   constructor() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.isAuth = true;
+        this.user = user;
       } else {
-        this.isAuth = false;
+        console.error("erreur d'authentification du user")
       }
     });
   }

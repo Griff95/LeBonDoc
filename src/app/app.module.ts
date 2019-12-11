@@ -26,6 +26,8 @@ import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
 import { OffresFav} from '../pages/favoris/offresfav';
 import {Offre} from "../models/Offre";
 import {OffresService} from "../services/offres.service";
+import {MoncompteService} from "../services/moncompte.service";
+import {UserProfil} from "../models/UserProfil";
 
 
 
@@ -72,7 +74,9 @@ import {OffresService} from "../services/offres.service";
     ConnexionService,
     OffresFav,
     Offre,
-    OffresService
+    OffresService,
+    MoncompteService,
+    UserProfil
   ]
 })
 export class AppModule {}

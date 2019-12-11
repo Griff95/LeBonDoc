@@ -10,8 +10,8 @@ import { MessagesPage } from '../messages/messages';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  offresPage = OffresPage;
   moncomptePage = MonComptePage;
+  offresPage = OffresPage;
   favorisPage = FavorisPage;
   messagesPage = MessagesPage;
   deposerPage = DeposerPage;
