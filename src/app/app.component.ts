@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import * as firebase from 'firebase';
 import {DashboardPage} from "../pages/dashboard/dashboard";
 import {OffresPage} from "../pages/offres/offres";
+
+
 @Component({
   templateUrl: 'app.html'
 })

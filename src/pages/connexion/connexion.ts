@@ -4,6 +4,7 @@ import { ConnexionService } from '../../services/connexion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardPage } from '../dashboard/dashboard';
 import {OffresPage} from "../offres/offres";
+import {TabsPage} from "../tabs/tabs"
 
 
 
@@ -49,7 +50,7 @@ export class ConnexionPage implements OnInit{
 
     this.connexionService.signInUser(email, password).then(
       () => {
-        this.navCtrl.push(OffresPage);
+        this.navCtrl.setRoot(TabsPage);
       },
       (error) => {
         this.errorMessage = error;
