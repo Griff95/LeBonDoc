@@ -16,7 +16,7 @@ export class Offre {
 	dateFin : Date;
 	datePublication : Date;
 	specialite : Specialite;
-	candidatures : Candidature[];
+	candidatures : String;
 	isAvailable : boolean;
 	id: string;
 	annonceType : OffreType;

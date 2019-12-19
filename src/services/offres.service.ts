@@ -2,14 +2,17 @@ import {Offre} from "../models/Offre";
 import {Subject} from "rxjs";
 
 import * as firebase from "firebase";
+import {Specialite} from "../models/Specialite";
+import {Candidature} from "../models/Candidature";
+import {OffreType} from "../models/OffreType";
 import DataSnapshot = firebase.database.DataSnapshot;
+import {getUserConfigFile} from "@ionic/app-scripts";
 
 export class OffresService{
 
   offres$ = new Subject<Offre[]>()
 
-  offresList: Offre[] = [
-  ];
+  offresList: Offre[] = [];
 
   addOffre(offre) {
     this.offresList.push(offre);
