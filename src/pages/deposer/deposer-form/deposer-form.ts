@@ -28,7 +28,7 @@ export class DeposerFormPage implements OnInit {
 
     onSubmitForm() {
         let newOffre = {
-            "name": this.deposerForm.get('name').value,
+            name: this.deposerForm.get('name').value,
             lieux: this.deposerForm.get('lieux').value,
             description: [
                 this.deposerForm.get('description').value

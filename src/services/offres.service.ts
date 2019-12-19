@@ -9,39 +9,9 @@ export class OffresService{
   offres$ = new Subject<Offre[]>()
 
   offresList: Offre[] = [
-    {
-      name: 'Medecin generaliste',
-      lieux: 'Corse',
-      description: [
-        'Nous recherchons un medecin generaliste disponible afin de remplacer un medecin'
-      ],
-      isFav: false,
-      userId: 0,
-      id : 0
-    },
-    {
-      name: 'Dentiste',
-      lieux: 'Toulouse',
-      description: [
-        'Nous recherchons un dentiste pour remplacer un depart a la retraite'
-      ],
-      isFav: false,
-      userId: 1,
-      id: 1
-    },
-    {
-      name: 'Psychologue',
-      lieux: 'Toulouse',
-      description: [
-        'Nous recherchons un Psychologue pour rejoindre l équipe de l hopital XXX'
-      ],
-      isFav: false,
-      userId: 2,
-      id: 2
-    }
   ];
 
-  addOffre(offre: Offre) {
+  addOffre(offre: { name: any; lieux: any; description: any[]; id: number; isFav: boolean; userId: number }) {
     this.offresList.push(offre);
     this.emitOffres();
   }

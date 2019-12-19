@@ -2,7 +2,8 @@ import {Injectable} from "@angular/core";
 import {User} from "firebase";
 import {Specialite} from "../models/Specialite";
 import {Candidature} from "../models/Candidature";
-import {AnnonceType} from "../models/OffreType";
+import {OffreType} from "./OffreType";
+
 
 @Injectable()
 export class Offre {
