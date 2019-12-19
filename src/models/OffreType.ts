@@ -1,4 +1,4 @@
-enum OffreType {
+export enum OffreType {
 	remplacement,
 	partenariat
 }
