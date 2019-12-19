@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {ModalController, NavController} from 'ionic-angular';
+import {ModalController, NavController,ViewController} from 'ionic-angular';
 import { ConnexionPage } from '../connexion/connexion';
 import {InscriptionPage } from '../inscription/inscription'
-import {OffresPage} from "../offres/offres";
 
 
 @Component({
@@ -11,7 +10,7 @@ import {OffresPage} from "../offres/offres";
 })
 export class HomePage {
 
-  constructor(public modalCtrl: ModalController) {}
+  constructor(public modalCtrl: ModalController, public viewCtrl: ViewController) {}
 
   onGoToConnexion() {
     let modal = this.modalCtrl.create(ConnexionPage);
@@ -22,4 +21,7 @@ export class HomePage {
     modal.present();
   }
 
+  dismissModal() {
+    this.viewCtrl.dismiss();
+  }
 }

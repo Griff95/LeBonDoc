@@ -8,7 +8,7 @@ export class MoncompteService {
 
   userProfil: UserProfil;
 
-  userProfil$ = new Subject<UserProfil>()
+  userProfil$ = new Subject<UserProfil>();
 
   addUserProfile(userProfil: UserProfil){
     this.userProfil= userProfil;

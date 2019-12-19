@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 import {User} from "firebase";
 
+
 export class ConnexionService {
   user: User;
 
@@ -43,6 +44,7 @@ export class ConnexionService {
   }
   signOut() {
     firebase.auth().signOut();
+    
   }
 
   }
