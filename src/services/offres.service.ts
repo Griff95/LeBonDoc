@@ -11,7 +11,7 @@ export class OffresService{
   offresList: Offre[] = [
   ];
 
-  addOffre(offre: { name: any; lieux: any; description: any[]; id: number; isFav: boolean; userId: number }) {
+  addOffre(offre) {
     this.offresList.push(offre);
     this.emitOffres();
   }

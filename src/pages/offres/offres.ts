@@ -28,7 +28,7 @@ export class OffresPage implements OnInit, OnDestroy{
     this.offresService.emitOffres();
   }
 
-  onLoadOffre(offre: {name: string, description: string[], lieux: string}) {
+  onLoadOffre(offre: Offre) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
   }

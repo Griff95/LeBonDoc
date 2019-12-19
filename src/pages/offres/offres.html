@@ -7,17 +7,17 @@
 <ion-content padding>
 
     <ion-refresher (ionRefresh)="doRefresh($event)" pull-factor="0.5" pullMax="200">
-        <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
-        </ion-refresher-content>
-      </ion-refresher>
+      <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+      </ion-refresher-content>
+    </ion-refresher>
 
     <ion-searchbar></ion-searchbar>
-    <br>  
+    <br>
     <ion-list>
-    <button ion-item *ngFor="let offre of offresList" (click)="onLoadOffre(offre)">
-      {{ offre.name }}, {{offre.lieux}}
-    </button>
-  </ion-list>
+      <button ion-item *ngFor="let offre of offresList" (click)="onLoadOffre(offre)">
+        {{ offre.titre }}, {{offre.lieux}}
+      </button>
+    </ion-list>
 
 </ion-content>
 
