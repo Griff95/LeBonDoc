@@ -1,0 +1,4 @@
+enum OffreType {
+	remplacement,
+	partenariat
+}

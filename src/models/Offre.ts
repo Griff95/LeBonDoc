@@ -1,14 +1,25 @@
 import {Injectable} from "@angular/core";
+import {User} from "firebase";
+import {Specialite} from "../models/Specialite";
+import {Candidature} from "../models/Candidature";
+import {AnnonceType} from "../models/OffreType";
 
 @Injectable()
 export class Offre {
-  lieux: string;
-  description: string[];
-  isFav: boolean;
-  id: number;
-  userId : number
+	titre: string;
+	description : string;
+	codePostal : number;
+	lieux: string;
+	dateDebut : Date;
+	dateFin : Date;
+	datePublication : Date;
+	specialite : Specialite;
+	annonceur : User;
+	candidatures : Candidature[];
+	isAvailable : boolean;
+	annonceType : OffreType;
 
-  constructor(public name: string) {
+  constructor() {
 
   }
 
