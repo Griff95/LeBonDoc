@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {User} from "firebase";
 import {Specialite} from "../models/Specialite";
+import {Offre} from "../models/Offre";
+import {Annonce} from "../models/Annonce";
 
 @Injectable()
 export class UserProfil {
