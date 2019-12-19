@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { FavorisPage } from '../../favoris/favoris';
-import { OffresPage } from '../offres';
 import { OffresFav } from '../../favoris/offresfav';
 import {Offre} from "../../../models/Offre";
 

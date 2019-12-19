@@ -5,6 +5,8 @@ import { FavorisPage } from '../favoris/favoris';
 import { DeposerPage } from '../deposer/deposer';
 import { MessagesPage } from '../messages/messages';
 
+
+
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
@@ -15,4 +17,7 @@ export class TabsPage {
   favorisPage = FavorisPage;
   messagesPage = MessagesPage;
   deposerPage = DeposerPage;
+  
+
+
 }

@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {LoadingController, NavController, NavParams, ToastController,Nav} from 'ionic-angular';
 import { ConnexionService } from '../../services/connexion.service';
-import { HomePage } from '../home/home';
 import {UserProfil} from "../../models/UserProfil";
 import {Subscription} from "rxjs";
-import {Offre} from "../../models/Offre";
 import {MoncompteService} from "../../services/moncompte.service";
+import { HomePage } from '../home/home';
+
+
 
 
 
@@ -21,6 +22,8 @@ export class MonComptePage implements OnInit, OnDestroy{
   userProfilSubscription: Subscription;
 
    constructor(public toastCtrl: ToastController,public loadingCtrl: LoadingController,public navCtrl: NavController, private moncompteService: MoncompteService,private connexionService: ConnexionService) {
+    
+;
   }
 
   ngOnInit(){
@@ -86,11 +89,11 @@ export class MonComptePage implements OnInit, OnDestroy{
 
   onDisconnect() {
     this.connexionService.signOut();
-    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.parent.parent.setRoot(HomePage);
   }
 
   ngOnDestroy(){
-     this.moncompteService.userProfil$.unsubscribe()
+     this.userProfilSubscription.unsubscribe();
   }
 
 }

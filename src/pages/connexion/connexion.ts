@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ConnexionService } from '../../services/connexion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {TabsPage} from "../tabs/tabs"
@@ -23,7 +23,7 @@ export class ConnexionPage implements OnInit{
   errorMessage: string;
   private authForm: FormGroup;
 
-  constructor(private navParams: NavParams, public navCtrl: NavController, private formBuilder: FormBuilder,private connexionService: ConnexionService ) {
+  constructor(private navParams: NavParams, public navCtrl: NavController,public viewCtrl: ViewController, private formBuilder: FormBuilder,private connexionService: ConnexionService ) {
   }
 
   ionViewDidLoad() {
@@ -55,5 +55,4 @@ export class ConnexionPage implements OnInit{
       }
     );
   }
-
 }

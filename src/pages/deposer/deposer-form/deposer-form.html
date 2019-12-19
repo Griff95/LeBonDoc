@@ -1,0 +1,26 @@
+<ion-header>
+        <ion-navbar>
+          <ion-title>Nouvelle offre</ion-title>
+        </ion-navbar>
+      </ion-header>
+      
+      <ion-content padding>
+        <form [formGroup]="deposerForm">
+          <ion-list>
+            <ion-item-divider>Informations</ion-item-divider>
+            <ion-item>
+              <ion-label>Nom</ion-label>
+              <ion-input placeholder="" formControlName="name"></ion-input>
+            </ion-item>
+            <ion-item>
+                    <ion-label>Lieu</ion-label>
+                    <ion-input placeholder="" formControlName="lieux"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                        <ion-label>Description</ion-label>
+                        <ion-input placeholder="" formControlName="description"></ion-input>
+                      </ion-item>
+          </ion-list>
+          <button ion-button block color="light" (click)="onSubmitForm()">Ajouter</button>
+        </form>
+      </ion-content>

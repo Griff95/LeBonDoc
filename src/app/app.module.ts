@@ -22,6 +22,7 @@ import {OffresPage} from "../pages/offres/offres";
 import {TabsPage} from "../pages/tabs/tabs";
 import {IonicStorageModule} from "@ionic/storage";
 import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
+import { DeposerFormPage } from '../pages/deposer/deposer-form/deposer-form';
 
 import { OffresFav} from '../pages/favoris/offresfav';
 import {Offre} from "../models/Offre";
@@ -45,7 +46,8 @@ import {UserProfil} from "../models/UserProfil";
     MonComptePage,
     OffresPage,
     TabsPage,
-    OffreSimplePage
+    OffreSimplePage,
+    DeposerFormPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import {UserProfil} from "../models/UserProfil";
     MonComptePage,
     OffresPage,
     TabsPage,
-    OffreSimplePage
+    OffreSimplePage,
+    DeposerFormPage
   ],
   providers: [
     StatusBar,
