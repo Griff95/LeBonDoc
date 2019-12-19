@@ -59,16 +59,17 @@ export class OffresPage implements OnInit, OnDestroy{
   }
 
   onFetchList(){
-    let loader = this.loadingCtrl.create({
+/*     let loader = this.loadingCtrl.create({
       content: "Récupération en cours..."
     });
-    loader.present();
-    this.offresService.retrieveData().then(
-      ()=>{
+    loader.present(); */
+    this.offresService.retrieveData()
+/*     .then(
+ *//*       ()=>{
         loader.dismiss();
         this.toastCtrl.create({
           message: "Données récupérées !",
-          duration: 3000,
+          duration: 1500,
           position: "bottom"
         }).present();
       }
@@ -77,12 +78,21 @@ export class OffresPage implements OnInit, OnDestroy{
         loader.dismiss();
         this.toastCtrl.create({
           message: error,
-          duration: 3000,
+          duration: 1500,
           position: "bottom"
         }).present();
       }
-    )
+    )  */  
+
   }
+
+  doRefresh(event) {
+    this.onFetchList();
+    setTimeout(() => {
+      //complete()  signify that the refreshing has completed and to close the refresher
+    event.complete();
+    }, 1000);
+}
 
   ngOnDestroy(){
     this.offresService.offres$.unsubscribe();

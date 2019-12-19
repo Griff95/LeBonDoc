@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
-import { OffresPage } from '../offres/offres';
 import { OffreSimplePage } from '../offres/offre-simple/offre-simple';
 import { OffresFav } from './offresfav';
 
