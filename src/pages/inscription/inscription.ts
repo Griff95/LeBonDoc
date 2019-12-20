@@ -90,7 +90,7 @@ export class InscriptionPage {
       unMotSurMoi: MotPerso
     }
 
-    this.moncompteservice.addUserProfile(newUser);
+
     this.connexionService.signUpUser(email, password).then(
       () => {
         this.navCtrl.push(TabsPage);
@@ -99,6 +99,9 @@ export class InscriptionPage {
         this.errorMessage = error;
       }
     );
+    newUser.userId=this.connexionService.user.uid;
+    this.moncompteservice.addUserProfile(newUser);
+    this.moncompteservice.saveData();
   }
   dismissModal() {
     this.viewCtrl.dismiss();

@@ -52,6 +52,7 @@ import {UserProfil} from "../models/UserProfil";
     TabsPage,
     OffreSimplePage,
     DeposerFormPage
+    
   ],
   imports: [
     BrowserModule,
