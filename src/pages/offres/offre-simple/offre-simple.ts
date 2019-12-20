@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { OffresFav } from '../../favoris/offresfav';
 import {Offre} from "../../../models/Offre";
+import {UserProfil} from "../../../models/UserProfil";
+import { Specialite } from '../../../models/Specialite';
 
 
 
@@ -12,13 +13,30 @@ import {Offre} from "../../../models/Offre";
 })
 export class OffreSimplePage implements OnInit {
 
-
-  offre: Offre;
-  constructor(public navParams: NavParams, public viewCtrl: ViewController, public storage : Storage, public global: OffresFav) {
+  userProfil:UserProfil;
+  offre: Offre[];
+  constructor(public navParams: NavParams, public viewCtrl: ViewController, public global: OffresFav) {
 
   }
 
   ngOnInit() {
+/*     this.userProfil = 
+
+    {
+      userId:"thretgrgraffz",
+      nom: "Bocquet",
+      prenom: "Rémi",
+      telephone: "0687702166",
+      email: "bocquetrem@eisti.eu",
+      dateDeNaissance: new Date(),
+      isVerified: false,
+      offres: [],
+      favoris: [],
+      specialite: Specialite.Dentiste,
+      codePostal: 52000,
+      unMotSurMoi: "C'est le jour 1"
+    }
+  ; */
     this.offre = this.navParams.get('offre');
   }
 
@@ -27,13 +45,20 @@ export class OffreSimplePage implements OnInit {
   }
 
   fav(offre) {
-    if (offre.isFav == false) {
-      offre.isFav = true;
+    if (offre.isAvailable == true) {
+      offre.isAvailable = false;
       this.global.offresfav.push(offre);
-    }
+/*       console.log(this.global.offresfav);
+ *//*       this.userProfil.favoris.push(offre);
+ *//*       console.log(this.userProfil.favoris);
+ */
+    
+}
     else {
-      offre.isFav = false;
-      this.global.offresfav.splice(this.global.offresfav.indexOf(offre.name),1);
-    }
+      offre.isAvailable = true;
+/*       this.userProfil.favoris.splice(this.userProfil.favoris.indexOf(offre.name),1);
+ */      this.global.offresfav.splice(this.global.offresfav.indexOf(offre.name),1);
+   
+ }
   }
 }

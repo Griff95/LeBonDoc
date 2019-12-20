@@ -3,15 +3,18 @@
     <ion-buttons>
       <button ion-button clear (click)="dismissModal()">Fermer</button>
     </ion-buttons>
-    <ion-title>{{ offre.name }}</ion-title>
+    <ion-title>{{ offre.titre }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-card>
-    <ion-card-header>{{ offre.name }}, {{offre.lieux}}</ion-card-header>
+    <ion-card-header>{{ offre.titre }}, {{offre.lieux}}</ion-card-header>
     <ion-card-content>
-      <p *ngFor="let line of offre.description">{{ line }}</p>
+      <p >{{ offre.description }}</p>
+    </ion-card-content>
+    <ion-card-content>
+
     </ion-card-content>
     <ion-grid>
       <ion-row>
@@ -19,8 +22,8 @@
           <button ion-button full color="primary">Je postule</button>
         </ion-col>
         <ion-col>
-          <button *ngIf="!offre.isFav" ion-button full color="secondary" (click)="fav(offre)">Ajouter à mes favoris</button>
-          <button *ngIf="offre.isFav" ion-button full color="secondary" (click)="fav(offre)">Retirer de mes favoris</button>
+          <button *ngIf="offre.isAvailable" ion-button full color="secondary" (click)="fav(offre)">Ajouter à mes favoris</button>
+          <button *ngIf="!offre.isAvailable" ion-button full color="secondary" (click)="fav(offre)">Retirer de mes favoris</button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { OffreSimplePage } from '../offres/offre-simple/offre-simple';
-import { OffresFav } from './offresfav';
+import {MoncompteService} from '../../services/moncompte.service';
+import { UserProfil } from '../../models/UserProfil';
+import {Subscription} from "rxjs";
+import { Specialite } from '../../models/Specialite';
+import { OffresFav } from '../favoris/offresfav';
+import { Offre } from '../../models/Offre';
 
-
-import { Storage } from '@ionic/storage';
-import {Offre} from "../../models/Offre";
 
 @Component({
   selector: 'page-favoris',
@@ -13,18 +15,37 @@ import {Offre} from "../../models/Offre";
 })
 export class FavorisPage {
 
-  offres = Offre;
+ /*  userProfil: UserProfil;
+  userProfilSubscription: Subscription; */  
 
-  constructor(public storage : Storage, private modalCtrl: ModalController,  public global: OffresFav) {
+  constructor(private modalCtrl: ModalController,public global: OffresFav) {
+   }
 
-    storage.get('offres').then((val) => {
-    this.offres = val;
-  });
+/*    ngOnInit(){
+
+        this.userProfil = 
+
+          {
+            userId:"thretgrgraffz",
+            nom: "Bocquet",
+            prenom: "Rémi",
+            telephone: "0687702166",
+            email: "bocquetrem@eisti.eu",
+            dateDeNaissance: new Date(),
+            isVerified: false,
+            offres: [],
+            favoris: [],
+            specialite: Specialite.Dentiste,
+            codePostal: 52000,
+            unMotSurMoi: "C'est le jour 1"
+          }
+        ;
+  
+
+  } */
 
 
-
-  }
-  onLoadOffre(offre: {name: string, description: string[]}) {
+  onLoadOffre(offre: Offre) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
   }

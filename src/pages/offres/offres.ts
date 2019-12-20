@@ -19,6 +19,7 @@ export class OffresPage implements OnInit, OnDestroy{
   }
 
   ngOnInit(){
+    this.onFetchList();
     this.offreSubscription = this.offresService.offres$.subscribe(
       (offres: Offre[]) => {
         this.offresList = offres;
@@ -27,7 +28,7 @@ export class OffresPage implements OnInit, OnDestroy{
     this.offresService.emitOffres();
   }
 
-  onLoadOffre(offre: {name: string, description: string[], lieux: string}) {
+  onLoadOffre(offre: Offre) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
   }
@@ -59,17 +60,17 @@ export class OffresPage implements OnInit, OnDestroy{
   }
 
   onFetchList(){
-/*     let loader = this.loadingCtrl.create({
+     let loader = this.loadingCtrl.create({
       content: "Récupération en cours..."
     });
-    loader.present(); */
+    loader.present();
     this.offresService.retrieveData()
-/*     .then(
- *//*       ()=>{
+     .then(
+        ()=>{
         loader.dismiss();
         this.toastCtrl.create({
           message: "Données récupérées !",
-          duration: 1500,
+          duration: 2000,
           position: "bottom"
         }).present();
       }
@@ -78,11 +79,11 @@ export class OffresPage implements OnInit, OnDestroy{
         loader.dismiss();
         this.toastCtrl.create({
           message: error,
-          duration: 1500,
+          duration: 2000,
           position: "bottom"
         }).present();
       }
-    )  */  
+    )
 
   }
 
