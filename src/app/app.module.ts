@@ -12,6 +12,7 @@ import { ConnexionPage } from '../pages/connexion/connexion';
 import { InscriptionPage } from '../pages/inscription/inscription';
 
 
+
 import { ConnexionService } from '../services/connexion.service';
 import {CalendrierPage} from "../pages/calendrier/calendrier";
 import {DeposerPage} from "../pages/deposer/deposer";
@@ -52,6 +53,7 @@ import {UserProfil} from "../models/UserProfil";
     TabsPage,
     OffreSimplePage,
     DeposerFormPage
+    
   ],
   imports: [
     BrowserModule,
