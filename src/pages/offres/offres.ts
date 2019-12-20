@@ -84,7 +84,7 @@ export class OffresPage implements OnInit, OnDestroy{
         loader.dismiss();
         this.toastCtrl.create({
           message: error,
-          duration: 2000,
+          duration: 1000,
           position: "bottom"
         }).present();
       }
