@@ -8,7 +8,7 @@ import {Offre} from "../models/Offre";
 export class UserProfil {
 
 
-  user:User;
+  userId:string;
   nom: string;
   prenom: string;
   telephone: string;

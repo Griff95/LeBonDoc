@@ -29,9 +29,11 @@ export class OffresPage implements OnInit, OnDestroy{
     this.offresService.emitOffres();
   }
 
+
   onSearch() {
     this.navCtrl.push(SearchPage);
   }
+
 
   onLoadOffre(offre: Offre) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});

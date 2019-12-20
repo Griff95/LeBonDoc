@@ -3,6 +3,11 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ConnexionService } from '../../services/connexion.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {TabsPage} from "../tabs/tabs"
+import * as firebase from "firebase";
+import DataSnapshot = firebase.database.DataSnapshot;
+import {MoncompteService} from "../../services/moncompte.service";
+import {UserProfil} from "../../models/UserProfil";
+import {Subscription} from "rxjs";
 
 
 
@@ -23,7 +28,7 @@ export class ConnexionPage implements OnInit{
   errorMessage: string;
   private authForm: FormGroup;
 
-  constructor(private navParams: NavParams, public navCtrl: NavController,public viewCtrl: ViewController, private formBuilder: FormBuilder,private connexionService: ConnexionService ) {
+  constructor(private moncompteService: MoncompteService,private navParams: NavParams, public navCtrl: NavController,public viewCtrl: ViewController, private formBuilder: FormBuilder,private connexionService: ConnexionService ) {
   }
 
   ionViewDidLoad() {
@@ -54,5 +59,11 @@ export class ConnexionPage implements OnInit{
         this.errorMessage = error;
       }
     );
+    //this.moncompteService.retrieveData();
+    //console.log(this.moncompteService.userProfil.prenom)
   }
+
+
+
+
 }
