@@ -8,6 +8,8 @@ import {AbstractControl} from "@angular/forms";
 
 @Injectable()
 export class Offre {
+
+  
 	titre: string;
 	description : string;
 	codePostal : number;

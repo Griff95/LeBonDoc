@@ -6,7 +6,6 @@
 
   <ion-content padding>
     <button ion-item *ngFor="let offre of global.offresfav"(click)="onLoadOffre(offre)">
-      {{ offre.name }}, {{ offre.lieux}}
+      {{ offre.titre }}, {{ offre.lieux}}
   </button>
-
   </ion-content>

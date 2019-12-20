@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label>Prénom</ion-label>
-      <ion-input value = {{userProfil2.prenom}} ></ion-input>
+      <ion-input value = {{userProfil2.prenom}} disabled></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Nom</ion-label>
@@ -49,10 +49,10 @@
     </ion-item>
   </ion-list>
 
-  
 
-  <button ion-button block color="light" (click)="onDisconnect()" >
-          <ion-icon name="exit"></ion-icon>
-          Déconnexion
-  </button>
+  <ion-footer>  <button ion-button block color="light" (click)="onDisconnect()" >
+    <ion-icon name="exit"></ion-icon>
+    Déconnexion
+  </button></ion-footer>
+
 </ion-content>

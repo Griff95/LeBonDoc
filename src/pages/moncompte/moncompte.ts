@@ -23,8 +23,6 @@ export class MonComptePage implements OnInit, OnDestroy {
   userProfil2: UserProfil;
 
   constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, public navCtrl: NavController, private moncompteService: MoncompteService, private connexionService: ConnexionService) {
-
-    ;
   }
   ngOnInit() {
     this.userProfilSubscription = this.moncompteService.userProfil$.subscribe(

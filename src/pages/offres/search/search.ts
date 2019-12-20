@@ -44,7 +44,7 @@ export class SearchPage  implements OnInit {
     //this.searchFilters.dateSearch = this.searchForm.get('dateSearch').value;
     //this.searchFilters.codePostal = this.searchForm.get('codePostal').value;
     //this.searchFilters.specialite = (<any>Specialite)[this.searchForm.get('specialite').value];
-    console.log(this.searchFilters);
+    console.log("trying to validate searcf form " + specialite);
     this.viewCtrl.dismiss({ "dateSearch" : dateSearch, "codePostal": codePostal, specialite: specialite});
   }
 

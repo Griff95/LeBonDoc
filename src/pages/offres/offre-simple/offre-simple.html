@@ -14,7 +14,6 @@
       <p >{{ offre.description }}</p>
     </ion-card-content>
     <ion-card-content>
-
     </ion-card-content>
     <ion-card-content>
 
@@ -25,8 +24,8 @@
           <button ion-button full color="primary">Je postule</button>
         </ion-col>
         <ion-col>
-          <button *ngIf="!offre.isFav" ion-button full color="secondary" (click)="fav(offre)">Ajouter à mes favoris</button>
-          <button *ngIf="offre.isFav" ion-button full color="secondary" (click)="fav(offre)">Retirer de mes favoris</button>
+          <button *ngIf="offre.isAvailable" ion-button full color="secondary" (click)="fav(offre)">Ajouter à mes favoris</button>
+          <button *ngIf="!offre.isAvailable" ion-button full color="secondary" (click)="fav(offre)">Retirer de mes favoris</button>
         </ion-col>
       </ion-row>
     </ion-grid>

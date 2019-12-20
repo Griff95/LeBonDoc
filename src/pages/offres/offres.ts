@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoadingController, ModalController, NavController, ToastController} from 'ionic-angular';
-import { OffreSimplePage } from './offre-simple/offre-simple';
-import { SearchPage } from './search/search';
+import {LoadingController, ModalController, ToastController} from 'ionic-angular';
+import {OffreSimplePage} from './offre-simple/offre-simple';
+import {SearchPage} from './search/search';
 import {Offre} from "../../models/Offre";
 import {OffresService} from "../../services/offres.service";
 import {Subscription} from "rxjs";
@@ -61,7 +61,7 @@ export class OffresPage implements OnInit, OnDestroy{
     this.moncompteService.retrieveData().then( () => {
       console.log(this.userProfil.specialite + "  " + this.userProfil.email);
       this.offresService.retrieveMostRecents();
-      this.offresService.retrieveSameSpeciality(this.userProfil.specialite);
+      this.offresService.retrieveSameSpeciality(Specialite.Infirmier);
     });
   }
   resetSearch(){
@@ -81,12 +81,12 @@ export class OffresPage implements OnInit, OnDestroy{
         console.log("searchFilters : " + data.specialite);
         this.offresService.search(data);
       } else {
+        console.log("ici");
         this.resetSearch();
       }
     });
     modal.present();
   }
-
 
   onLoadOffre(offre: Offre) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
