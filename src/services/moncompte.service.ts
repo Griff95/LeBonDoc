@@ -1,17 +1,38 @@
 import {UserProfil} from "../models/UserProfil";
 import {Subject} from "rxjs";
-import {Offre} from "../models/Offre";
 import * as firebase from "firebase";
+import {Specialite} from "../models/Specialite";
 import DataSnapshot = firebase.database.DataSnapshot;
 
 export class MoncompteService {
 
-  userProfil: UserProfil;
+  private userProfilList: UserProfil[] = [{
+    userId: null,
+    nom: 'test',
+    prenom: 'test',
+    telephone: '01020405',
+    email: 'test252545@gmail.fr',
+    dateDeNaissance: new Date(),
+    isVerified: false,
+    specialite: Specialite.Chirurgien,
+    codePostal: 95000,
+    unMotSurMoi: 'test description',
+    offres: [],
+    favoris: []
 
+  }];
+  userProfilList$ = new Subject<UserProfil[]>();
+
+  userProfil: UserProfil;
   userProfil$ = new Subject<UserProfil>();
 
   addUserProfile(userProfil: UserProfil){
-    this.userProfil= userProfil;
+    this.userProfilList.push(userProfil);
+    this.emitUserProfilList()
+  }
+
+  emitUserProfilList(){
+    this.userProfilList$.next(this.userProfilList.slice())
   }
 
   emitUserProfil(){
@@ -20,7 +41,7 @@ export class MoncompteService {
 
   saveData(){
     return new Promise((resolve, reject) => {
-      firebase.database().ref('userProfil').set(this.userProfil).then(
+      firebase.database().ref('userProfilsList').set(this.userProfilList).then(
         (data: DataSnapshot) => {
           resolve(data);
         })
@@ -34,10 +55,10 @@ export class MoncompteService {
 
   retrieveData(){
     return new Promise((resolve, reject) => {
-      firebase.database().ref('userProfil').once('value').then(
+      firebase.database().ref('userProfilsList').once('value').then(
         (data: DataSnapshot) => {
-          this.userProfil = data.val();
-          this.emitUserProfil();
+          this.userProfilList = data.val();
+          this.emitUserProfilList();
           resolve('Données récuprées avec succès !')
         })
         .catch(
@@ -48,5 +69,11 @@ export class MoncompteService {
     });
   }
 
-
+  userSelection(userId: String){
+    for (let userProfile of this.userProfilList){
+      if (userProfile.userId==userId){
+        this.userProfil=userProfile;
+      }
+    }
+  }
 }
