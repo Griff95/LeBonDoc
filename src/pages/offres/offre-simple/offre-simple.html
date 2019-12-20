@@ -11,6 +11,9 @@
   <ion-card>
     <ion-card-header>{{ offre.titre }}, {{offre.lieux}}</ion-card-header>
     <ion-card-content>
+      Début : {{ offre.dateDebut }}<br>
+      Fin : {{ offre.dateFin }}<br>
+      Type de médecin recherché : {{ offre.specialite }}<br>
       <p *ngFor="let line of offre.description">{{ line }}</p>
     </ion-card-content>
     <ion-card-content>
