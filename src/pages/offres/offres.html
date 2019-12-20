@@ -16,18 +16,37 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-title>Les plus récentes</ion-title>
-  <ion-list>
-    <button ion-item *ngFor="let offre of offresList" (click)="onLoadOffre(offre)">
-      {{ offre.titre }}, {{offre.lieux}}
-    </button>
-  </ion-list>
-  <ion-title>Dans votre domaine médical</ion-title>
-  <ion-list>
-    <button ion-item *ngFor="let offre of offresList" (click)="onLoadOffre(offre)">
-      {{ offre.titre }}, {{offre.lieux}}
-    </button>
-  </ion-list>
+  <div *ngIf="displayResults">
+      <ion-title no-lines>
+        <span item-start>Résultat de votre recherche</span>
+        <button item-end ion-button color="danger" (click)="resetSearch()">
+          <ion-icon name="close" ></ion-icon>
+        </button>
+      </ion-title>
+    <ion-chip *ngFor="let filter of filtersApplied">
+      <ion-label>{{ filter }}</ion-label>
+    </ion-chip>
+    <ion-list *ngIf="searchResultList">
+      <button ion-item *ngFor="let result of searchResultList" (click)="onLoadOffre(result)">
+        {{ result.titre }}, {{result.lieux}}, {{result.specialite}}, {{result.datePublication}}
+      </button>
+    </ion-list>
+  </div>
+  <div *ngIf="!displayResults">
+    <ion-title>Les plus récentes</ion-title>
+    <ion-list>
+      <button ion-item *ngFor="let offre of mostRecent | slice:0:4; let i=index " (click)="onLoadOffre(offre)">
+        {{ offre.titre }}, {{offre.lieux}}, {{offre.specialite}}, {{offre.datePublication}}
+      </button>
+    </ion-list>
+    <ion-title>Dans votre domaine médical</ion-title>
+    <ion-list>
+      <button ion-item *ngFor="let offre of sameSpeciality" (click)="onLoadOffre(offre)">
+        {{ offre.titre }}, {{offre.lieux}}, {{offre.specialite}}, {{offre.datePublication}}
+      </button>
+    </ion-list>
+  </div>
+
 
 
 </ion-content>

@@ -25,6 +25,7 @@ import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
 import { DeposerFormPage } from '../pages/deposer/deposer-form/deposer-form';
 import { SearchPage } from '../pages/offres/search/search';
 
+
 import { OffresFav} from '../pages/favoris/offresfav';
 import {OffresService} from "../services/offres.service";
 import {MoncompteService} from "../services/moncompte.service";

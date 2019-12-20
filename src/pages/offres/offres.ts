@@ -5,6 +5,9 @@ import { SearchPage } from './search/search';
 import {Offre} from "../../models/Offre";
 import {OffresService} from "../../services/offres.service";
 import {Subscription} from "rxjs";
+import {Specialite} from "../../models/Specialite";
+import {MoncompteService} from "../../services/moncompte.service";
+import {UserProfil} from "../../models/UserProfil";
 
 @Component({
   selector: 'page-offres',
@@ -12,26 +15,76 @@ import {Subscription} from "rxjs";
 })
 export class OffresPage implements OnInit, OnDestroy{
 
+  userProfil: UserProfil;
+
   offresList: Offre[];
-  offreSubscription: Subscription;
+  mostRecent: Offre[];
+  sameSpeciality: Offre[];
+  searchResultList: Offre[];
+  filtersApplied: string[] = [] ;
+  private displayResults: boolean;
 
-  constructor(private modalCtrl: ModalController,private offresService: OffresService, private toastCtrl: ToastController, private loadingCtrl: LoadingController, private navCtrl : NavController) {
+  private offreSubscription: Subscription;
+  private mostRecentSubscription: Subscription;
+  private sameSpeSubscription: Subscription;
+  private searchResultSubscription: Subscription;
+  private userProfilSubscription: Subscription;
 
+
+  constructor(private modalCtrl: ModalController,private offresService: OffresService, private toastCtrl: ToastController, private loadingCtrl: LoadingController,   private moncompteService: MoncompteService) {
+    this.displayResults = false;
   }
 
   ngOnInit(){
-    this.onFetchList();
-    this.offreSubscription = this.offresService.offres$.subscribe(
+    //this.onFetchList();
+    /*this.offreSubscription = this.offresService.offres$.subscribe(
       (offres: Offre[]) => {
         this.offresList = offres;
-    }
-    );
-    this.offresService.emitOffres();
+      });*/
+    this.mostRecentSubscription = this.offresService.mostRecent$.subscribe(
+      (offres: Offre[]) => {
+        this.mostRecent = offres;
+      });
+    this.sameSpeSubscription = this.offresService.sameSpeciality$.subscribe(
+      (offres: Offre[]) => {
+        this.sameSpeciality = offres;
+      });
+    this.searchResultSubscription = this.offresService.searchResult$.subscribe(
+      (results: Offre[]) => {
+        console.log("results : " + results);
+        this.searchResultList = results;
+      });
+    this.userProfilSubscription = this.moncompteService.userProfil$.subscribe(
+      (userProfil  ) => {
+        this.userProfil = userProfil;
+      });
+    this.moncompteService.retrieveData().then( () => {
+      console.log(this.userProfil.specialite + "  " + this.userProfil.email);
+      this.offresService.retrieveMostRecents();
+      this.offresService.retrieveSameSpeciality(this.userProfil.specialite);
+    });
+  }
+  resetSearch(){
+    this.searchResultList = undefined;
+    this.filtersApplied = [] ;
+    this.displayResults = false;
   }
 
-
   onSearch() {
-    this.navCtrl.push(SearchPage);
+    let modal = this.modalCtrl.create(SearchPage);
+    modal.onDidDismiss( data => {
+      if (data) {
+        this.displayResults = true;
+        if (data.specialite) this.filtersApplied.push(data.specialite)
+        if (data.dateSearch) this.filtersApplied.push(data.dateSearch)
+        if (data.codePostal) this.filtersApplied.push(data.codePostal)
+        console.log("searchFilters : " + data.specialite);
+        this.offresService.search(data);
+      } else {
+        this.resetSearch();
+      }
+    });
+    modal.present();
   }
 
 
@@ -104,6 +157,9 @@ export class OffresPage implements OnInit, OnDestroy{
 
   ngOnDestroy(){
     this.offresService.offres$.unsubscribe();
+    this.offresService.searchResult$.unsubscribe();
+    this.offresService.mostRecent$.unsubscribe();
+    this.offresService.sameSpeciality$.unsubscribe();
   }
 
 }

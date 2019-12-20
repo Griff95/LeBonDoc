@@ -59,13 +59,9 @@ export class ConnexionPage implements OnInit{
         this.errorMessage = error;
       }
     );
-    this.moncompteService.retrieveData();
-    this.moncompteService.userSelection(this.connexionService.user.uid)
-    console.log(this.moncompteService.userProfil.prenom)
-  }
 
-  fetchUserProfile(userId: String){
-    firebase.database().ref('userProfiles')
+    //this.moncompteService.retrieveData();
+    //console.log(this.moncompteService.userProfil.prenom)
   }
 
 
