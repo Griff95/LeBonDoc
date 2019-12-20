@@ -25,9 +25,13 @@ import {OffreSimplePage} from "../pages/offres/offre-simple/offre-simple";
 import { DeposerFormPage } from '../pages/deposer/deposer-form/deposer-form';
 
 import { OffresFav} from '../pages/favoris/offresfav';
-import {Offre} from "../models/Offre";
 import {OffresService} from "../services/offres.service";
 import {MoncompteService} from "../services/moncompte.service";
+
+import {Offre} from "../models/Offre";
+import {Candidature} from "../models/Candidature";
+import {Specialite} from "../models/Specialite";
+import {OffreType} from "../models/OffreType";
 import {UserProfil} from "../models/UserProfil";
 
 
@@ -77,6 +81,7 @@ import {UserProfil} from "../models/UserProfil";
     ConnexionService,
     OffresFav,
     Offre,
+    Candidature,
     OffresService,
     MoncompteService,
     UserProfil

@@ -2,46 +2,19 @@ import {Offre} from "../models/Offre";
 import {Subject} from "rxjs";
 
 import * as firebase from "firebase";
+import {Specialite} from "../models/Specialite";
+import {Candidature} from "../models/Candidature";
+import {OffreType} from "../models/OffreType";
 import DataSnapshot = firebase.database.DataSnapshot;
+import {getUserConfigFile} from "@ionic/app-scripts";
 
 export class OffresService{
 
   offres$ = new Subject<Offre[]>()
 
-  offresList: Offre[] = [
-    {
-      name: 'Medecin generaliste',
-      lieux: 'Corse',
-      description: [
-        'Nous recherchons un medecin generaliste disponible afin de remplacer un medecin'
-      ],
-      isFav: false,
-      userId: 0,
-      id : 0
-    },
-    {
-      name: 'Dentiste',
-      lieux: 'Toulouse',
-      description: [
-        'Nous recherchons un dentiste pour remplacer un depart a la retraite'
-      ],
-      isFav: false,
-      userId: 1,
-      id: 1
-    },
-    {
-      name: 'Psychologue',
-      lieux: 'Toulouse',
-      description: [
-        'Nous recherchons un Psychologue pour rejoindre l équipe de l hopital XXX'
-      ],
-      isFav: false,
-      userId: 2,
-      id: 2
-    }
-  ];
+  offresList: Offre[] = [];
 
-  addOffre(offre: Offre) {
+  addOffre(offre) {
     this.offresList.push(offre);
     this.emitOffres();
   }
