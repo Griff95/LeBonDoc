@@ -35,7 +35,7 @@ export class MonComptePage implements OnInit, OnDestroy {
     );
 
     this.moncompteService.retrieveData();
-    /* this.userProfil2 = {
+    this.userProfil2 = {
       userId: null,
       nom: "Bonin",
       prenom: "Julien",
@@ -48,9 +48,9 @@ export class MonComptePage implements OnInit, OnDestroy {
       unMotSurMoi: "Toujours debout, toujours la banane",
       offres: [],
       favoris: []
-    } */
+    }
 
-    this.userProfil2 = this.moncompteService.userProfil;
+    /* this.userProfil2 = this.moncompteService.userProfil; */
   }
 
   onSaveUserProfil() {
