@@ -17,7 +17,7 @@ export class UserProfil {
   isVerified: boolean;
   offres: Offre[];
   favoris: Offre[];
-  specialite: Specialite;
+  specialite: string;
   codePostal: number;
   unMotSurMoi: string;
 

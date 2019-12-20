@@ -1,14 +1,58 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>Mon Compte</ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <ion-title>Mon Compte</ion-title>
+  </ion-navbar>
+</ion-header>
 
 
 
-  <ion-content padding>
-    <button ion-button block color="light" (click)="onDisconnect()" >
-            <ion-icon name="exit"></ion-icon>
-            Déconnexion
+<ion-content padding>.
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Prénom</ion-label>
+      <ion-input value = {{userProfil2.prenom}} ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input value = {{userProfil2.nom}} disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Adresse mail</ion-label>
+      <ion-input value = {{userProfil2.email}} disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Numéro de téléphone</ion-label>
+      <ion-input value = {{userProfil2.telephone}} disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Spécialité</ion-label>
+      <ion-input value = {{userProfil2.specialite}} disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Code postal</ion-label>
+      <ion-input value = {{userProfil2.codePostal}} disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date de naissance</ion-label>
+      <ion-input value = {{userProfil2.dateDeNaissance}} disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-input value = {{userProfil2.unMotSurMoi}} disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button block color="light">
+        <ion-icon name="edit"></ion-icon>
+        Modifier mes informations
     </button>
-  </ion-content>
+    </ion-item>
+  </ion-list>
+
+  
+
+  <button ion-button block color="light" (click)="onDisconnect()" >
+          <ion-icon name="exit"></ion-icon>
+          Déconnexion
+  </button>
+</ion-content>
