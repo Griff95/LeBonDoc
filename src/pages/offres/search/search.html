@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button clear (click)="dismissSearchModal()">Fermer</button>
+    </ion-buttons>
+    <ion-title>Recherche</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="searchForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="D MMM YY" pickerFormat="D MMM YY" formControlName="dateSearch"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Département</ion-label>
+        <ion-searchbar formControlName="codePostal"></ion-searchbar>
+      </ion-item>
+      <ion-item>
+        <ion-label>Spécialité</ion-label>
+        <ion-select formControlName="specialite">
+          <ion-option *ngFor="let spe of specialites">{{ spe }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <button ion-button block (click)="validateSearchFilters()">Rechercher</button>
+    </ion-list>
+  </form>
+
+</ion-content>
+

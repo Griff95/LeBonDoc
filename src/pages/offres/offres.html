@@ -1,23 +1,32 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Offres</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="onSearch()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <ion-refresher (ionRefresh)="doRefresh($event)" pull-factor="0.5" pullMax="200">
-      <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
-      </ion-refresher-content>
-    </ion-refresher>
-
-    <ion-searchbar></ion-searchbar>
-    <br>
-    <ion-list>
-      <button ion-item *ngFor="let offre of offresList" (click)="onLoadOffre(offre)">
-        {{ offre.titre }}, {{offre.lieux}}
-      </button>
-    </ion-list>
+  <ion-refresher (ionRefresh)="doRefresh($event)" pull-factor="0.5" pullMax="200">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-title>Les plus récentes</ion-title>
+  <ion-list>
+    <button ion-item *ngFor="let offre of offresList" (click)="onLoadOffre(offre)">
+      {{ offre.titre }}, {{offre.lieux}}
+    </button>
+  </ion-list>
+  <ion-title>Dans votre domaine médical</ion-title>
+  <ion-list>
+    <button ion-item *ngFor="let offre of offresList" (click)="onLoadOffre(offre)">
+      {{ offre.titre }}, {{offre.lieux}}
+    </button>
+  </ion-list>
 
 </ion-content>
 

@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoadingController, ModalController, ToastController} from 'ionic-angular';
+import {LoadingController, ModalController, NavController, ToastController} from 'ionic-angular';
 import { OffreSimplePage } from './offre-simple/offre-simple';
+import { SearchPage } from './search/search';
 import {Offre} from "../../models/Offre";
 import {OffresService} from "../../services/offres.service";
 import {Subscription} from "rxjs";
@@ -14,7 +15,7 @@ export class OffresPage implements OnInit, OnDestroy{
   offresList: Offre[];
   offreSubscription: Subscription;
 
-  constructor(private modalCtrl: ModalController,private offresService: OffresService, private toastCtrl: ToastController, private loadingCtrl: LoadingController) {
+  constructor(private modalCtrl: ModalController,private offresService: OffresService, private toastCtrl: ToastController, private loadingCtrl: LoadingController, private navCtrl : NavController) {
 
   }
 
@@ -26,6 +27,10 @@ export class OffresPage implements OnInit, OnDestroy{
     }
     );
     this.offresService.emitOffres();
+  }
+
+  onSearch() {
+    this.navCtrl.push(SearchPage);
   }
 
   onLoadOffre(offre: Offre) {
@@ -98,4 +103,5 @@ export class OffresPage implements OnInit, OnDestroy{
   ngOnDestroy(){
     this.offresService.offres$.unsubscribe();
   }
+
 }

@@ -1,6 +1,6 @@
 export enum Specialite {
-	Chirurgien,
-	Dentiste,
-	Medecin_Generaliste,
-	Infirmier
-}
+	Chirurgien = "Chirurgien",
+	Dentiste = "Dentiste",
+	Medecin_Generaliste = "Médecin Généraliste",
+	Infirmier = "Infirmier"
+};
