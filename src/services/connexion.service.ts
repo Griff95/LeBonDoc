@@ -44,7 +44,6 @@ export class ConnexionService {
   }
   signOut() {
     firebase.auth().signOut();
-    
-  }
+    }
 
   }
