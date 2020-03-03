@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Vos offres</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content padding>
+    <ion-list>
+      <button ion-item *ngFor="let offre of userOffreListe" (click)="onLoadOffre(offre)">
+        {{ offre.titre }}, {{offre.lieux}}
+      </button>
+    </ion-list>
+    <ion-row *ngIf="userOffreListe.length==0">
+      Aucune offre déposé pour le moment.
+    </ion-row>
+  </ion-content>
+
+  <ion-footer padding align-self-center>
+        <button ion-button block color="light" (click)="ajouterOffre()">Ajouter une nouvelle offre</button>
+  </ion-footer>

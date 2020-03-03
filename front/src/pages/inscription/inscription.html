@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button clear (click)="dismissModal()">Fermer</button>
+    </ion-buttons>
+    <ion-title>Inscription</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="authForm">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Adresse mail</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Mot de passe</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Prénom</ion-label>
+        <ion-input placeholder="" formControlName="prenom"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Nom</ion-label>
+        <ion-input placeholder="" formControlName="nom"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Spécialité</ion-label>
+        <ion-select placeholder="Choisir" formControlName="specialite">
+          <ion-option ion-item value="Chirurgien">Chirurgien</ion-option>
+          <ion-option ion-item value="Dentiste">Dentiste</ion-option>
+          <ion-option ion-item value="Infirmier">Infirmier</ion-option>
+          <ion-option ion-item value="Medecin_Generaliste">Medecin Generaliste</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date de naissance</ion-label>
+        <ion-datetime value="1990-01-01" formControlName="birthdate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Numéro de téléphone</ion-label>
+        <ion-input type = "number" placeholder="" formControlName="PhoneNumber"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Code postal</ion-label>
+        <ion-input type = "number" placeholder="" formControlName="PostalCode"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Décrivez-vous simplement</ion-label>
+        <ion-textarea rows="1" id="messageInputBox" placeholder="" formControlName="MotPerso" (input)="change()" required>
+        </ion-textarea>
+      </ion-item>
+
+    </ion-list>
+    <button ion-button block color="light" (click)="onSubmitForm()">Soumettre</button>
+    <span ion-text color="danger">{{ errorMessage }}</span>
+  </form>
+</ion-content>

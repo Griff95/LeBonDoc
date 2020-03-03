@@ -1,7 +1,0 @@
-{
-  "name": "LeBonDoc",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}

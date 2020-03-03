@@ -1,0 +1,11 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Favoris</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content padding>
+    <button ion-item *ngFor="let offre of global.offresfav"(click)="onLoadOffre(offre)">
+      {{ offre.titre }}, {{ offre.lieux}}
+  </button>
+  </ion-content>
