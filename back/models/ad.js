@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const adSchema = mongoose.Schema({
-    userId: {
+    advertiser: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
@@ -14,25 +14,41 @@ const adSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    healthStructure : {
-        type: String
-    },
-    dateDebut : {
-        type: Date,
-        required: true
-    },
-    dateFin : {
-        type: Date
-    },
     medicalField: {
         type: String,
+        required: true
     },
-    applications : [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Application'
-    }],
+    adType: {
+        type: String,
+        required: true
+    },
+    retrocession : {
+        type: Number
+    },
     isAvailable : {
         type: Boolean
+    },
+    healthStructure: {
+        name: {
+            type: String,
+            required: true
+        },
+        structureType: {
+            type: String,
+            required: true
+        },
+        postalCode: {
+            type: Number,
+            required: true
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        department: {
+            type: String,
+            required: true
+        }
     }
 }, {
     // will include updateAt and createdAt

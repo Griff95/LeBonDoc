@@ -26,33 +26,22 @@ const userSchema = mongoose.Schema({
     phone: {
         type: Number,
     },
-    birthDate: {
-        type: Date,
+    postalCode: {
+        type: Number,
+        required: true
     },
-    ads: [{
-        type : mongoose.Types.ObjectId,
-        ref: 'Ad'
-    }],
-    favorites: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Ad'
-    }],
+    city: {
+        type: String,
+        required: true
+    },
+    department: {
+        type: String,
+        required: true
+    },
     medicalField: {
         type: String,
     },
     presentation: {
-        type: String
-    },
-    postalCode: {
-        type: Number
-    },
-    city: {
-        type: String
-    },
-    department: {
-        type: String
-    },
-    state: {
         type: String
     },
     healthStructure: {
@@ -62,15 +51,26 @@ const userSchema = mongoose.Schema({
         structureType: {
             type: String
         },
-        location: {
-            lat: { type: Number },
-            lon: { type: Number },
-            road: { type: String },
-            numRoad: { type: String },
-            city: { type: String },
-            postalCode: { type: Number }
-        }
-    }
+        //lat: { type: Number },
+        //lon: { type: Number },
+        //road: { type: String },
+        //numRoad: { type: String },
+        city: { type: String },
+        department: { type: String },
+        postalCode: { type: Number }
+    },
+    ads: [{
+        type : mongoose.Types.ObjectId,
+        ref: 'Ad'
+    }],
+    favorites: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Ad'
+    }],
+    chats: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'AdChat'
+    }]
 }, {
     // will include updateAt and createdAt fields
     timestamps: true

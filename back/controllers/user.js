@@ -48,7 +48,7 @@ exports.login = (req, res, next) => {
 
 exports.getAccount = (req, res, next) => {
     console.log("getAccount");
-    User.findById(req.body.userId).populate("ads").then(
+    User.findById(req.body.userId).populate("ads chats favorites").then(
         (user) => {
             res.status(200).json(user);
         }

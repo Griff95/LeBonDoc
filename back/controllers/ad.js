@@ -58,22 +58,25 @@ exports.postAd = (req, res, next) => {
     );
 };
 
-exports.removeAd = (req, res, next) => {
+exports.deactivateAd = (req, res, next) => {
     console.log("removeAd");
     User.findById(req.body.userId).then( (user) => {
         console.log(user);
         if (user.ads && user.ads.includes(req.params.id)) {
-            Ad.deleteOne({_id: req.params.id}).then(
+            Ad.findByIdAndUpdate(req.params.id, { isAvailable: false }).then(
                 (ad) => {
                     console.log(ad);
-                    User.findByIdAndUpdate(req.body.userId, {
+                    /*User.findByIdAndUpdate(req.body.userId, {
                         $pull: {ads: ad._id}
                     }).then((user) => {
                         console.log(user);
                         res.status(201).json({
                             message: 'Ad removed successfully!'
                         })
-                    }).catch((error) => { res.status(400).json({ error: error }); });;
+                    }).catch((error) => { res.status(400).json({ error: error }); });*/
+                    res.status(201).json({
+                        message: 'Ad deactivated successfully!'
+                    });
                 }
             ).catch((error) => { res.status(400).json({ error: error }); });
         }
