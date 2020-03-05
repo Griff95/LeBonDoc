@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { OffreSimplePage } from '../offres/offre-simple/offre-simple';
-import {MoncompteService} from '../../services/moncompte.service';
-import { UserProfil } from '../../models/UserProfil';
+import {AccountService} from '../../services/account.service';
+import { UserProfile } from '../../models/UserProfile';
 import {Subscription} from "rxjs";
 import { Specialite } from '../../models/Specialite';
 import { OffresFav } from '../favoris/offresfav';
-import { Offre } from '../../models/Offre';
+import { Ad } from '../../models/Ad';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { Offre } from '../../models/Offre';
 })
 export class FavorisPage {
 
- /*  userProfil: UserProfil;
+ /*  userProfil: UserProfile;
   userProfilSubscription: Subscription; */  
 
   constructor(private modalCtrl: ModalController,public global: OffresFav) {
@@ -45,7 +45,7 @@ export class FavorisPage {
   } */
 
 
-  onLoadOffre(offre: Offre) {
+  onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
   }

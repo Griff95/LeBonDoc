@@ -10,7 +10,10 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 password: hash,
                 name: req.body.name,
-                lastName: req.body.lastName
+                lastName: req.body.lastName,
+                city: req.body.city,
+                department: req.body.department,
+                postalCode: req.body.postalCode
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -48,15 +51,43 @@ exports.login = (req, res, next) => {
 
 exports.getAccount = (req, res, next) => {
     console.log("getAccount");
-    User.findById(req.body.userId).populate("ads chats favorites").then(
-        (user) => {
-            res.status(200).json(user);
+    if (req.headers.authorization) {
+        try {
+            const token = req.headers.authorization.split(' ')[1];
+            const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+            const userId = decodedToken.userId;
+            console.log("API Called : req.params.userId="+req.params.userId);
+            if (req.params.userId && req.params.userId !== userId) {
+                throw 'Invalid user ID';
+            } else {
+                User.findById(req.params.userId).populate("ads favorites chats").then(
+                    (user) => {
+                        console.log("getAccount2" + user);
+                        res.status(200).json(user);
+                    }
+                ).catch(
+                    (error) => {
+                        console.log("getAccount3");
+                        return res.status(404).json({ error: error });
+                    }
+                );
+            }
+        } catch {
+            res.status(401).json({
+                error: new Error('Invalid request!')
+            });
         }
-    ).catch(
-        (error) => {
-            return res.status(404).json({ error: error });
-        }
-    );
+    } else {
+        User.findById(req.body.userId).select("-email -phone").populate("ads").then(
+            (user) => {
+                res.status(200).json(user);
+            }
+        ).catch(
+            (error) => {
+                return res.status(404).json({ error: error });
+            }
+        );
+    }
 };
 
 exports.editAccount = (req, res, next) => {

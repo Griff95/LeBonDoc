@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import * as firebase from 'firebase';
 
 import { MyApp } from './app.component';
@@ -10,8 +11,8 @@ import { HomePage } from '../pages/home/home';
 import { ConnexionPage } from '../pages/connexion/connexion';
 import { InscriptionPage } from '../pages/inscription/inscription';
 
-
-import { ConnexionService } from '../services/connexion.service';
+import { AuthInterceptor} from "../interceptors/auth-interceptor";
+import { AuthService } from '../services/auth.service';
 import {CalendrierPage} from "../pages/calendrier/calendrier";
 import {DeposerPage} from "../pages/deposer/deposer";
 import {FavorisPage} from "../pages/favoris/favoris";
@@ -27,13 +28,13 @@ import { SearchPage } from '../pages/offres/search/search';
 
 import { OffresFav} from '../pages/favoris/offresfav';
 import {OffresService} from "../services/offres.service";
-import {MoncompteService} from "../services/moncompte.service";
+import {AccountService} from "../services/account.service";
 
-import {Offre} from "../models/Offre";
-import {Candidature} from "../models/Candidature";
+import {Ad} from "../models/Ad";
+import {AdChat} from "../models/AdChat";
 import {Specialite} from "../models/Specialite";
 import {OffreType} from "../models/OffreType";
-import {UserProfil} from "../models/UserProfil";
+import {UserProfile, UserProfilAdapter} from "../models/UserProfile";
 
 
 
@@ -58,7 +59,8 @@ import {UserProfil} from "../models/UserProfil";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -81,13 +83,15 @@ import {UserProfil} from "../models/UserProfil";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ConnexionService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    AuthService,
     OffresFav,
-    Offre,
-    Candidature,
+    Ad,
+    AdChat,
     OffresService,
-    MoncompteService,
-    UserProfil
+    AccountService,
+    UserProfile,
+    UserProfilAdapter
   ]
 })
 export class AppModule {}

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { OffresService } from "../../../services/offres.service";
 import {DateTime, NavController, NavParams, ViewController} from 'ionic-angular';
-import {Offre} from "../../../models/Offre";
-import {UserProfil} from "../../../models/UserProfil";
-import {Candidature} from "../../../models/Candidature";
-import {ConnexionService} from "../../../services/connexion.service";
+import {Ad} from "../../../models/Ad";
+import {UserProfile} from "../../../models/UserProfile";
+import {AdChat} from "../../../models/AdChat";
+import {AuthService} from "../../../services/auth.service";
 import {Specialite} from "../../../models/Specialite";
 import {OffreType} from "../../../models/OffreType";
 
@@ -23,7 +23,7 @@ export class DeposerFormPage implements OnInit {
     //OffreType : OffreType;
 
 
-    constructor(private formBuilder: FormBuilder, private offresService: OffresService, public navCtrl: NavController,private  connexionService: ConnexionService) { }
+    constructor(private formBuilder: FormBuilder, private offresService: OffresService, public navCtrl: NavController,private  authService: AuthService) { }
 
     ngOnInit() {
         this.initForm();
@@ -45,10 +45,10 @@ export class DeposerFormPage implements OnInit {
     }
 
     onSubmitForm() {
-        let candidature = new Candidature()
+        let candidature = new AdChat()
         let newOffre = {titre : this.deposerForm.get('titre').value,description : this.deposerForm.get('description').value,codePostal : this.deposerForm.get('codePostal').value,
           lieux : this.deposerForm.get('lieux').value,dateDebut : this.deposerForm.get('dateDebut').value,dateFin : this.deposerForm.get('dateFin').value,datePublication : new Date(),
-          specialite : this.deposerForm.get('specialite').value,candidatures : null,isAvailable : true,annonceType : this.deposerForm.get('annonceType').value,id: this.connexionService.user.uid};
+          specialite : this.deposerForm.get('specialite').value,candidatures : null,isAvailable : true,annonceType : this.deposerForm.get('annonceType').value,id: this.authService.userId};
         this.offresService.addOffre(newOffre);
         this.offresService.saveData()
         this.navCtrl.pop();

@@ -3,10 +3,10 @@ import {LoadingController, ModalController, ToastController} from 'ionic-angular
 import { DeposerFormPage } from './deposer-form/deposer-form';
 import {OffresService} from "../../services/offres.service";
 import { NavController, NavParams, ViewController } from 'ionic-angular';
-import {Offre} from "../../models/Offre";
+import {Ad} from "../../models/Ad";
 import {OffreSimplePage} from "../offres/offre-simple/offre-simple";
 import {Subscription} from "rxjs";
-import {ConnexionService} from "../../services/connexion.service";
+import {AuthService} from "../../services/auth.service";
 
 
 
@@ -16,18 +16,18 @@ import {ConnexionService} from "../../services/connexion.service";
 })
 export class DeposerPage {
 
-  offresList: Offre[];
-  userOffreListe: Offre[]=[];
+  offresList: Ad[];
+  userOffreListe: Ad[]=[];
   offreSubscription: Subscription;
 
-  constructor(private connexionService: ConnexionService,private loadingCtrl: LoadingController, private modalCtrl: ModalController,private offresService: OffresService, private toastCtrl: ToastController, public navCtrl: NavController) {
+  constructor(private authService: AuthService, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private offresService: OffresService, private toastCtrl: ToastController, public navCtrl: NavController) {
 
   }
 
   ngOnInit(){
     this.onFetchList();
     this.offreSubscription = this.offresService.offres$.subscribe(
-      (offres: Offre[]) => {
+      (offres: Ad[]) => {
         this.offresList = offres;
       }
     );
@@ -40,7 +40,7 @@ export class DeposerPage {
     this.navCtrl.push(DeposerFormPage);
 }
 
-  onLoadOffre(offre: Offre) {
+  onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
   }
@@ -75,13 +75,14 @@ export class DeposerPage {
 
   userOffreList(){
     for (let offre of this.offresList) {
-      if (offre.id==this.connexionService.user.uid) {
-        this.userOffreListe.push(offre)
-      }
     }
 
 
-    }
+  }
+
+  ngOnDestroy(){
+    this.offreSubscription.unsubscribe();
+  }
 
 
 }

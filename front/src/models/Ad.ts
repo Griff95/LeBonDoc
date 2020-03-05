@@ -1,27 +1,26 @@
 import {Injectable} from "@angular/core";
-import {User} from "firebase";
-import {Specialite} from "../models/Specialite";
-import {Candidature} from "../models/Candidature";
-import {OffreType} from "./OffreType";
-import {AbstractControl} from "@angular/forms";
+import {UserProfile} from "./UserProfile";
 
 
 @Injectable()
-export class Offre {
+export class Ad {
 
-  
-	titre: string;
-	description : string;
-	codePostal : number;
-	lieux: string;
-	dateDebut : Date;
-	dateFin : Date;
-	datePublication : Date;
-	specialite : Specialite;
-	candidatures : String;
-	isAvailable : boolean;
-	id: string;
-	annonceType : OffreType;
+	advertiser: UserProfile;
+	title: string;
+	description: string;
+	medicalField: string;
+	adType: string;
+	retrocession: number;
+	isAvailable: boolean;
+	healthStructure: {
+		name: string;
+		structureType: string;
+		postalCode: number;
+		city: string;
+		department: string;
+	};
+	editedAt: Date;
+	createdAt: Date;
 
 
   constructor(/*titre: string,
@@ -33,7 +32,7 @@ export class Offre {
                 datePublication : Date,
                 specialite : Specialite,
                 annonceur : User,
-                candidatures : Candidature[],
+                candidatures : AdChat[],
                 isAvailable : boolean,
                 annonceType : OffreType*/) {
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { OffresFav } from '../../favoris/offresfav';
-import {Offre} from "../../../models/Offre";
-import {UserProfil} from "../../../models/UserProfil";
+import {Ad} from "../../../models/Ad";
+import {UserProfile} from "../../../models/UserProfile";
 import { Specialite } from '../../../models/Specialite';
 
 
@@ -13,9 +13,11 @@ import { Specialite } from '../../../models/Specialite';
 })
 export class OffreSimplePage implements OnInit {
 
-  userProfil:UserProfil;
-  offre: Offre[];
-  constructor(public navParams: NavParams, public viewCtrl: ViewController, public global: OffresFav) {
+  userProfil:UserProfile;
+  offre: Ad[];
+  constructor(public navParams: NavParams,
+              public viewCtrl: ViewController,
+              public global: OffresFav) {
 
   }
 

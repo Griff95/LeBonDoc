@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
-import { ConnexionService } from '../../services/connexion.service';
+import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {TabsPage} from "../tabs/tabs"
 import * as firebase from "firebase";
 import DataSnapshot = firebase.database.DataSnapshot;
-import {MoncompteService} from "../../services/moncompte.service";
-import {UserProfil} from "../../models/UserProfil";
+import {AccountService} from "../../services/account.service";
+import {UserProfile} from "../../models/UserProfile";
 import {Subscription} from "rxjs";
 
 
@@ -28,7 +28,12 @@ export class ConnexionPage implements OnInit{
   errorMessage: string;
   private authForm: FormGroup;
 
-  constructor(private moncompteService: MoncompteService,private navParams: NavParams, public navCtrl: NavController,public viewCtrl: ViewController, private formBuilder: FormBuilder,private connexionService: ConnexionService ) {
+  constructor(private moncompteService: AccountService,
+              private navParams: NavParams,
+              public navCtrl: NavController,
+              public viewCtrl: ViewController,
+              private formBuilder: FormBuilder,
+              private authService: AuthService ) {
   }
 
   ionViewDidLoad() {
@@ -47,11 +52,11 @@ export class ConnexionPage implements OnInit{
     });
   }
 
-  onSubmitForm() {
+  onLogIn() {
   const email = this.authForm.get('email').value;
   const password = this.authForm.get('password').value;
 
-    this.connexionService.signInUser(email, password).then(
+    this.authService.login(email, password).then(
       () => {
         this.navCtrl.setRoot(TabsPage);
       },
@@ -59,10 +64,11 @@ export class ConnexionPage implements OnInit{
         this.errorMessage = error;
       }
     );
-
-    //this.moncompteService.retrieveData();
-    //console.log(this.moncompteService.userProfil.prenom)
   }
+
+  dismissModal() {
+    this.viewCtrl.dismiss();
+  };
 
 
 }

@@ -1,24 +1,24 @@
-import {Offre} from "../models/Offre";
+import {Ad} from "../models/Ad";
 import {Subject} from "rxjs";
 
 import * as firebase from "firebase";
 import {Specialite} from "../models/Specialite";
-import {Candidature} from "../models/Candidature";
+import {AdChat} from "../models/AdChat";
 import {OffreType} from "../models/OffreType";
 import DataSnapshot = firebase.database.DataSnapshot;
 import {getUserConfigFile} from "@ionic/app-scripts";
 
 export class OffresService{
 
-  offres$ = new Subject<Offre[]>();
-  searchResult$ = new Subject<Offre[]>();
-  mostRecent$ = new Subject<Offre[]>();
-  sameSpeciality$ = new Subject<Offre[]>();
+  offres$ = new Subject<Ad[]>();
+  searchResult$ = new Subject<Ad[]>();
+  mostRecent$ = new Subject<Ad[]>();
+  sameSpeciality$ = new Subject<Ad[]>();
 
-  offresList: Offre[] = [];
-  results: Offre[] = [];
-  recents : Offre[] = [];
-  same : Offre[] = [];
+  offresList: Ad[] = [];
+  results: Ad[] = [];
+  recents : Ad[] = [];
+  same : Ad[] = [];
 
   addOffre(offre) {
     this.offresList.push(offre);

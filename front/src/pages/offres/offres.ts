@@ -2,12 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoadingController, ModalController, ToastController} from 'ionic-angular';
 import {OffreSimplePage} from './offre-simple/offre-simple';
 import {SearchPage} from './search/search';
-import {Offre} from "../../models/Offre";
+import {Ad} from "../../models/Ad";
 import {OffresService} from "../../services/offres.service";
 import {Subscription} from "rxjs";
 import {Specialite} from "../../models/Specialite";
-import {MoncompteService} from "../../services/moncompte.service";
-import {UserProfil} from "../../models/UserProfil";
+import {AccountService} from "../../services/account.service";
+import {UserProfile} from "../../models/UserProfile";
 
 @Component({
   selector: 'page-offres',
@@ -15,45 +15,49 @@ import {UserProfil} from "../../models/UserProfil";
 })
 export class OffresPage implements OnInit, OnDestroy{
 
-  userProfil: UserProfil;
+  userProfil: UserProfile;
 
-  offresList: Offre[];
-  mostRecent: Offre[];
-  sameSpeciality: Offre[];
-  searchResultList: Offre[];
+  offresList: Ad[];
+  mostRecent: Ad[];
+  sameSpeciality: Ad[];
+  searchResultList: Ad[];
   filtersApplied: string[] = [] ;
   private displayResults: boolean;
 
-  private offreSubscription: Subscription;
+  //private offreSubscription: Subscription;
   private mostRecentSubscription: Subscription;
   private sameSpeSubscription: Subscription;
   private searchResultSubscription: Subscription;
   private userProfilSubscription: Subscription;
 
-  constructor(private modalCtrl: ModalController,private offresService: OffresService, private toastCtrl: ToastController, private loadingCtrl: LoadingController,   private moncompteService: MoncompteService) {
+  constructor(private modalCtrl: ModalController,
+              private offresService: OffresService,
+              private toastCtrl: ToastController,
+              private loadingCtrl: LoadingController,
+              private accountService: AccountService) {
     this.displayResults = false;
   }
 
   ngOnInit(){
     //this.onFetchList();
     /*this.offreSubscription = this.offresService.offres$.subscribe(
-      (offres: Offre[]) => {
+      (offres: Ad[]) => {
         this.offresList = offres;
       });*/
     this.mostRecentSubscription = this.offresService.mostRecent$.subscribe(
-      (offres: Offre[]) => {
+      (offres: Ad[]) => {
         this.mostRecent = offres;
       });
     this.sameSpeSubscription = this.offresService.sameSpeciality$.subscribe(
-      (offres: Offre[]) => {
+      (offres: Ad[]) => {
         this.sameSpeciality = offres;
       });
     this.searchResultSubscription = this.offresService.searchResult$.subscribe(
-      (results: Offre[]) => {
+      (results: Ad[]) => {
         console.log("results : " + results);
         this.searchResultList = results;
       });
-    this.userProfilSubscription = this.moncompteService.userProfil$.subscribe(
+    this.userProfilSubscription = this.accountService.userProfil$.subscribe(
       (userProfil  ) => {
         this.userProfil = userProfil;
       });
@@ -61,7 +65,7 @@ export class OffresPage implements OnInit, OnDestroy{
     this.offresService.retrieveSameSpeciality(Specialite.Infirmier);
 
 
-    /*this.moncompteService.retrieveData().then( () => {
+    /*this.accountService.retrieveData().then( () => {
       console.log(this.userProfil.specialite + "  " + this.userProfil.email);
     });*/
   }
@@ -89,7 +93,7 @@ export class OffresPage implements OnInit, OnDestroy{
     modal.present();
   }
 
-  onLoadOffre(offre: Offre) {
+  onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
   }
@@ -157,10 +161,11 @@ export class OffresPage implements OnInit, OnDestroy{
 }
 
   ngOnDestroy(){
-    this.offresService.offres$.unsubscribe();
-    this.offresService.searchResult$.unsubscribe();
-    this.offresService.mostRecent$.unsubscribe();
-    this.offresService.sameSpeciality$.unsubscribe();
+    this.mostRecentSubscription.unsubscribe();
+    this.searchResultSubscription.unsubscribe();
+    //this.offreSubscription.unsubscribe();
+    this.userProfilSubscription.unsubscribe();
+    this.sameSpeSubscription.unsubscribe();
   }
 
 }

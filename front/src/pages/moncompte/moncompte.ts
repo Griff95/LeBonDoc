@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoadingController, NavController, NavParams, ToastController, Nav } from 'ionic-angular';
-import { ConnexionService } from '../../services/connexion.service';
-import { UserProfil } from "../../models/UserProfil";
+import { AuthService } from '../../services/auth.service';
+import { UserProfile, UserProfilAdapter } from "../../models/UserProfile";
 import { Subscription } from "rxjs";
-import { MoncompteService } from "../../services/moncompte.service";
+import { AccountService } from "../../services/account.service";
 import { HomePage } from '../home/home';
+import {User} from "firebase";
 
 
 
@@ -18,71 +19,66 @@ import { HomePage } from '../home/home';
 export class MonComptePage implements OnInit, OnDestroy {
 
   errorMessage: string;
-  userProfil: UserProfil;
+  userProfile: UserProfile;
   userProfilSubscription: Subscription;
-  userProfil2: UserProfil;
 
-  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, public navCtrl: NavController, private moncompteService: MoncompteService, private connexionService: ConnexionService) {
+  constructor(public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController,
+              public navCtrl: NavController,
+              private accountService: AccountService,
+              private authService: AuthService) {
   }
   ngOnInit() {
-    this.userProfilSubscription = this.moncompteService.userProfil$.subscribe(
-      (userProfil) => {
-        this.userProfil = userProfil;
-        console.log(userProfil);
-      }
+    console.log("bonjour la galère");
+
+    this.userProfilSubscription = this.accountService.userProfil$.subscribe(
+        (user) => {
+          this.userProfile = user;
+          console.log(user);
+        });
+
+    this.accountService.getAccount(this.authService.getUserId()).then(
+        (profile: UserProfile) => {
+          this.userProfile = profile;
+        }
     );
-
-    this.moncompteService.retrieveData();
-    this.userProfil2 = {
-      userId: null,
-      nom: "Bonin",
-      prenom: "Julien",
-      telephone: "0669384319",
-      email: "boninjulie@eisti.eu",
-      dateDeNaissance: new Date(),
-      isVerified: false,
-      specialite: "Dentiste",
-      codePostal: 2,
-      unMotSurMoi: "Toujours debout, toujours la banane",
-      offres: [],
-      favoris: []
-    }
-
-    /* this.userProfil2 = this.moncompteService.userProfil; */
+    console.log("on init ended");
   }
 
-  onSaveUserProfil() {
-    let loader = this.loadingCtrl.create({
-      content: "Sauvegarde en cours..."
-    });
-    loader.present();
-    this.moncompteService.saveData().then(
-      () => {
-        loader.dismiss();
-        this.toastCtrl.create({
-          message: "Données sauvegardées !",
-          duration: 3000,
-          position: "bottom"
-        }).present();
-      }
-    ).catch(
-      (error) => {
-        loader.dismiss();
-        this.toastCtrl.create({
-          message: error,
-          duration: 3000,
-          position: "bottom"
-        }).present();
-      }
-    )
-  }
+  // onEditProfile() {
+  //   let loader = this.loadingCtrl.create({
+  //     content: "Sauvegarde en cours..."
+  //   });
+  //   loader.present();
+  //   this.accountService.editProfile(this.userProfile).then(
+  //     () => {
+  //       loader.dismiss();
+  //       this.toastCtrl.create({
+  //         message: "Données sauvegardées !",
+  //         duration: 3000,
+  //         position: "bottom"
+  //       }).present();
+  //     }
+  //   ).catch(
+  //     (error) => {
+  //       loader.dismiss();
+  //       this.toastCtrl.create({
+  //         message: error,
+  //         duration: 3000,
+  //         position: "bottom"
+  //       }).present();
+  //     }
+  //   )
+  // }
 
+
+/*
   onFetchUserProfil() {
     let loader = this.loadingCtrl.create({
       content: "Récupération en cours..."
     });
     loader.present();
-    this.moncompteService.retrieveData().then(
+    this.accountService.getAccount(this.authService.getUserId()).then(
       () => {
         loader.dismiss();
         this.toastCtrl.create({
@@ -102,9 +98,9 @@ export class MonComptePage implements OnInit, OnDestroy {
       }
     )
   }
-
+*/
   onDisconnect() {
-    this.connexionService.signOut();
+    this.authService.logOut();
     this.navCtrl.parent.parent.setRoot(HomePage);
   }
 

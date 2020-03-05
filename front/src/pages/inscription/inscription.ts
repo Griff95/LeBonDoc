@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
-import { ConnexionService } from '../../services/connexion.service';
+import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TabsPage } from "../tabs/tabs";
 import { nodeModuleNameResolver } from 'typescript';
-import { MoncompteService } from "../../services/moncompte.service";
-import { Offre } from "../../models/Offre";
+import { AccountService } from "../../services/account.service";
+import { Ad } from "../../models/Ad";
 
 
 /**
@@ -25,7 +25,11 @@ export class InscriptionPage {
   errorMessage: string;
   private authForm: FormGroup;
 
-  constructor(private navParams: NavParams, public navCtrl: NavController, public viewCtrl: ViewController, private formBuilder: FormBuilder, private connexionService: ConnexionService, private moncompteservice: MoncompteService, public offre: Offre) {
+  constructor(private navParams: NavParams,
+              public navCtrl: NavController,
+              public viewCtrl: ViewController,
+              private formBuilder: FormBuilder,
+              private authService: AuthService) {
   }
 
   ionViewDidLoad() {
@@ -33,76 +37,64 @@ export class InscriptionPage {
   }
 
   ngOnInit() {
-
     this.initForm();
   }
+
+
   initForm() {
     this.authForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      birthdate: ['', Validators.required],
-      PhoneNumber: ['', Validators.required],
-      PostalCode: ['', Validators.required],
-      specialite: ['', Validators.required],
-      MotPerso: ['', Validators.required]
-
+      confirmPassword: ['', Validators.required],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      department: ['', Validators.required],
+      city: ['', Validators.required],
+      medicalField: ['', Validators.required]
     });
-
-    /* user:User;
-  nom: string;
-  prenom: string;
-  telephone: string;
-  email: string;
-  dateDeNaissance: Date;
-  isVerified: boolean;
-  offres: Offre[];
-  favoris: Offre[];
-  specialite: Specialite;
-  codePostal: number;
-  unMotSurMoi: string; */
   }
 
-  onSubmitForm() {
+  onSignUp() {
     const email = this.authForm.get('email').value;
     const password = this.authForm.get('password').value;
-    const birth = this.authForm.get('birthdate').value;
-    const phone = this.authForm.get('PhoneNumber').value;
-    const PostalCode = this.authForm.get('PostalCode').value;
-    const MotPerso = this.authForm.get('MotPerso').value;
-    const prenom = this.authForm.get('prenom').value;
-    const nom = this.authForm.get('nom').value;
-    const specialite = this.authForm.get('specialite').value;
+    const confirmPassword = this.authForm.get('confirmPassword').value;
+    const phone = this.authForm.get('phone').value;
+    const postalCode = this.authForm.get('postalCode').value;
+    const name = this.authForm.get('name').value;
+    const lastName = this.authForm.get('lastName').value;
+    const medicalField = this.authForm.get('medicalField').value;
+    const department = this.authForm.get('department').value;
+    const city = this.authForm.get('city').value;
 
-    let newUser = {
-      userId: null,
-      nom: nom,
-      prenom: prenom,
-      telephone: phone,
-      email: email,
-      dateDeNaissance: birth,
-      isVerified: false,
-      offres: [],
-      favoris: [],
-      specialite: specialite,
-      codePostal: PostalCode,
-      unMotSurMoi: MotPerso
+    if (password == confirmPassword) {
+      let newUser = {
+        lastName: lastName,
+        password: password,
+        name: name,
+        phone: phone,
+        email: email,
+        medicalField: medicalField,
+        postalCode: postalCode,
+        department: department,
+        city: city
+      };
+
+
+      this.authService.signUp(newUser).then(
+          () => {
+            this.navCtrl.push(TabsPage);
+          },
+          (error) => {
+            this.errorMessage = error;
+          }
+      );
+    } else {
+      this.errorMessage = "Les mots de passe de coïncident pas";
     }
-
-
-    this.connexionService.signUpUser(email, password).then(
-      () => {
-        this.navCtrl.push(TabsPage);
-      },
-      (error) => {
-        this.errorMessage = error;
-      }
-    );
-    newUser.userId=this.connexionService.user.uid;
-    this.moncompteservice.addUserProfile(newUser);
-    this.moncompteservice.saveData();
   }
+
   dismissModal() {
     this.viewCtrl.dismiss();
   }

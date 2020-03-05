@@ -5,7 +5,7 @@ import {Specialite} from "../../../models/Specialite";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 // @ts-ignore
 import * as JSONdepartements from "../../../assets/departments.json";
-import {Candidature} from "../../../models/Candidature";
+import {AdChat} from "../../../models/AdChat";
 
 @Component({
   selector: 'page-search',
@@ -18,7 +18,8 @@ export class SearchPage  implements OnInit {
   searchFilters: { dateSearch : Date, codePostal: number, specialite: Specialite};
   departements: any;
 
-  constructor(private viewCtrl: ViewController, private formBuilder: FormBuilder) {
+  constructor(private viewCtrl: ViewController,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
