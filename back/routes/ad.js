@@ -3,16 +3,17 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const adCtrl = require('../controllers/ad');
 
-router.get('/:id', adCtrl.getAd);
-router.delete('/:id', auth, adCtrl.deactivateAd);
-router.put('/:id', auth, adCtrl.editAd);
-router.post('/', auth, adCtrl.postAd);
+
 // router.get('/search', adCtrl.search);
 router.get('/recent', adCtrl.findRecent);
 router.get('/sameMedicalField', auth, adCtrl.findSameMedialField);
 router.get('/sameDepartment', auth, adCtrl.findSameDepartment);
 // router.post('/addFavorites/:id', auth, adCtrl.addToFavorites);
 // router.post('/removeFavorites/:id', auth, adCtrl.removeFavorites);
+router.get('/:id', adCtrl.getAd);
+router.delete('/:id', auth, adCtrl.deactivateAd);
+router.put('/:id', auth, adCtrl.editAdDescription);
+router.post('/', auth, adCtrl.postAd);
 
 /*
  * Ad API : localhost:3000/api/ad

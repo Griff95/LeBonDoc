@@ -1,5 +1,26 @@
-{
-  "mGeneraliste": "Médecin Généraliste",
-  "kine": "Kinésithérapeute",
-  "chirurgien": "Chirurgien"
-}
+[
+  {
+    "id": 1,
+    "title": "Kinésithérapeute"
+  },
+  {
+    "id": 2,
+    "title": "Médecin Généraliste"
+  },
+  {
+    "id": 3,
+    "title": "Infirmier"
+  },
+  {
+    "id": 4,
+    "title": "Dentiste"
+  },
+  {
+    "id": 5,
+    "title": "Chirurgien"
+  },
+  {
+    "id": 6,
+    "title": "Anésthésiste"
+  }
+]

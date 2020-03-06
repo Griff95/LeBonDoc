@@ -5,15 +5,13 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
         const userId = decodedToken.userId;
-        console.log("API Called : req.body.userId="+req.body.userId);
+        console.log("API Called : req.body.userId="+req.body.userId + " req.body._id="+ req.body._id);
         if (req.body.userId && req.body.userId !== userId) {
-            throw 'Invalid user ID';
+            res.status(401).json({ 'error': 'Invalid request!'});
         } else {
             next();
         }
     } catch {
-        res.status(401).json({
-            error: new Error('Invalid request!')
-        });
+        res.status(401).json({ 'error': 'Invalid request!' });
     }
 };

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, ViewController} from "ionic-angular";
-import {OffresService} from "../../../services/offres.service";
-import {Specialite} from "../../../models/Specialite";
+import {AdService} from "../../../services/ad.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 // @ts-ignore
 import * as JSONdepartements from "../../../assets/departments.json";
@@ -14,8 +13,8 @@ import {AdChat} from "../../../models/AdChat";
 export class SearchPage  implements OnInit {
 
   searchForm: FormGroup;
-  specialites : Specialite[];
-  searchFilters: { dateSearch : Date, codePostal: number, specialite: Specialite};
+  specialites : Object[];
+  searchFilters: { dateSearch : Date, codePostal: number, specialite: string};
   departements: any;
 
   constructor(private viewCtrl: ViewController,
@@ -23,7 +22,7 @@ export class SearchPage  implements OnInit {
   }
 
   ngOnInit(): void {
-    this.specialites = Object.keys(Specialite).map(key => Specialite[key]).slice();
+    // this.specialites = Object.keys(Specialite).map(key => Specialite[key]).slice();
     this.departements = JSONdepartements;
     console.log(this.departements);
     this.initForm();
@@ -41,7 +40,7 @@ export class SearchPage  implements OnInit {
   validateSearchFilters() {
     var dateSearch = this.searchForm.get('dateSearch').value;
     var codePostal = this.searchForm.get('codePostal').value;
-    var specialite = (<any>Specialite)[this.searchForm.get('specialite').value];
+    var specialite = 1;
     //this.searchFilters.dateSearch = this.searchForm.get('dateSearch').value;
     //this.searchFilters.codePostal = this.searchForm.get('codePostal').value;
     //this.searchFilters.specialite = (<any>Specialite)[this.searchForm.get('specialite').value];

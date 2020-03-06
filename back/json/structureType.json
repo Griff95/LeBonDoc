@@ -1,10 +1,34 @@
-{
-  "cabinetGroupe": "Cabinet de groupe",
-  "cabinetIndiv": "Cabinet individuel",
-  "centreSante": "Centre de santé",
-  "centreHosp": "Centre hospitalier",
-  "clinique": "Clinique",
-  "maisonSante": "Maison de Santé",
-  "pharmacie": "Pharmacie",
-  "ephad":  "EPHAD"
-}
+[
+  {
+    "id": 1,
+    "title": "Cabinet de groupe"
+  },
+  {
+    "id": 2,
+    "title": "Cabinet individuelle"
+  },
+  {
+    "id": 3,
+    "title": "Centre de santé"
+  },
+  {
+    "id": 4,
+    "title": "Centre hospitalier"
+  },
+  {
+    "id": 5,
+    "title": "Clinique"
+  },
+  {
+    "id": 6,
+    "title": "Maison de Santé"
+  },
+  {
+    "id": 7,
+    "title": "Pharmacie"
+  },
+  {
+    "id": 8,
+    "title": "EPHAD"
+  }
+]

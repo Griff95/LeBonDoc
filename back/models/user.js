@@ -38,6 +38,9 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    region: {
+        type: String
+    },
     medicalField: {
         type: String,
     },

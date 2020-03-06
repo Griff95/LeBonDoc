@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import * as firebase from 'firebase';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -27,57 +26,55 @@ import { SearchPage } from '../pages/offres/search/search';
 
 
 import { OffresFav} from '../pages/favoris/offresfav';
-import {OffresService} from "../services/offres.service";
+import {AdService} from "../services/ad.service";
 import {AccountService} from "../services/account.service";
 
 import {Ad} from "../models/Ad";
 import {AdChat} from "../models/AdChat";
-import {Specialite} from "../models/Specialite";
-import {OffreType} from "../models/OffreType";
-import {UserProfile, UserProfilAdapter} from "../models/UserProfile";
-
+import {UserProfile} from "../models/UserProfile";
+import {JsonService} from "../services/json.service";
 
 
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    ConnexionPage,
-    InscriptionPage,
-    CalendrierPage,
-    DeposerPage,
-    FavorisPage,
-    MessagesPage,
-    MonComptePage,
-    OffresPage,
-    TabsPage,
-    OffreSimplePage,
-    DeposerFormPage,
-    SearchPage
+      MyApp,
+      HomePage,
+      ConnexionPage,
+      InscriptionPage,
+      CalendrierPage,
+      DeposerPage,
+      FavorisPage,
+      MessagesPage,
+      MonComptePage,
+      OffresPage,
+      TabsPage,
+      OffreSimplePage,
+      DeposerFormPage,
+      SearchPage
   ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot(),
+        HttpClientModule
+    ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    ConnexionPage,
-    InscriptionPage,
-    CalendrierPage,
-    DeposerPage,
-    FavorisPage,
-    MessagesPage,
-    MonComptePage,
-    OffresPage,
-    TabsPage,
-    OffreSimplePage,
-    DeposerFormPage,
-    SearchPage
+      MyApp,
+      HomePage,
+      ConnexionPage,
+      InscriptionPage,
+      CalendrierPage,
+      DeposerPage,
+      FavorisPage,
+      MessagesPage,
+      MonComptePage,
+      OffresPage,
+      TabsPage,
+      OffreSimplePage,
+      DeposerFormPage,
+      SearchPage
   ],
   providers: [
     StatusBar,
@@ -85,13 +82,13 @@ import {UserProfile, UserProfilAdapter} from "../models/UserProfile";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AuthService,
+    JsonService,
     OffresFav,
     Ad,
     AdChat,
-    OffresService,
+    AdService,
     AccountService,
-    UserProfile,
-    UserProfilAdapter
+    UserProfile
   ]
 })
 export class AppModule {}

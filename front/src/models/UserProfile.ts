@@ -2,32 +2,39 @@ import {Injectable} from "@angular/core";
 import {Ad} from "./Ad";
 import {AdChat} from "./AdChat";
 import {Adapter} from "../app/core/adapter"
-import {HealthStructure} from "./HealthStructure";
 
 
 @Injectable()
 export class UserProfile {
 
-  constructor(
-    email: string,
-    name: string,
-    lastName: string,
-    phone: string,
-    postalCode: number,
-    city: string,
-    department: string,
-    medicalField: string,
-    presentation: string,
-    healthStructure: HealthStructure,
-    ads: Ad[],
-    favorites: Ad[],
-    chats: AdChat[],
-    editedAt: Date,
-    createAt: Date
-  ) {}
+  public email: string;
+  public name: string;
+  public lastName: string;
+  public phone: string;
+  public postalCode: number;
+  public city: string;
+  public department: string;
+  public region: string;
+  public medicalField: string;
+  public presentation: string;
+  public 	healthStructure: {
+    name: string;
+    structureType: string;
+    postalCode: number;
+    city: string;
+    department: string;
+  };
+  public ads: Ad[];
+  public favorites: Ad[];
+  public chats: AdChat[];
+  public editedAt: Date;
+  public createAt: Date;
+
+  constructor() {}
 
 }
 
+/**
 @Injectable()
 export class UserProfilAdapter implements Adapter<UserProfile> {
   adapt(item: any): UserProfile {
@@ -63,3 +70,4 @@ export class UserProfilAdapter implements Adapter<UserProfile> {
 
   }
 }
+*/

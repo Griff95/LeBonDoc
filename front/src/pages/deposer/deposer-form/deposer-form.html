@@ -1,54 +1,62 @@
 <ion-header>
-        <ion-navbar>
-          <ion-title>Nouvelle offre</ion-title>
-        </ion-navbar>
-      </ion-header>
+  <ion-navbar>
+    <ion-title>Nouvelle offre</ion-title>
+  </ion-navbar>
+</ion-header>
 
-      <ion-content padding>
-        <form [formGroup]="deposerForm">
-          <ion-list>
-            <ion-item-divider>Informations</ion-item-divider>
-            <ion-item>
-              <ion-label>Titre</ion-label>
-              <ion-input placeholder="" formControlName="titre"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Lieu</ion-label>
-              <ion-input placeholder="" formControlName="lieux"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Code postal</ion-label>
-              <ion-input placeholder="" formControlName="codePostal"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>Date de début</ion-label>
-              <ion-datetime value="2000-01-01" placeholder="2000-01-01" formControlName="dateDebut"></ion-datetime>
-            </ion-item>
-            <ion-item>
-              <ion-label>Date de fin</ion-label>
-              <ion-datetime value="2000-01-01" placeholder="2000-01-01" formControlName="dateFin"></ion-datetime>
-            </ion-item>
-            <ion-item>
-              <ion-label>Spécialité</ion-label>
-              <ion-select placeholder="Choisir" formControlName="specialite">
-                <ion-option ion-item value="Chirurgien">Chirurgien</ion-option>
-                <ion-option ion-item value="Dentiste">Dentiste</ion-option>
-                <ion-option ion-item value="Infirmier">Infirmier</ion-option>
-                <ion-option ion-item value="Medecin_Generaliste">Medecin Generaliste</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label>Type d'offre</ion-label>
-              <ion-select placeholder="Choisir" formControlName="annonceType">
-                <ion-option ion-item value="partenariat">partenariat</ion-option>
-                <ion-option ion-item value="remplacement">remplacement</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label>Description</ion-label>
-              <ion-input placeholder="" formControlName="description"></ion-input>
-            </ion-item>
-          </ion-list>
-          <button ion-button block color="light" (click)="onSubmitForm()">Ajouter</button>
-        </form>
-      </ion-content>
+<ion-content padding>
+  <form [formGroup]="postAdForm">
+    <ion-list>
+      <ion-item-divider>Informations</ion-item-divider>
+      <ion-item>
+        <ion-label>Titre</ion-label>
+        <ion-input placeholder="" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-input placeholder="" formControlName="description"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Domaine Médical</ion-label>
+        <ion-select formControlName="medicalField" >
+          <ion-option [value]="item.id" *ngFor="let item of medicalFields">{{ item.title }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Type d'offre</ion-label>
+        <ion-select formControlName="adType" >
+          <ion-option [value]="item.id" *ngFor="let item of adTypes">{{ item.title }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>% de retrocession</ion-label>
+        <ion-input placeholder="" formControlName="retrocession"></ion-input>
+      </ion-item>
+      <ion-item-divider>Structure Médicale</ion-item-divider>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input placeholder="" formControlName="hSName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Type de Structure</ion-label>
+        <ion-select formControlName="hSStructureType" >
+          <ion-option [value]="item.id" *ngFor="let item of structureTypes">{{ item.title }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Code Postal</ion-label>
+        <ion-input placeholder="" formControlName="hSPostalCode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ville</ion-label>
+        <ion-input placeholder="" formControlName="hSCity"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Département</ion-label>
+        <ion-input placeholder="" formControlName="hSDepartment"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-label *ngIf="error">{{error}}</ion-label>
+    <button ion-button block color="light" (click)="onSubmitForm()">Ajouter</button>
+  </form>
+</ion-content>

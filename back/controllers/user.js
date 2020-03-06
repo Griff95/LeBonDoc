@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Ad = require('../models/ad');
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
@@ -58,7 +59,7 @@ exports.getAccount = (req, res, next) => {
             const userId = decodedToken.userId;
             console.log("API Called : req.params.userId="+req.params.userId);
             if (req.params.userId && req.params.userId !== userId) {
-                throw 'Invalid user ID';
+                return res.status(404).json({ error });
             } else {
                 User.findById(req.params.userId).populate("ads favorites chats").then(
                     (user) => {
@@ -91,12 +92,38 @@ exports.getAccount = (req, res, next) => {
 };
 
 exports.editAccount = (req, res, next) => {
-    console.log("editAccount");
+    console.log("editAccount for user " + req.body);
     User.findByIdAndUpdate(req.body.userId, req.body, { new: true })
         .then((user) => {
+            console.log(user);
             res.status(201).json({ user });
         })
         .catch((error) => {
             res.status(400).json({ error: error });
     });
+};
+
+exports.getUserAds = (req, res, next) => {
+    console.log("getUserAds");
+    User.findById(req.params.userId).then( (user) => {
+        console.log(user);
+        if (user.ads.length > 0) {
+            Ad.find({ '_id' :  { $in: user.ads }}, 'title adType advertiser healthStructure.structureType healthStructure.department').then( (ads) => {
+                res.status(201).json(ads);
+            }).catch(
+                (error) => {
+                    res.status(400).json({
+                        error: "Oups.."
+                    });
+                });
+        } else {
+            res.status(200).json([]);
+        }
+    }).catch(
+        (error) => {
+            res.status(400).json({
+                error: error
+            });
+        }
+    );
 };

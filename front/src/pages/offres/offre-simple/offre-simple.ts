@@ -3,7 +3,6 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { OffresFav } from '../../favoris/offresfav';
 import {Ad} from "../../../models/Ad";
 import {UserProfile} from "../../../models/UserProfile";
-import { Specialite } from '../../../models/Specialite';
 
 
 

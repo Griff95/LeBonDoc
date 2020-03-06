@@ -4,7 +4,6 @@ import { OffreSimplePage } from '../offres/offre-simple/offre-simple';
 import {AccountService} from '../../services/account.service';
 import { UserProfile } from '../../models/UserProfile';
 import {Subscription} from "rxjs";
-import { Specialite } from '../../models/Specialite';
 import { OffresFav } from '../favoris/offresfav';
 import { Ad } from '../../models/Ad';
 

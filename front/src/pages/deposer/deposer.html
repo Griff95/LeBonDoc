@@ -5,16 +5,16 @@
   </ion-header>
 
   <ion-content padding>
-    <ion-list>
-      <button ion-item *ngFor="let offre of userOffreListe" (click)="onLoadOffre(offre)">
-        {{ offre.titre }}, {{offre.lieux}}
+    <ion-list *ngIf="userAds">
+      <button ion-item *ngFor="let ad of userAds" (click)="onLoadOffre(ad)">
+        {{ ad.title }}, {{ad.healthStructure.department}}
       </button>
     </ion-list>
-    <ion-row *ngIf="userOffreListe.length==0">
+    <ion-row *ngIf="userAds.length==0">
       Aucune offre déposé pour le moment.
     </ion-row>
   </ion-content>
 
   <ion-footer padding align-self-center>
-        <button ion-button block color="light" (click)="ajouterOffre()">Ajouter une nouvelle offre</button>
+        <button ion-button block color="light" (click)="createNewAd()">Ajouter une nouvelle offre</button>
   </ion-footer>

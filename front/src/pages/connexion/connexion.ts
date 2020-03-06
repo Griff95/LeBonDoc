@@ -3,7 +3,6 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {TabsPage} from "../tabs/tabs"
-import * as firebase from "firebase";
 import DataSnapshot = firebase.database.DataSnapshot;
 import {AccountService} from "../../services/account.service";
 import {UserProfile} from "../../models/UserProfile";

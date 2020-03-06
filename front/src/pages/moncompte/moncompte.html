@@ -4,43 +4,68 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>.
-  <ion-list>
-    <ion-item>
-      <ion-label>Prénom</ion-label>
-      <ion-input value = {{userProfile?.name}}></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Nom</ion-label>
-      <ion-input value = {{userProfile?.lastName}}></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Adresse mail</ion-label>
-      <ion-input value = {{userProfile?.email}}></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Numéro de téléphone</ion-label>
-      <ion-input value = {{userProfile?.phone}}></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Domaine Médical</ion-label>
-      <ion-input value = {{userProfile?.medicalField}}></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Code postal</ion-label>
-      <ion-input value = {{userProfile?.postalCode}}></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Description</ion-label>
-      <ion-input value = {{userProfile?.presentation}}></ion-input>
-    </ion-item>
-    <ion-item>
-      <button ion-button block color="light">
-        <ion-icon name="edit"></ion-icon>
-        Modifier mes informations
-    </button>
-    </ion-item>
-  </ion-list>
+<ion-content padding>
+  <form [formGroup]="editProfileForm" (ngSubmit)="onEditProfile(editProfileForm)">
+    <ion-list>
+      <ion-item>
+        <ion-label>Prénom</ion-label>
+        <ion-input value = {{userProfile?.name}} formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input value = {{userProfile?.lastName}} formControlName="lastName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Adresse mail</ion-label>
+        <ion-input value = {{userProfile?.email}} formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Numéro de téléphone</ion-label>
+        <ion-input value = {{userProfile?.phone}} formControlName="phone"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Domaine Médical</ion-label>
+        <ion-select formControlName="medicalField" >
+          <ion-option [value]="item.id" *ngFor="let item of medicalFields">{{ item.title }}</ion-option>
+        </ion-select>
+        <ion-input value = {{userProfile?.medicalField}} formControlName="medicalField"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Code Postal</ion-label>
+        <ion-input type="search" value = {{userProfile?.postalCode}} formControlName="postalCode" placeholder="Code Postal" (input)="searchLocation($event, editProfileForm);"></ion-input>
+<!--        <ion-label *ngIf="foundLocation">-->
+<!--          {{ foundLocation.city}}, {{ foundLocation.postalCode }}, {{ foundLocation.department }}, {{ foundLocation.region }}-->
+<!--        </ion-label>-->
+<!--        <ion-searchbar formControlName="postalCode" placeholder="Code Postal" (ionInput)="searchLocation()"></ion-searchbar>-->
+<!--        <ion-list *ngIf="userProfile?.postalCode">-->
+<!--          <ion-item>{{ userProfile?.city }}, {{ userProfile?.postalCode }}, {{ userProfile?.department }}, {{ userProfile?.region }}</ion-item>-->
+<!--        </ion-list>-->
+      </ion-item>
+      <ion-item>
+        <ion-label>Ville</ion-label>
+        <ion-input value = {{userProfile?.city}} formControlName="city"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Département</ion-label>
+        <ion-input value = {{userProfile?.department}} formControlName="department"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Région</ion-label>
+        <ion-input value = {{userProfile?.region}} formControlName="region"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input value = {{userProfile?.presentation}} formControlName="presentation"></ion-input>
+      </ion-item>
+      <ion-item>
+        <button ion-button block color="light" type="submit">
+          <ion-icon name="edit"></ion-icon>
+          Modifier mes informations
+        </button>
+        <span ion-text color="danger">{{ errorMessage }}</span>
+      </ion-item>
+    </ion-list>
+  </form>
 
 
   <ion-footer>  <button ion-button block color="light" (click)="onDisconnect()" >
