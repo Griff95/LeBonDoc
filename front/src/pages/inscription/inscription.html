@@ -33,12 +33,9 @@
         <ion-input placeholder="" formControlName="lastName"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label fixed>Domaine Médical</ion-label>
-        <ion-select placeholder="Choisir" formControlName="medicalField">
-          <ion-option ion-item value="Chirurgien">Chirurgien</ion-option>
-          <ion-option ion-item value="Dentiste">Dentiste</ion-option>
-          <ion-option ion-item value="Infirmier">Infirmier</ion-option>
-          <ion-option ion-item value="Medecin_Generaliste">Medecin Generaliste</ion-option>
+        <ion-label>Domaine Médical</ion-label>
+        <ion-select formControlName="medicalField" >
+          <ion-option [value]="item.title" *ngFor="let item of medicalFields">{{ item.title }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -47,7 +44,7 @@
       </ion-item>
       <ion-item>
         <ion-label floating>Code postal</ion-label>
-        <ion-input type = "number" placeholder="" formControlName="postalCode"></ion-input>
+        <ion-input type = "number" placeholder="" formControlName="postalCode" (input)="searchLocationByPostalCode($event);"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Ville</ion-label>
@@ -56,6 +53,10 @@
       <ion-item>
         <ion-label floating>Département</ion-label>
         <ion-input type = "text" placeholder="" formControlName="department"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Région</ion-label>
+        <ion-input type = "text" placeholder="" formControlName="region"></ion-input>
       </ion-item>
 
     </ion-list>

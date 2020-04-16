@@ -168,6 +168,10 @@ export class MonComptePage implements OnInit, OnDestroy {
         this.navCtrl.parent.parent.setRoot(HomePage);
     }
 
+    compareWith = (o1, o2) => {
+        return o1 && o2 ? o1.id === o2.id  : o1 === o2;
+    };
+
     ngOnDestroy() {
         this.userProfilSubscription.unsubscribe();
     }

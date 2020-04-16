@@ -26,9 +26,8 @@
       <ion-item>
         <ion-label>Domaine Médical</ion-label>
         <ion-select formControlName="medicalField" >
-          <ion-option [value]="item.id" *ngFor="let item of medicalFields">{{ item.title }}</ion-option>
+          <ion-option [value]="item.title" *ngFor="let item of medicalFields">{{ item.title }}</ion-option>
         </ion-select>
-        <ion-input value = {{userProfile?.medicalField}} formControlName="medicalField"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Code Postal</ion-label>

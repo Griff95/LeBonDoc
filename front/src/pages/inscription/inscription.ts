@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TabsPage } from "../tabs/tabs";
-import { nodeModuleNameResolver } from 'typescript';
-import { AccountService } from "../../services/account.service";
-import { Ad } from "../../models/Ad";
+import {JsonService} from "../../services/json.service";
 
 
 /**
@@ -24,12 +22,15 @@ export class InscriptionPage {
   connexionForm: FormGroup;
   errorMessage: string;
   private authForm: FormGroup;
+  medicalFields: Object[];
 
   constructor(private navParams: NavParams,
               public navCtrl: NavController,
               public viewCtrl: ViewController,
               private formBuilder: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private jsonService: JsonService,
+              private zone: NgZone) {
   }
 
   ionViewDidLoad() {
@@ -38,6 +39,11 @@ export class InscriptionPage {
 
   ngOnInit() {
     this.initForm();
+    this.jsonService.getMedicalFields().then(
+        (data: Object[]) => {
+          this.medicalFields = data;
+        }
+    );
   }
 
 
@@ -52,6 +58,7 @@ export class InscriptionPage {
       postalCode: ['', Validators.required],
       department: ['', Validators.required],
       city: ['', Validators.required],
+      region: ['', Validators.required],
       medicalField: ['', Validators.required]
     });
   }
@@ -117,5 +124,25 @@ export class InscriptionPage {
     element.style.height = scroll_height + "px";
     textarea.style.minHeight = scroll_height + "px";
     textarea.style.height = scroll_height + "px";
+  }
+
+  searchLocationByPostalCode($event) {
+    const postalCode = $event.target.value;
+    console.log("searchLocation called" + postalCode);
+
+    this.jsonService.findLocationByPostalCode(postalCode).then((location: any) => {
+      this.zone.run(() => {
+        console.log(JSON.stringify(location));
+        this.authForm.controls['postalCode'].setValue(location.postalCode);
+        this.authForm.controls['department'].setValue(location.department);
+        this.authForm.controls['city'].setValue(location.city);
+        this.authForm.controls['region'].setValue(location.region);
+      });
+    }).catch( (error) => {
+      this.authForm.controls['department'].setValue("");
+      this.authForm.controls['city'].setValue("");
+      this.authForm.controls['region'].setValue("");
+    });
+
   }
 }
