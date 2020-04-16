@@ -6,8 +6,8 @@ const adCtrl = require('../controllers/ad');
 
 // router.get('/search', adCtrl.search);
 router.get('/recent', adCtrl.findRecent);
-router.get('/sameMedicalField', auth, adCtrl.findSameMedialField);
-router.get('/sameDepartment', auth, adCtrl.findSameDepartment);
+router.get('/medicalField/:id', adCtrl.findAdsByMedicalFieldId);
+router.get('/department/:id', adCtrl.findAdsByDepartmentId);
 // router.post('/addFavorites/:id', auth, adCtrl.addToFavorites);
 // router.post('/removeFavorites/:id', auth, adCtrl.removeFavorites);
 router.get('/:id', adCtrl.getAd);

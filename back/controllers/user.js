@@ -12,6 +12,7 @@ exports.signup = (req, res, next) => {
                 password: hash,
                 name: req.body.name,
                 lastName: req.body.lastName,
+                phone: req.body.phone,
                 city: req.body.city,
                 department: req.body.department,
                 postalCode: req.body.postalCode

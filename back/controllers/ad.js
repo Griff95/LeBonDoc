@@ -106,8 +106,8 @@ exports.findRecent = (req, res, next) => {
     );
 };
 
-exports.findSameDepartment =  (req, res, next) => {
-    console.log("findSameDepartement");
+exports.findAdsByDepartmentId =  (req, res, next) => {
+    console.log("findAdsByDepartmentId");
     Ad.find({ "healthStructure.location.department": req.body.department }).sort('-createdAt').limit(10).then( (ads) => {
             res.status(200).json(ads);
         }
@@ -120,9 +120,9 @@ exports.findSameDepartment =  (req, res, next) => {
     );
 };
 
-exports.findSameMedialField =  (req, res, next) => {
-    console.log("findSameMedicalField");
-    Ad.find({ medicalField : req.body.medicalField }).sort('-createdAt').limit(10).then( (ads) => {
+exports.findAdsByMedicalFieldId =  (req, res, next) => {
+    console.log("findAdsByMedicalFieldId");
+    Ad.find({ medicalField : req.params.id }).sort('-createdAt').limit(10).then( (ads) => {
             res.status(200).json(ads);
         }
     ).catch(
