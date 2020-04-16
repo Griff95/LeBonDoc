@@ -7,6 +7,7 @@ import {AdService} from "../../services/ad.service";
 import {Subscription} from "rxjs";
 import {AccountService} from "../../services/account.service";
 import {UserProfile} from "../../models/UserProfile";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'page-offres',
@@ -16,14 +17,12 @@ export class OffresPage implements OnInit, OnDestroy{
 
   userProfil: UserProfile;
 
-  offresList: Ad[];
   mostRecent: Ad[];
   sameSpeciality: Ad[];
   searchResultList: Ad[];
   filtersApplied: string[] = [] ;
   private displayResults: boolean;
 
-  //private offreSubscription: Subscription;
   private mostRecentSubscription: Subscription;
   private sameSpeSubscription: Subscription;
   private searchResultSubscription: Subscription;
@@ -31,6 +30,7 @@ export class OffresPage implements OnInit, OnDestroy{
 
   constructor(private modalCtrl: ModalController,
               private adService: AdService,
+              private authService: AuthService,
               private toastCtrl: ToastController,
               private loadingCtrl: LoadingController,
               private accountService: AccountService,
@@ -39,11 +39,6 @@ export class OffresPage implements OnInit, OnDestroy{
   }
 
   ngOnInit(){
-    //this.onFetchList();
-    /*this.offreSubscription = this.adService.offres$.subscribe(
-      (offres: Ad[]) => {
-        this.offresList = offres;
-      });*/
     this.mostRecentSubscription = this.adService.mostRecent$.subscribe(
         (mostRecentAds: Ad[]) => {
           this.zone.run(() => {
@@ -67,20 +62,19 @@ export class OffresPage implements OnInit, OnDestroy{
         (userProfil  ) => {
           this.userProfil = userProfil;
         });
-    this.adService.getAdsMostRecent().then( r => {
+    this.adService.getAdsMostRecent().then( r => {}).catch((err) => console.log(err));
 
-    }).catch((err) => console.log(err));
-    this.adService.getAdsSameMedicalField().then(r => {
-
-    }).catch( (err) => {
-      console.log(err);
-    });
-
-
-    /*this.accountService.retrieveData().then( () => {
-      console.log(this.userProfil.specialite + "  " + this.userProfil.email);
-    });*/
+    this.accountService.getAccount(this.authService.getUserId()).then( r => {
+      if (this.userProfil.medicalField)
+        this.adService.getAdsSameMedicalField(this.userProfil.medicalField).then((r : Ad[]) => {
+          this.zone.run(() => {
+            this.sameSpeciality = r;
+          });
+        }).catch( (err) => console.log(err));
+    })
   }
+
+
   resetSearch(){
     this.searchResultList = undefined;
     this.filtersApplied = [] ;
@@ -173,7 +167,6 @@ export class OffresPage implements OnInit, OnDestroy{
   ngOnDestroy(){
     this.mostRecentSubscription.unsubscribe();
     this.searchResultSubscription.unsubscribe();
-    //this.offreSubscription.unsubscribe();
     this.userProfilSubscription.unsubscribe();
     this.sameSpeSubscription.unsubscribe();
   }

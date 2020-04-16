@@ -1,6 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Mon Compte</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="onDisconnect()">
+        <ion-label>Déconnexion</ion-label>
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -26,7 +32,7 @@
       <ion-item>
         <ion-label>Domaine Médical</ion-label>
         <ion-select formControlName="medicalField" >
-          <ion-option [value]="item.title" *ngFor="let item of medicalFields">{{ item.title }}</ion-option>
+          <ion-option [value]="item.id" *ngFor="let item of medicalFields">{{ item.title }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -67,9 +73,9 @@
   </form>
 
 
-  <ion-footer>  <button ion-button block color="light" (click)="onDisconnect()" >
-    <ion-icon name="exit"></ion-icon>
-    Déconnexion
-  </button></ion-footer>
+<!--  <ion-footer>  <button ion-button block color="light" (click)="onDisconnect()" >-->
+<!--    <ion-icon name="exit"></ion-icon>-->
+<!--    Déconnexion-->
+<!--  </button></ion-footer>-->
 
 </ion-content>

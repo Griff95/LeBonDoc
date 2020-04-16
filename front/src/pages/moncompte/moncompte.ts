@@ -1,4 +1,4 @@
-import {Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LoadingController, NavController, NavParams, ToastController, Nav, Select} from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { UserProfile } from "../../models/UserProfile";
@@ -43,16 +43,18 @@ export class MonComptePage implements OnInit, OnDestroy {
                 this.userProfile = profile;
             }
         );
-        this.userProfilSubscription = this.accountService.userProfil$.subscribe(
-            (user) => {
-                this.userProfile = user;
-                console.log(user);
-            });
         this.jsonService.getMedicalFields().then(
             (data: Object[]) => {
                 this.medicalFields = data;
             }
         );
+        this.userProfilSubscription = this.accountService.userProfil$.subscribe(
+            (user) => {
+                this.userProfile = user;
+                this.editProfileForm.controls['medicalField'].setValue(user.medicalField);
+                console.log(user);
+            });
+
 
     }
 
@@ -167,10 +169,6 @@ export class MonComptePage implements OnInit, OnDestroy {
         this.authService.logOut();
         this.navCtrl.parent.parent.setRoot(HomePage);
     }
-
-    compareWith = (o1, o2) => {
-        return o1 && o2 ? o1.id === o2.id  : o1 === o2;
-    };
 
     ngOnDestroy() {
         this.userProfilSubscription.unsubscribe();

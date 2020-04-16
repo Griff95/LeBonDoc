@@ -168,9 +168,9 @@ export class AdService{
         });
     }
 
-    getAdsSameMedicalField(){
+    getAdsSameMedicalField(medicalFieldId){
         return new Promise((resolve, reject) => {
-            this.http.get<Ad[]>('http://localhost:3000/api/ad/sameMedicalField').subscribe(
+            this.http.get<Ad[]>('http://localhost:3000/api/ad/medicalField/'+medicalFieldId).subscribe(
                 (data: Ad[]) => {
                     this.recents = data;
                     this.emitAdsSameMedicalField();
