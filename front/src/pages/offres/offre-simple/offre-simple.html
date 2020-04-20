@@ -9,15 +9,19 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-card-header>{{ offre.titre }}, {{offre.lieux}}</ion-card-header>
+    <ion-card-header>{{ offre.title }}, {{offre.healthStructure.city}}</ion-card-header>
+
     <ion-card-content>
       <p >{{ offre.description }}</p>
     </ion-card-content>
     <ion-card-content>
+      <p >Offre proposé par {{ offre.advertiser.name}} {{ offre.advertiser.lastName}}</p>
     </ion-card-content>
+
     <ion-card-content>
 
     </ion-card-content>
+
     <ion-grid>
       <ion-row>
         <ion-col>
