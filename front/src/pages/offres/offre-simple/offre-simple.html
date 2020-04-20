@@ -3,8 +3,8 @@
     <ion-buttons>
       <button ion-button clear (click)="dismissModal()">Fermer</button>
     </ion-buttons>
-    <ion-buttons start>
-      <button ion-button (click)="addOrRemoveFavorites()">
+    <ion-buttons start *ngIf="offre">
+      <button ion-button color=black (click)="fav(offre)"> <!-- TODO -->
         <ion-icon name="heart"></ion-icon>
       </button>
     </ion-buttons>
@@ -59,12 +59,6 @@
         <ion-col>
           <button *ngIf="offre.advertiser==userProfil._id" ion-button full color="primary" (click)="deleteOffre(offre)">Supprimer l'offre</button>
           <button *ngIf="offre.advertiser!=userProfil._id" ion-button full color="primary" (click)="contactOwner(offre)">Prendre contact</button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <button *ngIf="offre.isAvailable" ion-button full color="secondary" (click)="fav(offre)">Ajouter à mes favoris</button>
-          <button *ngIf="!offre.isAvailable" ion-button full color="secondary" (click)="fav(offre)">Retirer de mes favoris</button>
         </ion-col>
       </ion-row>
     </ion-grid>

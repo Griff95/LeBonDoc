@@ -60,10 +60,6 @@ export class OffreSimplePage implements OnInit {
 
   }
 
-  addOrRemoveFavorites() {
-    
-  }
-
   contactOwner(offre){
 
   }
