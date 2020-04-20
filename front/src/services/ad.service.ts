@@ -7,6 +7,10 @@ import {AuthService} from "./auth.service";
 @Injectable()
 export class AdService{
 
+    DOMAINEMEDICAL: String[] = ["Kinésithérapeute","Médecin Généraliste","Infimier","Dentiste","Chirurgien","Anésthésiste"];
+    TYPEOFFRE : String[] = ["CDD","CDI","Remplacement","Installation"];
+    HEALTHSTRUCTURETYPE : String[] = ["Cabinet de groupe", "Cabinet individuelle", "Centre de santé","Centre hospitalier", "Clinique", "Maison de santé","Pharmacie","EPHAD"]
+
     offres$ = new Subject<Ad[]>();
     offresList: Ad[] = [];
 

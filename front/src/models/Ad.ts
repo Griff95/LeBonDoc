@@ -21,6 +21,7 @@ export class Ad {
 	};
 	editedAt: Date;
 	createdAt: Date;
+	public  _id : String;
 
 
   constructor(/*titre: string,

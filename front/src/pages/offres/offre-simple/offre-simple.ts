@@ -3,6 +3,9 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { OffresFav } from '../../favoris/offresfav';
 import {Ad} from "../../../models/Ad";
 import {UserProfile} from "../../../models/UserProfile";
+import {AdService} from "../../../services/ad.service";
+import {AccountService} from "../../../services/account.service";
+
 
 
 
@@ -12,11 +15,18 @@ import {UserProfile} from "../../../models/UserProfile";
 })
 export class OffreSimplePage implements OnInit {
 
-  userProfil:UserProfile;
-  offre: Ad[];
+  userProfil: UserProfile = this.accountService.userProfil;
+  ownerUserProfil;
+  offre: Ad;
+  promise;
+  user;
+  date;
+
   constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
-              public global: OffresFav) {
+              public global: OffresFav,
+              private adService: AdService,
+              private accountService: AccountService) {
 
   }
 
@@ -39,6 +49,15 @@ export class OffreSimplePage implements OnInit {
     }
   ; */
     this.offre = this.navParams.get('offre');
+    console.log(this.offre);
+    console.log(this.userProfil);
+
+
+
+    this.promise = this.adService.getAd(this.offre._id);
+    console.log(this.promise);
+    this.promise.then(data => this.ownerUserProfil=data)
+    console.log("test",this.ownerUserProfil)
   }
 
   dismissModal() {
@@ -49,17 +68,26 @@ export class OffreSimplePage implements OnInit {
     if (offre.isAvailable == true) {
       offre.isAvailable = false;
       this.global.offresfav.push(offre);
+
 /*       console.log(this.global.offresfav);
  *//*       this.userProfil.favoris.push(offre);
  *//*       console.log(this.userProfil.favoris);
  */
     
-}
+    }
     else {
       offre.isAvailable = true;
 /*       this.userProfil.favoris.splice(this.userProfil.favoris.indexOf(offre.name),1);
  */      this.global.offresfav.splice(this.global.offresfav.indexOf(offre.name),1);
    
- }
+    }
+  }
+
+  deleteOffre(offre){
+
+  }
+
+  contactOwner(offre){
+
   }
 }
