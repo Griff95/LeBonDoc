@@ -28,7 +28,7 @@ exports.editAdDescription = (req, res, next) => {
 
 exports.getAd = (req, res, next) => {
     console.log("getAd by id");
-    Ad.findById(req.params.id).then(
+    Ad.findById(req.params.id).populate("advertiser").then(
         (ad) => {
             res.status(200).json(ad);
         }
