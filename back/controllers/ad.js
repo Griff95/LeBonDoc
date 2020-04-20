@@ -28,7 +28,7 @@ exports.editAdDescription = (req, res, next) => {
 
 exports.getAd = (req, res, next) => {
     console.log("getAd by id");
-    Ad.findById(req.params.id).populate("advertiser").then(
+    Ad.findById(req.params.id).populate("advertiser").exec().then(
         (ad) => {
             res.status(200).json(ad);
         }
@@ -132,4 +132,11 @@ exports.findAdsByMedicalFieldId =  (req, res, next) => {
             });
         }
     );
+};
+
+exports.addToFavorites = (req, res, next) => {
+    console.log("addToFavorites");
+    User.findByIdAndUpdate(req.body.userId, { $push: { favorites: req.param.id }}).then( (user) => {
+
+    });
 };
