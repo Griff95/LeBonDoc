@@ -3,12 +3,17 @@
     <ion-buttons>
       <button ion-button clear (click)="dismissModal()">Fermer</button>
     </ion-buttons>
-    <ion-title>{{ offre.titre }}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="addOrRemoveFavorites()">
+        <ion-icon name="heart"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title *ngIf="offre">{{ offre.title }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngIf="offre">
     <ion-card-header>{{ offre.title }}</ion-card-header>
 
     <ion-card-content>
@@ -18,13 +23,13 @@
     <ion-card>
       <ion-card-header>Structure</ion-card-header>
       <ion-card-content>
-        <p >nom de la structure : {{ offre.healthStructure.name }}</p>
+        <p >Nom : {{ offre.healthStructure.name }}</p>
       </ion-card-content>
       <ion-card-content>
-        <p >Type de la structure : {{ adService.HEALTHSTRUCTURETYPE[offre.healthStructure.structureType-1] }}</p>
+        <p >Type : {{ adService.HEALTHSTRUCTURETYPE[offre.healthStructure.structureType-1] }}</p>
       </ion-card-content>
       <ion-card-content>
-        <p >Ville de la structure : {{ offre.healthStructure.city }}</p>
+        <p >Ville : {{ offre.healthStructure.city }}</p>
       </ion-card-content>
 
     </ion-card>
@@ -32,7 +37,7 @@
     <ion-card>
       <ion-card-header>Détails</ion-card-header>
       <ion-card-content>
-        <p >Offre proposé par : {{ offre.advertiser }}</p>
+        <p >Annonceur :  {{ offre.advertiser.name }} {{ offre.advertiser.lastName }}</p>
       </ion-card-content>
       <ion-card-content>
         <p >Domaine médical : {{ adService.DOMAINEMEDICAL[offre.medicalField-1] }}</p>
@@ -41,10 +46,10 @@
         <p >Type : {{ adService.TYPEOFFRE[offre.adType-1] }}</p>
       </ion-card-content>
       <ion-card-content>
-        <p >Avec une rétrocession de : {{ offre.retrocession }} %</p>
+        <p >Rétrocession : {{ offre.retrocession }} %</p>
       </ion-card-content>
       <ion-card-content>
-        <p >le : {{offre.createdAt| date: 'mediumDate'}} {{offre.createdAt| date: 'shortTime'}}</p>
+        <p >Posté le : {{offre.createdAt| date: 'mediumDate'}} {{offre.createdAt| date: 'shortTime'}}</p>
       </ion-card-content>
     </ion-card>
 
