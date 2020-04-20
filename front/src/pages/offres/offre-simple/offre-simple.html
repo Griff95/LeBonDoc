@@ -9,16 +9,10 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-card-header>{{ offre.title }} : {{offre.healthStructure.city}}</ion-card-header>
+    <ion-card-header>{{ offre.title }}</ion-card-header>
 
     <ion-card-content>
-      <p >Description de l'offre : {{ offre.description }}</p>
-    </ion-card-content>
-    <ion-card-content>
-      <p >Domaine médical de l'offre : {{ adService.DOMAINEMEDICAL[offre.medicalField-1] }}</p>
-    </ion-card-content>
-    <ion-card-content>
-      <p >Type de l'offre : {{ adService.TYPEOFFRE[offre.adType-1] }}</p>
+      <p >{{ offre.description }}</p>
     </ion-card-content>
 
     <ion-card>
@@ -36,8 +30,15 @@
     </ion-card>
 
     <ion-card>
+      <ion-card-header>Détails</ion-card-header>
       <ion-card-content>
         <p >Offre proposé par : {{ offre.advertiser }}</p>
+      </ion-card-content>
+      <ion-card-content>
+        <p >Domaine médical : {{ adService.DOMAINEMEDICAL[offre.medicalField-1] }}</p>
+      </ion-card-content>
+      <ion-card-content>
+        <p >Type : {{ adService.TYPEOFFRE[offre.adType-1] }}</p>
       </ion-card-content>
       <ion-card-content>
         <p >Avec une rétrocession de : {{ offre.retrocession }} %</p>
