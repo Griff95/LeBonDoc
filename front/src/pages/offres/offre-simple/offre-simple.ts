@@ -16,7 +16,7 @@ import {AccountService} from "../../../services/account.service";
 export class OffreSimplePage implements OnInit {
 
   userProfil: UserProfile = this.accountService.userProfil;
-  ownerUserProfil;
+  //ownerUserProfil: any;
   offre: Ad;
   promise;
   user;
@@ -26,7 +26,8 @@ export class OffreSimplePage implements OnInit {
               public viewCtrl: ViewController,
               public global: OffresFav,
               private adService: AdService,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              public ownerUserProfil: UserProfile) {
 
   }
 
@@ -55,9 +56,9 @@ export class OffreSimplePage implements OnInit {
 
 
     this.promise = this.adService.getAd(this.offre._id);
-    console.log(this.promise);
-    this.promise.then(data => this.ownerUserProfil=data)
-    console.log("test",this.ownerUserProfil)
+
+    this.promise.then((data) => {this.offre=data}).catch((error)=>{console.log(error)})
+
   }
 
   dismissModal() {

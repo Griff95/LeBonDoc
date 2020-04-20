@@ -32,7 +32,7 @@
     <ion-card>
       <ion-card-header>Détails</ion-card-header>
       <ion-card-content>
-        <p >Offre proposé par : {{ offre.advertiser }}</p>
+        <p >Offre proposé par : {{ offre.advertiser.name }} {{ offre.advertiser.lastName }}</p>
       </ion-card-content>
       <ion-card-content>
         <p >Domaine médical : {{ adService.DOMAINEMEDICAL[offre.medicalField-1] }}</p>
