@@ -137,6 +137,13 @@ exports.findAdsByMedicalFieldId =  (req, res, next) => {
 exports.addToFavorites = (req, res, next) => {
     console.log("addToFavorites");
     User.findByIdAndUpdate(req.body.userId, { $push: { favorites: req.param.id }}).then( (user) => {
+        res.status(200).json({ msg: "Add to favorite successful" });
+    }).catch( (err) => { res.status(400).json({ error: "Add to favorite failed" })});
+};
 
-    });
+exports.removeFavorites = (req, res, next) => {
+    console.log("removeFavorites");
+    User.findByIdAndUpdate(req.body.userId, { $pull: { favorites: req.param.id }}).then( (user) => {
+        res.status(200).json({ msg: "Remove from favorite successful" });
+    }).catch( (err) => { res.status(400).json({ error: "Remove From favorite failed" })});
 };
