@@ -57,6 +57,10 @@ export class AdService{
         this.sameSpeciality$.next(this.same.slice());
     }
 
+    emitSearch(){
+        this.searchResult$.next(this.same.slice());
+    }
+
 
     // saveData(){
     //     return new Promise((resolve, reject) => {
@@ -187,8 +191,19 @@ export class AdService{
         });
     }
 
-    search(searchFilters: { codePostal: number; dateSearch: Date; medicalField: number }) {
-        //TODO
+    search(medicalField,postalCode,structureType,adType) {
+        return new Promise((resolve, reject) => {
+            this.http.post<Ad[]>('http://localhost:3000/api/ad/medicalField/',{medicalField,postalCode,structureType,adType}).subscribe(
+                (data: Ad[]) => {
+                    this.recents = data;
+                    this.emitSearch();
+                    resolve(data);
+                },
+                (error => {
+                    reject(error);
+                })
+            )
+        });
     }
 
     // snapshotToArray = snapshot => {

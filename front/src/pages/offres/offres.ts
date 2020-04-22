@@ -86,10 +86,11 @@ export class OffresPage implements OnInit, OnDestroy{
     modal.onDidDismiss( data => {
       if (data) {
         this.displayResults = true;
-        if (data.specialite) this.filtersApplied.push(data.specialite)
-        if (data.dateSearch) this.filtersApplied.push(data.dateSearch)
-        if (data.codePostal) this.filtersApplied.push(data.codePostal)
-        this.adService.search(data);
+        if (data.medicalField) this.filtersApplied.push(data.medicalField)
+        if (data.adType) this.filtersApplied.push(data.adType)
+        if (data.postalCode) this.filtersApplied.push(data.postalCode)
+        if (data.structureType) this.filtersApplied.push(data.structureType)
+        this.adService.search(data.medicalField,data.postalCode,data.structureType,data.adType);
       } else {
         this.resetSearch();
       }
