@@ -193,7 +193,7 @@ export class AdService{
 
     search(medicalField,postalCode,structureType,adType) {
         return new Promise((resolve, reject) => {
-            this.http.post<Ad[]>('http://localhost:3000/api/ad/medicalField/',{medicalField,postalCode,structureType,adType}).subscribe(
+            this.http.post<Ad[]>('http://localhost:3000/api/ad/search/',{medicalField,postalCode,structureType,adType}).subscribe(
                 (data: Ad[]) => {
                     this.recents = data;
                     this.emitSearch();

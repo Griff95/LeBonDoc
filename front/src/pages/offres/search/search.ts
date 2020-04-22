@@ -75,17 +75,11 @@ export class SearchPage  implements OnInit {
 
      */
 
-    this.adService.search(this.searchForm.get('medicalField').value,
-        this.searchForm.get('postalCode').value,
-        this.searchForm.get('structureType').value,
-        this.searchForm.get('adType').value).then(() => {
       this.viewCtrl.dismiss({"medicalField" : this.searchForm.get('medicalField').value,
         "adType" : this.searchForm.get('adType').value,
         "structureType": this.searchForm.get('structureType').value,
         "postalCode": this.searchForm.get('postalCode').value});
-    }).catch( (err) => {
-      console.log(err);
-    });
+
   }
 
 
