@@ -69,29 +69,29 @@ exports.postAd = (req, res, next) => {
     }
 };
 
-exports.deactivateAd = (req, res, next) => {
+exports.removeAd = (req, res, next) => {
     console.log("deactivateAd");
-    User.findById(req.body.userId).then( (user) => {
+    User.findById(req.body.userId).then((user) => {
         console.log(user);
         if (user.ads && user.ads.includes(req.params.id)) {
-            Ad.findByIdAndUpdate(req.params.id, { isAvailable: false }).then(
+            Ad.findByIdAndDelete(req.params.id).exec().then(
                 (ad) => {
-                    console.log(ad);
-                    /*User.findByIdAndUpdate(req.body.userId, {
+                    // console.log(ad);
+                    User.findByIdAndUpdate(req.body.userId, {
                         $pull: {ads: ad._id}
                     }).then((user) => {
-                        console.log(user);
+                        // console.log(user);
                         res.status(201).json({
                             message: 'Ad removed successfully!'
                         })
-                    }).catch((error) => { res.status(400).json({ error: error }); });*/
+                    }).catch((error) => { res.status(400).json({ error: error }); });
                     res.status(201).json({
                         message: 'Ad deactivated successfully!'
                     });
                 }
             ).catch((error) => { res.status(400).json({ error: error }); });
         }
-    });
+    }).catch((error) => { res.status(400).json({ error: error }); });;
 };
 
 exports.findRecent = (req, res, next) => {
@@ -146,4 +146,18 @@ exports.removeFavorites = (req, res, next) => {
     User.findByIdAndUpdate(req.body.userId, { $pull: { favorites: req.param.id }}).then( (user) => {
         res.status(200).json({ msg: "Remove from favorite successful" });
     }).catch( (err) => { res.status(400).json({ error: "Remove From favorite failed" })});
+};
+
+exports.search = (req, res, next) => {
+    console.log("search");
+    const query = {};
+    if (req.body.medicalField) query.medicalField = req.body.medicalField;
+    if (req.body.postalCode) query.healthStructure.postalCode = req.body.postalCode;
+    if (req.body.structureType) query.healthStructure.structureType = req.body.structureType;
+    if (req.body.adType) query.adType = req.body.adType;
+    if (query !== {})
+        Ad.find(query).then((ads) => {
+            res.status(200).json(ads);
+        }).catch( (err) => { res.status(400).json({ error: "Search failed" })});
+
 };

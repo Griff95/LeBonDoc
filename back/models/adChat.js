@@ -19,16 +19,13 @@ const adChatSchema = mongoose.Schema({
     msg: [{
         user: {
             type: mongoose.Types.ObjectId,
-            ref: 'User',
-            required: true
+            ref: 'User'
         },
         msg: {
-            type: String,
-            required: true
+            type: String
         },
         createdAt: {
-            type: Date,
-            required: true
+            type: Date
         }
     }]
 }, {

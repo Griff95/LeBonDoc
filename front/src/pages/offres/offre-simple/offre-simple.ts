@@ -16,7 +16,6 @@ import {AccountService} from "../../../services/account.service";
 export class OffreSimplePage implements OnInit {
 
   userProfil: UserProfile = this.accountService.userProfil;
-  //ownerUserProfil: any;
   offre: Ad;
   promise;
   user;
@@ -32,32 +31,8 @@ export class OffreSimplePage implements OnInit {
   }
 
   ngOnInit() {
-/*     this.userProfil = 
 
-    {
-      userId:"thretgrgraffz",
-      nom: "Bocquet",
-      prenom: "Rémi",
-      telephone: "0687702166",
-      email: "bocquetrem@eisti.eu",
-      dateDeNaissance: new Date(),
-      isVerified: false,
-      offres: [],
-      favoris: [],
-      specialite: Specialite.Dentiste,
-      codePostal: 52000,
-      unMotSurMoi: "C'est le jour 1"
-    }
-  ; */
-    this.offre = this.navParams.get('offre');
-    console.log(this.offre);
-    console.log(this.userProfil);
-
-
-
-    this.promise = this.adService.getAd(this.offre._id);
-
-    this.promise.then((data) => {this.offre=data}).catch((error)=>{console.log(error)})
+    this.adService.getAd(this.navParams.get('offre')._id).then((ad: Ad) => this.offre = ad)
 
   }
 

@@ -4,14 +4,14 @@ const auth = require('../middleware/auth');
 const adCtrl = require('../controllers/ad');
 
 
-// router.get('/search', adCtrl.search);
+router.post('/search', adCtrl.search);
 router.get('/recent', adCtrl.findRecent);
 router.get('/medicalField/:id', adCtrl.findAdsByMedicalFieldId);
 router.get('/department/:id', adCtrl.findAdsByDepartmentId);
 router.put('/addFavorites/:id', auth, adCtrl.addToFavorites);
 router.put('/removeFavorites/:id', auth, adCtrl.removeFavorites);
 router.get('/:id', adCtrl.getAd);
-router.delete('/:id', auth, adCtrl.deactivateAd);
+router.delete('/:id', auth, adCtrl.removeAd);
 router.put('/:id', auth, adCtrl.editAdDescription);
 router.post('/', auth, adCtrl.postAd);
 
