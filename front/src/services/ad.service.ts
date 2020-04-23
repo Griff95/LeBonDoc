@@ -102,7 +102,7 @@ export class AdService{
         });
     }
 
-    activateAd(id) {
+    deleteAd(id) {
         return new Promise( (resolve, reject) => {
             this.http.delete('http://localhost:3000/api/ad/'+id).subscribe(
                 (data) => {

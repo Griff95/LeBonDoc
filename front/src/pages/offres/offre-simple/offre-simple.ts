@@ -60,7 +60,8 @@ export class OffreSimplePage implements OnInit {
   }
 
   deleteOffre(offre){
-
+    this.adService.deleteAd(this.offre._id);
+    this.viewCtrl.dismiss();
   }
 
   contactOwner(offre){
