@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { OffresFav } from '../../favoris/offresfav';
 import {Ad} from "../../../models/Ad";
@@ -26,7 +26,8 @@ export class OffreSimplePage implements OnInit {
               public global: OffresFav,
               private adService: AdService,
               private accountService: AccountService,
-              public ownerUserProfil: UserProfile) {
+              public ownerUserProfil: UserProfile,
+              private zone: NgZone) {
 
   }
 
@@ -62,6 +63,7 @@ export class OffreSimplePage implements OnInit {
   deleteOffre(offre){
     this.adService.deleteAd(this.offre._id);
     this.viewCtrl.dismiss();
+
   }
 
   contactOwner(offre){

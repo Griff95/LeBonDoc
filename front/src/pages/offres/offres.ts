@@ -129,6 +129,7 @@ export class OffresPage implements OnInit, OnDestroy{
   onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
+    modal.onDidDismiss(() => this.ngOnInit());
   }
 
   // onSaveList(){

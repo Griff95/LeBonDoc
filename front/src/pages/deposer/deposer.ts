@@ -48,6 +48,8 @@ export class DeposerPage {
   onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
+    // @ts-ignore
+    modal.onDidDismiss(() => this.ionViewWillEnter());
   }
 
   // onFetchList(){
