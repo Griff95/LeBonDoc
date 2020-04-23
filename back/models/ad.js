@@ -48,6 +48,10 @@ const adSchema = mongoose.Schema({
         department: {
             type: String,
             required: true
+        },
+        region: {
+            type: String,
+            required: true
         }
     }
 }, {

@@ -16,10 +16,7 @@
 <!--  </ion-refresher>-->
   <div *ngIf="displayResults">
       <ion-title no-lines>
-        <span item-start>Résultat de votre recherche</span>
-        <button item-end ion-button color="danger" (click)="resetSearch()">
-          <ion-icon name="close" ></ion-icon>
-        </button>
+        Résultat de votre recherche
       </ion-title>
     <ion-chip *ngIf=filtersApplied.medicalField>
       <ion-label>{{ adService.DOMAINEMEDICAL[filtersApplied.medicalField-1] }}</ion-label>

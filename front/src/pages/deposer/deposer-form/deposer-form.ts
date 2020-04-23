@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AdService } from "../../../services/ad.service";
 import {DateTime, NavController, NavParams, ViewController} from 'ionic-angular';
@@ -27,7 +27,8 @@ export class DeposerFormPage implements OnInit {
                 private adService: AdService,
                 public navCtrl: NavController,
                 private  authService: AuthService,
-                private jsonService: JsonService) { }
+                private jsonService: JsonService,
+                private zone: NgZone) { }
 
     ngOnInit() {
         this.initForm();
@@ -60,7 +61,8 @@ export class DeposerFormPage implements OnInit {
             hSStructureType: ['',Validators.required],
             hSPostalCode: ['',Validators.required],
             hSCity: ['',Validators.required],
-            hSDepartment: ['',Validators.required]
+            hSDepartment: ['',Validators.required],
+            hSRegion: ['', Validators.required]
         });
     }
 
@@ -77,12 +79,30 @@ export class DeposerFormPage implements OnInit {
         newAd.healthStructure.postalCode = this.postAdForm.get('hSPostalCode').value;
         newAd.healthStructure.city = this.postAdForm.get('hSCity').value;
         newAd.healthStructure.department = this.postAdForm.get('hSDepartment').value;
+        newAd.healthStructure.region = this.postAdForm.get('hSRegion').value;
 
         this.adService.postAd(JSON.stringify(newAd)).then(() => {
             this.navCtrl.pop();
         }).catch( (err) => {
             this.error = "Problème";
         });
+    }
+
+    searchLocation($event) {
+        this.jsonService.findLocationByPostalCode($event.target.value).then((location: any) => {
+            this.zone.run(() => {
+                console.log(JSON.stringify(location));
+                this.postAdForm.controls['hSPostalCode'].setValue(location.postalCode);
+                this.postAdForm.controls['hSDepartment'].setValue(location.department);
+                this.postAdForm.controls['hSCity'].setValue(location.city);
+                this.postAdForm.controls['hSRegion'].setValue(location.region);
+            });
+        }).catch( (error) => {
+            this.postAdForm.controls['hSDepartment'].setValue("");
+            this.postAdForm.controls['hSCity'].setValue("");
+            this.postAdForm.controls['hSRegion'].setValue("");
+        });
+
     }
 
 }
