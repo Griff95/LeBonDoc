@@ -21,13 +21,34 @@
           <ion-icon name="close" ></ion-icon>
         </button>
       </ion-title>
-    <ion-chip *ngFor="let filter of filtersApplied">
-      <ion-label>{{ filter }}</ion-label>
+    <ion-chip *ngIf=filtersApplied.medicalField>
+      <ion-label>{{ adService.DOMAINEMEDICAL[filtersApplied.medicalField-1] }}</ion-label>
+      <ion-icon name="close" color="light" (click)=removeFilter(0)></ion-icon>
+    </ion-chip>
+    <ion-chip *ngIf=filtersApplied.postalCode>
+      <ion-label>{{ filtersApplied.postalCode }}</ion-label>
+      <ion-icon name="close" color="light" (click)=removeFilter(1)></ion-icon>
+    </ion-chip>
+    <ion-chip *ngIf=filtersApplied.adType>
+      <ion-label>{{ adService.TYPEOFFRE[filtersApplied.adType-1] }}</ion-label>
+      <ion-icon name="close" color="light" (click)=removeFilter(2)></ion-icon>
+    </ion-chip>
+    <ion-chip *ngIf=filtersApplied.structureType>
+      <ion-label>{{ adService.HEALTHSTRUCTURETYPE[filtersApplied.structureType-1] }}</ion-label>
+      <ion-icon name="close" color="light" (click)=removeFilter(3)></ion-icon>
     </ion-chip>
     <ion-list *ngIf="searchResultList">
-      <button ion-item *ngFor="let result of searchResultList" (click)="onLoadOffre(result)">
-        {{ result.title }}, {{result.healthStructure.city}}, {{result.medicalField}}, {{result.createdAt}}
-      </button>
+      <ion-item text-wrap *ngFor="let result of searchResultList | slice:0:10; let i=index " (click)="onLoadOffre(result)">
+        <ion-label>
+          <h2>{{ result.title }}</h2>
+          <div style="font-size:11px">
+            <ion-note>{{result.healthStructure.city}}, {{result.createdAt| date: 'mediumDate'}} {{result.createdAt| date: 'shortTime'}}</ion-note>
+          </div>
+        </ion-label>
+      </ion-item>
+<!--      <button ion-item *ngFor="let result of searchResultList" (click)="onLoadOffre(result)">-->
+<!--        {{ result.title }}, {{result.healthStructure.city}}, {{result.medicalField}}, {{result.createdAt}}-->
+<!--      </button>-->
     </ion-list>
   </div>
   <div *ngIf="!displayResults">

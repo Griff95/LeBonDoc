@@ -11,24 +11,24 @@
   <form [formGroup]="searchForm">
     <ion-list>
 
-        <ion-item>
-          <ion-label>Spécialité</ion-label>
-          <ion-select formControlName="medicalField">
-            <ion-option *ngFor="let medicalField of medicalFields">{{ medicalField.title }}</ion-option>
-          </ion-select>
-        </ion-item>
+      <ion-item>
+        <ion-label>Spécialité</ion-label>
+        <ion-select formControlName="medicalField">
+          <ion-option [value]="medicalField.id" *ngFor="let medicalField of medicalFields">{{ medicalField.title }}</ion-option>
+        </ion-select>
+      </ion-item>
 
 
-          <ion-item>
-            <ion-label>Département</ion-label>
-            <ion-input placeholder="" formControlName="postalCode"></ion-input>
-          </ion-item>
+      <ion-item>
+        <ion-label>Département</ion-label>
+        <ion-input placeholder="" formControlName="postalCode"></ion-input>
+      </ion-item>
 
 
-       <ion-item>
+      <ion-item>
         <ion-label>Type de structure</ion-label>
-        <ion-select formControlName="structureType" multiple="true">
-          <ion-option *ngFor="let structureType of structureTypes">{{ structureType.title}}</ion-option>
+        <ion-select formControlName="structureType">
+          <ion-option [value]="structureType.id" *ngFor="let structureType of structureTypes">{{ structureType.title}}</ion-option>
         </ion-select>
       </ion-item>
 

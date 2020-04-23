@@ -26,15 +26,14 @@ export class SearchPage  implements OnInit {
 
   constructor(private viewCtrl: ViewController,
               private formBuilder: FormBuilder,
-              private jsonService: JsonService,
-              private adService: AdService) {
+              private jsonService: JsonService) {
   }
 
   ngOnInit(): void {
     // this.specialites = Object.keys(Specialite).map(key => Specialite[key]).slice();
+    this.initForm();
     this.departements = JSONdepartements;
     console.log(this.departements);
-    this.initForm();
     this.jsonService.getMedicalFields().then(
         (data: Object[]) => {
           this.medicalFields = data;
@@ -75,10 +74,12 @@ export class SearchPage  implements OnInit {
 
      */
 
-      this.viewCtrl.dismiss({"medicalField" : this.searchForm.get('medicalField').value,
-        "adType" : this.searchForm.get('adType').value,
-        "structureType": this.searchForm.get('structureType').value,
-        "postalCode": this.searchForm.get('postalCode').value});
+      this.viewCtrl.dismiss({
+        medicalField : this.searchForm.get('medicalField').value,
+        adType : this.searchForm.get('adType').value,
+        structureType: this.searchForm.get('structureType').value,
+        postalCode: this.searchForm.get('postalCode').value
+      });
 
   }
 

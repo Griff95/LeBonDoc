@@ -151,13 +151,15 @@ exports.removeFavorites = (req, res, next) => {
 exports.search = (req, res, next) => {
     console.log("search");
     const query = {};
+    console.log(req.body);
     if (req.body.medicalField) query.medicalField = req.body.medicalField;
-    if (req.body.postalCode) query.healthStructure.postalCode = req.body.postalCode;
-    if (req.body.structureType) query.healthStructure.structureType = req.body.structureType;
+    if (req.body.postalCode) Object.assign(query,  { "healthStructure.postalCode": new RegExp("^"+req.body.postalCode+".*$") });
+    if (req.body.structureType) Object.assign(query, { "healthStructure.structureType": req.body.structureType });
     if (req.body.adType) query.adType = req.body.adType;
+    console.log(query);
     if (query !== {})
-        Ad.find(query).then((ads) => {
+        Ad.find(query).sort('-createdAt').then((ads) => {
             res.status(200).json(ads);
-        }).catch( (err) => { res.status(400).json({ error: "Search failed" })});
+        }).catch( (err) => { console.log(err);res.status(400).json({ error: "Search failed" })});
 
 };

@@ -20,7 +20,13 @@ export class OffresPage implements OnInit, OnDestroy{
   mostRecent: Ad[];
   sameSpeciality: Ad[];
   searchResultList: Ad[];
-  filtersApplied: string[] = [] ;
+  filtersApplied = {
+    medicalField: null,
+    postalCode: null,
+    adType: null,
+    structureType: null
+  };
+  public objectKeys = Object.keys;
   private displayResults: boolean;
 
   private mostRecentSubscription: Subscription;
@@ -51,13 +57,13 @@ export class OffresPage implements OnInit, OnDestroy{
             this.sameSpeciality = sameMedicalFieldAds;
           });
         });
-    this.searchResultSubscription = this.adService.searchResult$.subscribe(
-        (results: Ad[]) => {
-          this.zone.run(() => {
-            console.log("results : " + results);
-            this.searchResultList = results;
-          });
-        });
+    // this.searchResultSubscription = this.adService.searchResult$.subscribe(
+    //     (results: Ad[]) => {
+    //       this.zone.run(() => {
+    //         console.log("results : " + results);
+    //         this.searchResultList = results;
+    //       });
+    //     });
     this.userProfilSubscription = this.accountService.userProfil$.subscribe(
         (userProfil  ) => {
           this.userProfil = userProfil;
@@ -77,25 +83,47 @@ export class OffresPage implements OnInit, OnDestroy{
 
   resetSearch(){
     this.searchResultList = undefined;
-    this.filtersApplied = [] ;
+    this.filtersApplied = {
+      medicalField: null,
+      postalCode: null,
+      adType: null,
+      structureType: null
+    };
     this.displayResults = false;
   }
 
   onSearch() {
-    let modal = this.modalCtrl.create(SearchPage);
+    let modal = this.modalCtrl.create(SearchPage, {filters: this.filtersApplied});
     modal.onDidDismiss( data => {
       if (data) {
+        console.log(JSON.stringify(data));
         this.displayResults = true;
-        if (data.medicalField) this.filtersApplied.push(data.medicalField)
-        if (data.adType) this.filtersApplied.push(data.adType)
-        if (data.postalCode) this.filtersApplied.push(data.postalCode)
-        if (data.structureType) this.filtersApplied.push(data.structureType)
-        this.adService.search(data.medicalField,data.postalCode,data.structureType,data.adType);
+        if (data.medicalField) this.filtersApplied.medicalField = data.medicalField;
+        if (data.adType) this.filtersApplied.adType = data.adType;
+        if (data.postalCode) this.filtersApplied.postalCode = data.postalCode;
+        if (data.structureType) this.filtersApplied.structureType = data.structureType;
+        this.adService.search(JSON.stringify(this.filtersApplied)).then((ads : Ad[]) => {
+          this.searchResultList = ads;
+        }).catch((err) => console.log(err));
       } else {
         this.resetSearch();
       }
     });
     modal.present();
+  }
+
+  removeFilter(i){
+    if (i == 0) delete this.filtersApplied.medicalField;
+    if (i == 1) delete this.filtersApplied.postalCode;
+    if (i == 2) delete this.filtersApplied.adType;
+    if (i == 3) delete this.filtersApplied.structureType;
+    if (this.filtersApplied.medicalField || this.filtersApplied.postalCode || this.filtersApplied.adType || this.filtersApplied.structureType) {
+      this.adService.search(JSON.stringify(this.filtersApplied)).then((ads: Ad[]) => {
+        this.searchResultList = ads;
+      }).catch((err) => console.log(err));
+    } else {
+      this.resetSearch();
+    }
   }
 
   onLoadOffre(offre: Ad) {
@@ -167,7 +195,7 @@ export class OffresPage implements OnInit, OnDestroy{
 
   ngOnDestroy(){
     this.mostRecentSubscription.unsubscribe();
-    this.searchResultSubscription.unsubscribe();
+    // this.searchResultSubscription.unsubscribe();
     this.userProfilSubscription.unsubscribe();
     this.sameSpeSubscription.unsubscribe();
   }
