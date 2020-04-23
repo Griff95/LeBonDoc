@@ -109,7 +109,7 @@ exports.getUserAds = (req, res, next) => {
     User.findById(req.params.userId).then( (user) => {
         console.log(user);
         if (user.ads.length > 0) {
-            Ad.find({ '_id' :  { $in: user.ads }}, 'title adType advertiser healthStructure.structureType healthStructure.department').then( (ads) => {
+            Ad.find({ '_id' :  { $in: user.ads }}, 'title adType advertiser healthStructure.city createdAt').then( (ads) => {
                 res.status(201).json(ads);
             }).catch(
                 (error) => {
