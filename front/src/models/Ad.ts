@@ -18,6 +18,7 @@ export class Ad {
 		postalCode: number;
 		city: string;
 		department: string;
+		region: string;
 	};
 	editedAt: Date;
 	createdAt: Date;

@@ -16,7 +16,7 @@ import {NgZone} from "@angular/core";
 })
 export class DeposerPage {
 
-  userAds = [];
+  userAds : Ad[] = [];
   userAdsSub: Subscription;
 
   constructor(private authService: AuthService,
@@ -33,9 +33,7 @@ export class DeposerPage {
     this.adService.getUserAds().then(
         (ads:[]) => {
           this.zone.run(() => {
-            this.userAds = [];
-            for (let ad of ads)
-              this.userAds.push(ad);
+            this.userAds = ads;
           })
         }, (err) => {
           console.log('Fetch userAds error: ' + JSON.stringify(err));
@@ -50,6 +48,8 @@ export class DeposerPage {
   onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
+    // @ts-ignore
+    modal.onDidDismiss(() => this.ionViewWillEnter());
   }
 
   // onFetchList(){

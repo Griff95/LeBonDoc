@@ -130,7 +130,7 @@ export class AdService{
         });
     }
 
-    activateAd(id) {
+    deleteAd(id) {
         return new Promise( (resolve, reject) => {
             this.http.delete('http://localhost:3000/api/ad/'+id).subscribe(
                 (data) => {
@@ -219,11 +219,11 @@ export class AdService{
         });
     }
 
-    search(medicalField,postalCode,structureType,adType) {
+    search(searchFilter) {
         return new Promise((resolve, reject) => {
-            this.http.post<Ad[]>('http://localhost:3000/api/ad/search/',{medicalField,postalCode,structureType,adType}).subscribe(
+            this.http.post<Ad[]>('http://localhost:3000/api/ad/search/',searchFilter).subscribe(
                 (data: Ad[]) => {
-                    this.recents = data;
+                    this.results = data;
                     this.emitSearch();
                     resolve(data);
                 },

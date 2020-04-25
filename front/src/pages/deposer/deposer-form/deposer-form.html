@@ -45,7 +45,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Code Postal</ion-label>
-        <ion-input placeholder="" formControlName="hSPostalCode"></ion-input>
+        <ion-input placeholder="" formControlName="hSPostalCode" (input)="searchLocation($event)"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Ville</ion-label>
@@ -54,6 +54,10 @@
       <ion-item>
         <ion-label>Département</ion-label>
         <ion-input placeholder="" formControlName="hSDepartment"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Région</ion-label>
+        <ion-input placeholder="" formControlName="hSRegion"></ion-input>
       </ion-item>
     </ion-list>
     <ion-label *ngIf="error">{{error}}</ion-label>

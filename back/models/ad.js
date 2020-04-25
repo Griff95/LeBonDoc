@@ -38,7 +38,7 @@ const adSchema = mongoose.Schema({
             required: true
         },
         postalCode: {
-            type: Number,
+            type: String,
             required: true
         },
         city: {
@@ -46,6 +46,10 @@ const adSchema = mongoose.Schema({
             required: true
         },
         department: {
+            type: String,
+            required: true
+        },
+        region: {
             type: String,
             required: true
         }

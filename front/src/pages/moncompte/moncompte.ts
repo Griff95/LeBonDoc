@@ -146,8 +146,6 @@ export class MonComptePage implements OnInit, OnDestroy {
     */
     searchLocation($event, form) {
         this.search = $event.target.value;
-        console.log("searchLocation called" + this.search);
-
         this.jsonService.findLocationByPostalCode(this.search).then((location: any) => {
             this.zone.run(() => {
                 console.log(JSON.stringify(location));
