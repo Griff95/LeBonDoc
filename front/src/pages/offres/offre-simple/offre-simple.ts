@@ -31,7 +31,7 @@ export class OffreSimplePage implements OnInit {
   }
 
   ngOnInit() {
-
+   
     this.adService.getAd(this.navParams.get('offre')._id).then((ad: Ad) => this.offre = ad)
 
   }
@@ -41,22 +41,27 @@ export class OffreSimplePage implements OnInit {
   }
 
   fav(offre) {
+    console.log(this.userProfil);
+    this.adService.addToFavorites(this.navParams.get('offre')._id)
+    //this.adService.removeFavorites(this.navParams.get('offre')._id)
+    console.log(this.userProfil.favorites);
+    //console.log(this.navParams.get('offre')._id)
+    /*
+    this.userProfil.addFavorites;
     if (offre.isAvailable == true) {
       offre.isAvailable = false;
       this.global.offresfav.push(offre);
-
-/*       console.log(this.global.offresfav);
- *//*       this.userProfil.favoris.push(offre);
- *//*       console.log(this.userProfil.favoris);
- */
+      
+      
     
     }
     else {
       offre.isAvailable = true;
-/*       this.userProfil.favoris.splice(this.userProfil.favoris.indexOf(offre.name),1);
- */      this.global.offresfav.splice(this.global.offresfav.indexOf(offre.name),1);
+      //this.userProfil.favoris.splice(this.userProfil.favoris.indexOf(offre.name),1);
+      //this.global.offresfav.splice(this.global.offresfav.indexOf(offre.name),1);
    
     }
+    */
   }
 
   deleteOffre(offre){

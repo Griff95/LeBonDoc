@@ -40,6 +40,34 @@ export class AdService{
         this.offresList.push(offre);
         this.emitOffres();
     }
+    
+    addToFavorites(id) {
+        return new Promise( (resolve, reject) => {
+            this.http.put('http://localhost:3000/api/ad/addFavorites/'+id).subscribe(
+                (data) => {
+                    resolve(data);
+                },
+                (error) => {
+                    reject(error);
+                }
+            )
+        })
+    }
+    
+    removeFavorites(id) {
+        return new Promise( (resolve, reject) => {
+            this.http.put('http://localhost:3000/api/ad/removeFavorites/'+id).subscribe(
+                (data) => {
+                    resolve(data);
+                },
+                (error) => {
+                    reject(error);
+                }
+            )
+        })
+    }
+    
+    
 
     emitOffres(){
         this.offres$.next(this.offresList.slice());
