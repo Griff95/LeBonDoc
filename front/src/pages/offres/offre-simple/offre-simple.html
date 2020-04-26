@@ -1,15 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-buttons>
+    <ion-buttons start>
       <button ion-button clear (click)="dismissModal()">Fermer</button>
     </ion-buttons>
-    <ion-buttons start *ngIf="offre">
-      <button ion-button color=black (click)="fav(offre)"> <!-- TODO -->
-        
+    <ion-buttons end>
+      <button ion-button id='fav-heart' color=black (click)="favorites()">
         <ion-icon name="heart"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title *ngIf="offre">{{ offre.title }}</ion-title>
+    <ion-title>Annonce</ion-title>
   </ion-navbar>
 </ion-header>
 

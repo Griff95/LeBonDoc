@@ -53,43 +53,18 @@ exports.login = (req, res, next) => {
 
 exports.getAccount = (req, res, next) => {
     console.log("getAccount");
-    if (req.headers.authorization) {
-        try {
-            const token = req.headers.authorization.split(' ')[1];
-            const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-            const userId = decodedToken.userId;
-            console.log("API Called : req.params.userId="+req.params.userId);
-            if (req.params.userId && req.params.userId !== userId) {
-                return res.status(404).json({ error });
-            } else {
-                User.findById(req.params.userId).populate("ads favorites chats").then(
-                    (user) => {
-                        console.log("getAccount2" + user);
-                        res.status(200).json(user);
-                    }
-                ).catch(
-                    (error) => {
-                        console.log("getAccount3");
-                        return res.status(404).json({ error: error });
-                    }
-                );
-            }
-        } catch {
-            res.status(401).json({
-                error: new Error('Invalid request!')
-            });
+    // console.log(req.body);
+    User.findById(req.body.userId).then(
+        (user) => {
+            // console.log(user);
+            res.status(200).json(user);
         }
-    } else {
-        User.findById(req.body.userId).select("-email -phone").populate("ads").then(
-            (user) => {
-                res.status(200).json(user);
-            }
-        ).catch(
-            (error) => {
-                return res.status(404).json({ error: error });
-            }
-        );
-    }
+    ).catch(
+        (error) => {
+            return res.status(404).json({ error: error });
+        }
+    );
+
 };
 
 exports.editAccount = (req, res, next) => {

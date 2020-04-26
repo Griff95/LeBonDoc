@@ -17,6 +17,9 @@ export class AdService{
     userAds : Ad[];
     userAds$ = new Subject<Ad[]>();
 
+    userFavoritesAds: Ad[];
+    userFavoritesAds$ = new Subject<Ad[]>();
+
     searchResult$ = new Subject<Ad[]>();
     results: Ad[] = [];
 
@@ -36,6 +39,10 @@ export class AdService{
         this.userAds$.next(this.userAds);
     }
 
+    emitUserFavoritesAds() {
+        this.userFavoritesAds$.next(this.userFavoritesAds);
+    }
+
     addOffre(offre) {
         this.offresList.push(offre);
         this.emitOffres();
@@ -43,7 +50,7 @@ export class AdService{
     
     addToFavorites(id) {
         return new Promise( (resolve, reject) => {
-            this.http.put('http://localhost:3000/api/ad/addFavorites/'+id).subscribe(
+            this.http.put('http://localhost:3000/api/ad/addFavorites', id).subscribe(
                 (data) => {
                     resolve(data);
                 },
@@ -53,11 +60,26 @@ export class AdService{
             )
         })
     }
-    
+
     removeFavorites(id) {
         return new Promise( (resolve, reject) => {
-            this.http.put('http://localhost:3000/api/ad/removeFavorites/'+id).subscribe(
+            this.http.put('http://localhost:3000/api/ad/removeFavorites/', id).subscribe(
                 (data) => {
+                    resolve(data);
+                },
+                (error) => {
+                    reject(error);
+                }
+            )
+        })
+    }
+
+    getUserFavorites() {
+        return new Promise( (resolve, reject) => {
+            this.http.get('http://localhost:3000/api/ad/favorites').subscribe(
+                (data : Ad[]) => {
+                    this.userFavoritesAds = data;
+                    this.emitUserFavoritesAds();
                     resolve(data);
                 },
                 (error) => {
@@ -192,7 +214,6 @@ export class AdService{
         return new Promise((resolve, reject) => {
             this.http.get('http://localhost:3000/api/ad/recent').subscribe(
                 (data: any[]) => {
-                    console.log(data);
                     this.recents = data;
                     this.emitAdsMostRecent();
                     resolve(data);
@@ -208,7 +229,7 @@ export class AdService{
         return new Promise((resolve, reject) => {
             this.http.get<Ad[]>('http://localhost:3000/api/ad/medicalField/'+medicalFieldId).subscribe(
                 (data: Ad[]) => {
-                    this.recents = data;
+                    this.same = data;
                     this.emitAdsSameMedicalField();
                     resolve(data);
                 },
@@ -233,15 +254,5 @@ export class AdService{
             )
         });
     }
-
-    // snapshotToArray = snapshot => {
-    //     let returnArray = [];
-    //     snapshot.forEach( element => {
-    //         let item = element.val();
-    //         item.key = element.key;
-    //         returnArray.push(item);
-    //     })
-    //     return returnArray;
-    // }
 }
 

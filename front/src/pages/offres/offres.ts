@@ -15,7 +15,7 @@ import {AuthService} from "../../services/auth.service";
 })
 export class OffresPage implements OnInit, OnDestroy{
 
-  userProfil: UserProfile;
+  userProfile: UserProfile;
 
   mostRecent: Ad[];
   sameSpeciality: Ad[];
@@ -57,27 +57,14 @@ export class OffresPage implements OnInit, OnDestroy{
             this.sameSpeciality = sameMedicalFieldAds;
           });
         });
-    // this.searchResultSubscription = this.adService.searchResult$.subscribe(
-    //     (results: Ad[]) => {
-    //       this.zone.run(() => {
-    //         console.log("results : " + results);
-    //         this.searchResultList = results;
-    //       });
-    //     });
-    this.userProfilSubscription = this.accountService.userProfil$.subscribe(
-        (userProfil  ) => {
-          this.userProfil = userProfil;
-        });
-    this.adService.getAdsMostRecent().then( r => {}).catch((err) => console.log(err));
-
-    this.accountService.getAccount(this.authService.getUserId()).then( r => {
-      if (this.userProfil.medicalField)
-        this.adService.getAdsSameMedicalField(this.userProfil.medicalField).then((r : Ad[]) => {
-          this.zone.run(() => {
-            this.sameSpeciality = r;
-          });
-        }).catch( (err) => console.log(err));
-    })
+    this.userProfilSubscription = this.accountService.userProfil$.subscribe((profile  ) => {
+      this.userProfile = profile;
+      if (this.userProfile.medicalField) {
+        this.adService.getAdsSameMedicalField(this.userProfile.medicalField);
+      }
+    });
+    this.adService.getAdsMostRecent();
+    this.accountService.getAccount(this.authService.getUserId());
   }
 
 

@@ -5,6 +5,9 @@ import {Ad} from "../../../models/Ad";
 import {UserProfile} from "../../../models/UserProfile";
 import {AdService} from "../../../services/ad.service";
 import {AccountService} from "../../../services/account.service";
+import {Subscription} from "rxjs";
+import {AuthService} from "../../../services/auth.service";
+import {setStyles} from "@angular/animations/browser/src/util";
 
 
 
@@ -15,7 +18,8 @@ import {AccountService} from "../../../services/account.service";
 })
 export class OffreSimplePage implements OnInit {
 
-  userProfil: UserProfile = this.accountService.userProfil;
+  userProfilSub : Subscription;
+  userProfil: UserProfile;
   offre: Ad;
   promise;
   user;
@@ -27,30 +31,51 @@ export class OffreSimplePage implements OnInit {
               private adService: AdService,
               private accountService: AccountService,
               public ownerUserProfil: UserProfile,
+              private authService : AuthService,
               private zone: NgZone) {
 
   }
 
   ngOnInit() {
-   
-    this.adService.getAd(this.navParams.get('offre')._id).then((ad: Ad) => this.offre = ad)
+    this.userProfilSub = this.accountService.userProfil$.subscribe((profile: UserProfile) => {
+      this.zone.run(() => {
+        this.userProfil = profile;
+        const heart = document.getElementById('fav-heart');
+        if (this.userProfil.favorites.includes(this.navParams.get('offre')._id)) {
+          heart.setAttribute("style", "color:blue");
+        } else {
+          heart.setAttribute("style", "color:black");
+        }
+      });
+    });
+    this.accountService.getAccount(this.authService.getUserId());
+    this.adService.getAd(this.navParams.get('offre')._id).then((ad: Ad) => {
+      this.offre = ad;
+    });
   }
 
   dismissModal() {
     this.viewCtrl.dismiss();
   }
 
-  fav(offre) {
+  favorites() {
     console.log(this.offre);
-    this.adService.addToFavorites(this.navParams.get('offre')._id).then(
-        (data) => {
+    const id = this.navParams.get('offre')._id;
+    if (this.userProfil.favorites.includes(id)) {
+      this.adService.removeFavorites(JSON.stringify({ id: id })).then(
+          (data) => {
+            this.accountService.getAccount(this.authService.getUserId());
             console.log(data);
-            console.log(this.navParams.get('offre')._id);
-            console.log(this.userProfil);
-        }, (err) => {
-          console.log('Fetch userAds error: ' + JSON.stringify(err));
-        }
-    );
+          }, (err) => {console.log(err.toString())}
+      );
+    } else {
+      this.adService.addToFavorites(JSON.stringify({ id: id })).then(
+          (data) => {
+            this.accountService.getAccount(this.authService.getUserId());
+            console.log(data);
+          }, (err) => {console.log(err.toString())}
+      );
+    }
     //this.adService.removeFavorites(this.navParams.get('offre')._id)
     //console.log(this.userProfil.favorites);
     //console.log(this.navParams.get('offre')._id)
@@ -65,5 +90,9 @@ export class OffreSimplePage implements OnInit {
 
   contactOwner(offre){
 
+  }
+
+  ngOnDestroy(){
+    this.userProfilSub.unsubscribe();
   }
 }
