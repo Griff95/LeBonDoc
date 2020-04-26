@@ -134,6 +134,20 @@ exports.findAdsByMedicalFieldId =  (req, res, next) => {
     );
 };
 
+exports.getFavorites = (req, res, next) => {
+    console.log("getFavorites");
+    User.findById(req.body.userId).then( (user) => {
+        console.log(user);
+        if (user.favorites.length > 0) {
+            Ad.find({ '_id' :  { $in: user.favorites }}, 'title adType advertiser healthStructure.city createdAt').then((ads) => {
+                res.status(201).json(ads);
+            }).catch((error) => { res.status(400).json({error: error})});
+        } else {
+            res.status(200).json([]);
+        }
+    }).catch((error) => { res.status(400).json({error: error})});
+};
+
 exports.addToFavorites = (req, res, next) => {
     console.log("addToFavorites");
     User.findByIdAndUpdate(req.body.userId, { $push: { favorites: req.param.id }}).then( (user) => {

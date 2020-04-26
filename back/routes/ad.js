@@ -10,6 +10,7 @@ router.get('/medicalField/:id', adCtrl.findAdsByMedicalFieldId);
 router.get('/department/:id', adCtrl.findAdsByDepartmentId);
 router.put('/addFavorites/:id', auth, adCtrl.addToFavorites);
 router.put('/removeFavorites/:id', auth, adCtrl.removeFavorites);
+router.get('/favorites', auth, adCtrl.getFavorites);
 router.get('/:id', adCtrl.getAd);
 router.delete('/:id', auth, adCtrl.removeAd);
 router.put('/:id', auth, adCtrl.editAdDescription);
