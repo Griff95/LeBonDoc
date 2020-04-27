@@ -25,33 +25,6 @@ export class Ad {
 	public  _id : String;
 
 
-  constructor(/*titre: string,
-                description : string,
-                codePostal : number,
-                lieux: string,
-                dateDebut : Date,
-                dateFin : Date,
-                datePublication : Date,
-                specialite : Specialite,
-                annonceur : User,
-                candidatures : AdChat[],
-                isAvailable : boolean,
-                annonceType : OffreType*/) {
-
-    /*this.titre=titre;
-    this.description=description;
-    this.codePostal=codePostal;
-    this.lieux=lieux;
-    this.dateDebut=dateDebut;
-    this.dateFin=dateFin
-    this.datePublication=datePublication;
-    this.specialite=specialite;
-    this.annonceur=annonceur;
-    this.candidatures=candidatures;
-    this.isAvailable=isAvailable;
-    this.annonceType=annonceType;*/
-
-
-  }
+  constructor() {}
 
 }

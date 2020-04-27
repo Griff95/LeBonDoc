@@ -1,15 +1,12 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
-import { OffresFav } from '../../favoris/offresfav';
 import {Ad} from "../../../models/Ad";
 import {UserProfile} from "../../../models/UserProfile";
 import {AdService} from "../../../services/ad.service";
 import {AccountService} from "../../../services/account.service";
 import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
-import {setStyles} from "@angular/animations/browser/src/util";
-
-
+import {JsonService} from "../../../services/json.service";
 
 
 @Component({
@@ -27,12 +24,11 @@ export class OffreSimplePage implements OnInit {
 
   constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
-              public global: OffresFav,
               private adService: AdService,
               private accountService: AccountService,
-              public ownerUserProfil: UserProfile,
               private authService : AuthService,
-              private zone: NgZone) {
+              private zone: NgZone,
+              private jsonService : JsonService) {
 
   }
 
@@ -49,8 +45,13 @@ export class OffreSimplePage implements OnInit {
       });
     });
     this.accountService.getAccount(this.authService.getUserId());
+    this.jsonService.getStructureTypes();
+    this.jsonService.getMedicalFields();
+    this.jsonService.getAdTypes();
     this.adService.getAd(this.navParams.get('offre')._id).then((ad: Ad) => {
       this.offre = ad;
+      console.log("found ad :");
+      console.log(ad);
     });
   }
 
@@ -65,6 +66,7 @@ export class OffreSimplePage implements OnInit {
       this.adService.removeFavorites(JSON.stringify({ id: id })).then(
           (data) => {
             this.accountService.getAccount(this.authService.getUserId());
+            this.adService.getUserFavorites();
             console.log(data);
           }, (err) => {console.log(err.toString())}
       );
@@ -72,14 +74,11 @@ export class OffreSimplePage implements OnInit {
       this.adService.addToFavorites(JSON.stringify({ id: id })).then(
           (data) => {
             this.accountService.getAccount(this.authService.getUserId());
+            this.adService.getUserFavorites();
             console.log(data);
           }, (err) => {console.log(err.toString())}
       );
     }
-    //this.adService.removeFavorites(this.navParams.get('offre')._id)
-    //console.log(this.userProfil.favorites);
-    //console.log(this.navParams.get('offre')._id)
-
   }
 
   deleteOffre(offre){

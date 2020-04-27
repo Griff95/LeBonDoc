@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { OffreSimplePage } from '../offres/offre-simple/offre-simple';
-import {AccountService} from '../../services/account.service';
-import { UserProfile } from '../../models/UserProfile';
 import {Subscription} from "rxjs";
-import { OffresFav } from '../favoris/offresfav';
 import { Ad } from '../../models/Ad';
+import {AdService} from "../../services/ad.service";
 
 
 @Component({
@@ -14,38 +12,28 @@ import { Ad } from '../../models/Ad';
 })
 export class FavorisPage {
 
+  favoris: Ad[];
+  favorisSub : Subscription;
  /*  userProfil: UserProfile;
   userProfilSubscription: Subscription; */  
 
-  constructor(private modalCtrl: ModalController,public global: OffresFav) {
+  constructor(private modalCtrl: ModalController,
+              private adService : AdService) {
    }
 
-/*    ngOnInit(){
-
-        this.userProfil = 
-
-          {
-            userId:"thretgrgraffz",
-            nom: "Bocquet",
-            prenom: "Rémi",
-            telephone: "0687702166",
-            email: "bocquetrem@eisti.eu",
-            dateDeNaissance: new Date(),
-            isVerified: false,
-            offres: [],
-            favoris: [],
-            specialite: Specialite.Dentiste,
-            codePostal: 52000,
-            unMotSurMoi: "C'est le jour 1"
-          }
-        ;
-  
-
-  } */
+ngOnInit(){
+    this.favorisSub = this.adService.userFavoritesAds$.subscribe( (fav : Ad[]) => {
+      this.favoris = fav;
+    });
+  this.adService.getUserFavorites();
+}
 
 
   onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
+    modal.onDidDismiss( () => {
+      this.adService.getUserFavorites();
+    });
     modal.present();
   }
 

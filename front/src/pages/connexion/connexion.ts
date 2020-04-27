@@ -3,10 +3,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {TabsPage} from "../tabs/tabs"
-import DataSnapshot = firebase.database.DataSnapshot;
 import {AccountService} from "../../services/account.service";
-import {UserProfile} from "../../models/UserProfile";
-import {Subscription} from "rxjs";
 
 
 
@@ -35,9 +32,6 @@ export class ConnexionPage implements OnInit{
               private authService: AuthService ) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ConnexionPage');
-  }
 
   ngOnInit(){
 

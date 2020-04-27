@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -33,9 +33,6 @@ export class InscriptionPage {
               private zone: NgZone) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InscriptionPage');
-  }
 
   ngOnInit() {
     this.initForm();

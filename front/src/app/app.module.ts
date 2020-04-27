@@ -12,7 +12,6 @@ import { InscriptionPage } from '../pages/inscription/inscription';
 
 import { AuthInterceptor} from "../interceptors/auth-interceptor";
 import { AuthService } from '../services/auth.service';
-import {CalendrierPage} from "../pages/calendrier/calendrier";
 import {DeposerPage} from "../pages/deposer/deposer";
 import {FavorisPage} from "../pages/favoris/favoris";
 import {MessagesPage} from "../pages/messages/messages";
@@ -25,7 +24,6 @@ import { DeposerFormPage } from '../pages/deposer/deposer-form/deposer-form';
 import { SearchPage } from '../pages/offres/search/search';
 
 
-import { OffresFav} from '../pages/favoris/offresfav';
 import {AdService} from "../services/ad.service";
 import {AccountService} from "../services/account.service";
 
@@ -42,7 +40,6 @@ import {JsonService} from "../services/json.service";
       HomePage,
       ConnexionPage,
       InscriptionPage,
-      CalendrierPage,
       DeposerPage,
       FavorisPage,
       MessagesPage,
@@ -65,7 +62,6 @@ import {JsonService} from "../services/json.service";
       HomePage,
       ConnexionPage,
       InscriptionPage,
-      CalendrierPage,
       DeposerPage,
       FavorisPage,
       MessagesPage,
@@ -83,7 +79,6 @@ import {JsonService} from "../services/json.service";
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AuthService,
     JsonService,
-    OffresFav,
     Ad,
     AdChat,
     AdService,

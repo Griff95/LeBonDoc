@@ -26,12 +26,10 @@ export class OffresPage implements OnInit, OnDestroy{
     adType: null,
     structureType: null
   };
-  public objectKeys = Object.keys;
   private displayResults: boolean;
 
   private mostRecentSubscription: Subscription;
   private sameSpeSubscription: Subscription;
-  private searchResultSubscription: Subscription;
   private userProfilSubscription: Subscription;
 
   constructor(private modalCtrl: ModalController,
@@ -83,7 +81,6 @@ export class OffresPage implements OnInit, OnDestroy{
     let modal = this.modalCtrl.create(SearchPage, {filters: this.filtersApplied});
     modal.onDidDismiss( data => {
       if (data) {
-        console.log(JSON.stringify(data));
         this.displayResults = true;
         if (data.medicalField) this.filtersApplied.medicalField = data.medicalField;
         if (data.adType) this.filtersApplied.adType = data.adType;
@@ -119,71 +116,8 @@ export class OffresPage implements OnInit, OnDestroy{
     modal.onDidDismiss(() => this.ngOnInit());
   }
 
-  // onSaveList(){
-  //   let loader = this.loadingCtrl.create({
-  //     content: "Sauvegarde en cours..."
-  //   });
-  //   loader.present();
-  //   this.adService.saveData().then(
-  //       ()=>{
-  //         loader.dismiss();
-  //         this.toastCtrl.create({
-  //           message: "Données sauvegardées !",
-  //           duration: 3000,
-  //           position: "bottom"
-  //         }).present();
-  //       }
-  //   ).catch(
-  //       (error)=>{
-  //         loader.dismiss();
-  //         this.toastCtrl.create({
-  //           message: error,
-  //           duration: 3000,
-  //           position: "bottom"
-  //         }).present();
-  //       }
-  //   )
-  // }
-  //
-  // onFetchList(){
-  //   let loader = this.loadingCtrl.create({
-  //     content: "Récupération en cours..."
-  //   });
-  //   loader.present();
-  //   this.adService.retrieveData()
-  //       .then(
-  //           ()=>{
-  //             loader.dismiss();
-  //             this.toastCtrl.create({
-  //               message: "Données récupérées !",
-  //               duration: 2000,
-  //               position: "bottom"
-  //             }).present();
-  //           }
-  //       ).catch(
-  //       (error)=>{
-  //         loader.dismiss();
-  //         this.toastCtrl.create({
-  //           message: error,
-  //           duration: 1000,
-  //           position: "bottom"
-  //         }).present();
-  //       }
-  //   )
-  //
-  // }
-  //
-  // doRefresh(event) {
-  //   this.onFetchList();
-  //   setTimeout(() => {
-  //     //complete()  signify that the refreshing has completed and to close the refresher
-  //     event.complete();
-  //   }, 1000);
-  // }
-
   ngOnDestroy(){
     this.mostRecentSubscription.unsubscribe();
-    // this.searchResultSubscription.unsubscribe();
     this.userProfilSubscription.unsubscribe();
     this.sameSpeSubscription.unsubscribe();
   }

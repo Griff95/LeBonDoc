@@ -26,7 +26,7 @@
         <p >Nom : {{ offre.healthStructure.name }}</p>
       </ion-card-content>
       <ion-card-content>
-        <p >Type : {{ adService.HEALTHSTRUCTURETYPE[offre.healthStructure.structureType-1] }}</p>
+        <p >Type : {{ jsonService.HEALTHSTRUCTURETYPE[offre.healthStructure.structureType-1] }}</p>
       </ion-card-content>
       <ion-card-content>
         <p >Ville : {{ offre.healthStructure.city }}</p>
@@ -40,10 +40,10 @@
         <p >Annonceur :  {{ offre.advertiser.name }} {{ offre.advertiser.lastName }}</p>
       </ion-card-content>
       <ion-card-content>
-        <p >Domaine médical : {{ adService.DOMAINEMEDICAL[offre.medicalField-1] }}</p>
+        <p >Domaine médical : {{ jsonService.DOMAINEMEDICAL[offre.medicalField-1] }}</p>
       </ion-card-content>
       <ion-card-content>
-        <p >Type : {{ adService.TYPEOFFRE[offre.adType-1] }}</p>
+        <p >Type : {{ jsonService.TYPEOFFRE[offre.adType-1] }}</p>
       </ion-card-content>
       <ion-card-content>
         <p >Rétrocession : {{ offre.retrocession }} %</p>

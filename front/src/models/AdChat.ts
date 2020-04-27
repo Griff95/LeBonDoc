@@ -1,15 +1,15 @@
 import {Injectable} from "@angular/core";
-import {User} from "firebase";
 import {Ad} from "./Ad";
+import {UserProfile} from "./UserProfile";
 
 
 @Injectable()
 export class AdChat {
-	user: User;
-	advertiser: User;
+	user: UserProfile;
+	advertiser: UserProfile;
 	ad: Ad;
 	msg: [{
-		user: User;
+		user: UserProfile;
 		msg: string;
 		createdAt: Date;
 	}];

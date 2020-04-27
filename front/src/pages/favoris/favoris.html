@@ -5,15 +5,16 @@
   </ion-header>
 
   <ion-content padding>
-      
-      <ion-item text-wrap *ngFor="let offre of global.offresfav" (click)="onLoadOffre(offre)">
-        <ion-label>
-          <h2>{{ offre.title }}</h2>
-          <div style="font-size:11px">
-            <ion-note>{{offre.healthStructure.city}}, {{offre.createdAt| date: 'mediumDate'}} {{offre.createdAt| date: 'shortTime'}}</ion-note>
-          </div>
-        </ion-label>
-      </ion-item>
+      <ion-list *ngIf="favoris">
+          <ion-item text-wrap *ngFor="let offre of favoris" (click)="onLoadOffre(offre)">
+              <ion-label>
+                  <h2>{{ offre.title }}</h2>
+                  <div style="font-size:11px">
+                      <ion-note>{{offre.healthStructure.city}}, {{offre.createdAt| date: 'mediumDate'}} {{offre.createdAt| date: 'shortTime'}}</ion-note>
+                  </div>
+              </ion-label>
+          </ion-item>
+      </ion-list>
       
       
       

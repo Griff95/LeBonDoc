@@ -1,12 +1,11 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {LoadingController, NavController, NavParams, ToastController, Nav, Select} from 'ionic-angular';
+import {Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import {LoadingController, NavController,  ToastController} from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { UserProfile } from "../../models/UserProfile";
 import { Subscription } from "rxjs";
 import { AccountService } from "../../services/account.service";
 import { JsonService} from "../../services/json.service";
 import { HomePage } from '../home/home';
-import {User} from "firebase";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -83,10 +82,6 @@ export class MonComptePage implements OnInit, OnDestroy {
         edit.name = form.get('name').value;
         edit.email = form.get('email').value;
         edit.medicalField = form.get('medicalField').value;
-        // edit.postalCode = this.foundLocation.postalCode ? this.foundLocation.postalCode : undefined;
-        // edit.department = this.foundLocation.department != null ? this.foundLocation.department : undefined;
-        // edit.city = this.foundLocation.city != null ? this.foundLocation.city : undefined;
-        // edit.region = this.foundLocation.region != null ? this.foundLocation.region : undefined;
         edit.postalCode = form.get('postalCode').value;
         edit.department = form.get('department').value;
         edit.city = form.get('city').value;
@@ -117,33 +112,6 @@ export class MonComptePage implements OnInit, OnDestroy {
     }
 
 
-    /*
-      onFetchUserProfil() {
-        let loader = this.loadingCtrl.create({
-          content: "Récupération en cours..."
-        });
-        loader.present();
-        this.accountService.getAccount(this.authService.getUserId()).then(
-          () => {
-            loader.dismiss();
-            this.toastCtrl.create({
-              message: "Données récupérées !",
-              duration: 3000,
-              position: "bottom"
-            }).present();
-          }
-        ).catch(
-          (error) => {
-            loader.dismiss();
-            this.toastCtrl.create({
-              message: error,
-              duration: 3000,
-              position: "bottom"
-            }).present();
-          }
-        )
-      }
-    */
     searchLocation($event, form) {
         this.search = $event.target.value;
         this.jsonService.findLocationByPostalCode(this.search).then((location: any) => {

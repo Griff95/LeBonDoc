@@ -17,7 +17,6 @@ import {NgZone} from "@angular/core";
 export class DeposerPage {
 
   userAds : Ad[] = [];
-  userAdsSub: Subscription;
 
   constructor(private authService: AuthService,
               private loadingCtrl: LoadingController,
@@ -48,42 +47,6 @@ export class DeposerPage {
   onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
-    // @ts-ignore
     modal.onDidDismiss(() => this.ionViewWillEnter());
   }
-
-  // onFetchList(){
-  //   let loader = this.loadingCtrl.create({
-  //     content: "Récupération en cours..."
-  //   });
-  //   loader.present();
-  //   this.adService.getUserAds()
-  //     .then(
-  //       ()=>{
-  //         loader.dismiss();
-  //         this.toastCtrl.create({
-  //           message: "Données récupérées !",
-  //           duration: 2000,
-  //           position: "bottom"
-  //         }).present();
-  //       }
-  //     ).catch(
-  //     (error)=>{
-  //       loader.dismiss();
-  //       this.toastCtrl.create({
-  //         message: error,
-  //         duration: 1000,
-  //         position: "bottom"
-  //       }).present();
-  //     }
-  //   )
-  //
-  // }
-
-
-  ngOnDestroy(){
-    //this.userAdsSub.unsubscribe();
-  }
-
-
 }
