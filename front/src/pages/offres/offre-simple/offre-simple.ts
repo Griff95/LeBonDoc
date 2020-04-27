@@ -17,10 +17,12 @@ export class OffreSimplePage implements OnInit {
 
   userProfilSub : Subscription;
   userProfil: UserProfile;
+
+  medicalField;
+  adType;
+  structureType;
+
   offre: Ad;
-  promise;
-  user;
-  date;
 
   constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
@@ -45,9 +47,9 @@ export class OffreSimplePage implements OnInit {
       });
     });
     this.accountService.getAccount(this.authService.getUserId());
-    this.jsonService.getStructureTypes();
-    this.jsonService.getMedicalFields();
-    this.jsonService.getAdTypes();
+    this.jsonService.getStructureTypes().then((data) => this.structureType = data);
+    this.jsonService.getMedicalFields().then((data) => this.medicalField = data);
+    this.jsonService.getAdTypes().then((data) => this.adType = data);
     this.adService.getAd(this.navParams.get('offre')._id).then((ad: Ad) => {
       this.offre = ad;
       console.log("found ad :");
