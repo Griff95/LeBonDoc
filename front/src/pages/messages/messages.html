@@ -1,13 +1,27 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>Mes messages</ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <ion-title>Mes Conversations</ion-title>
 
-  <ion-content padding>
-    <p>Page de messagerie entre les différents acteurs</p>
-  </ion-content>
+  </ion-navbar>
+</ion-header>
 
-  <ion-footer padding>
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-item text-wrap *ngFor="let conv of conversationsList" (click)="onLoadConv(offre)">
+        <ion-label>
+          <h2>{{ conv.user.name }}</h2>
+          <div style="font-size:11px">
+            <ion-note>{{ conv.msg[1] }}</ion-note>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+
+  <ion-footer>
+
 
   </ion-footer>
