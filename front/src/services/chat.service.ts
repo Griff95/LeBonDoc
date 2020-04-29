@@ -3,16 +3,21 @@ import {Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 
+
 @Injectable()
-export class ChatService{
+export class ChatService {
+
+
+
 
   chats: AdChat[];
-  chatsList$: new Subject<AdChat[]>();
+  chatsList$ = new Subject<AdChat[]>();
+
 
   constructor(private http: HttpClient) {
   }
 
-  getChat(idAd){
+  getChat(id){
     return new Promise( (resolve, reject) => {
         this.http.get('http://localhost:3000/api/startOrGetChat/' + idAd).subscribe(
             (data: any[]) => {
@@ -28,10 +33,11 @@ export class ChatService{
     })
   }
 
-  sendMessage(){
+  sendMessage(chatJson){
     return new Promise( (resolve, reject) => {
-        this.http.post('http://localhost:3000/api/sendMessage').subscribe(
+        this.http.post('http://localhost:3000/api/sendMessage', chatJson).subscribe(
             (data) => {
+                console.log("Message envoyé")
                 resolve(data);
             },
             (error) => {
