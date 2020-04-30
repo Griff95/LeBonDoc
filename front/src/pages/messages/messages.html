@@ -9,7 +9,7 @@
     <ion-list>
       <ion-item text-wrap *ngFor="let conv of chatsList" (click)="onLoadConv(conv)">
         <ion-label>
-          <h2>Chat avec {{ conv.advertiser.name }} {{ conv.advertiser.lastName }}</h2>
+          <h2>Chat avec {{ (userId == conv.user._id) ? conv.advertiser.name + " " + conv.advertiser.lastName : conv.user.name + " " + conv.user.lastName }}</h2>
           <div style="font-size:15px">
             <ion-note>{{ conv.ad.title }}</ion-note>
           </div>

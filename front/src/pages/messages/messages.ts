@@ -15,6 +15,7 @@ export class MessagesPage {
 
   chatsList: AdChat[];
   chatsListSubscription: Subscription;
+  userId = this.authService.getUserId();
 
   constructor(public navParams: NavParams,
               private chatService: ChatService,
