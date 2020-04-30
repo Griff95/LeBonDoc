@@ -18,7 +18,7 @@
 
 
         <ion-label>
-          <div *ngIf="checkUser(msg)" style="float: right; padding-right: 10px;">
+          <div *ngIf="!checkUser(msg)" style="float: right; padding-right: 10px;">
             <div style="font-size:9px">
               <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
             </div>
@@ -30,7 +30,7 @@
         </ion-label>
 
         <ion-label>
-          <div *ngIf="!checkUser(msg)" style="float: left; padding-left: 10px;">
+          <div *ngIf="checkUser(msg)" style="float: left; padding-left: 10px;">
             <div style="font-size:9px">
               <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
             </div>
