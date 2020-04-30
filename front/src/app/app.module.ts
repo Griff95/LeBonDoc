@@ -15,6 +15,7 @@ import { AuthService } from '../services/auth.service';
 import {DeposerPage} from "../pages/deposer/deposer";
 import {FavorisPage} from "../pages/favoris/favoris";
 import {MessagesPage} from "../pages/messages/messages";
+import {ConversationComponent} from "../components/conversation/conversation"
 import {MonComptePage} from "../pages/moncompte/moncompte";
 import {OffresPage} from "../pages/offres/offres";
 import {TabsPage} from "../pages/tabs/tabs";
@@ -25,6 +26,7 @@ import { SearchPage } from '../pages/offres/search/search';
 
 
 import {AdService} from "../services/ad.service";
+import {ChatService} from "../services/chat.service";
 import {AccountService} from "../services/account.service";
 
 import {Ad} from "../models/Ad";
@@ -43,6 +45,7 @@ import {JsonService} from "../services/json.service";
       DeposerPage,
       FavorisPage,
       MessagesPage,
+      ConversationComponent,
       MonComptePage,
       OffresPage,
       TabsPage,
@@ -65,6 +68,7 @@ import {JsonService} from "../services/json.service";
       DeposerPage,
       FavorisPage,
       MessagesPage,
+      ConversationComponent,
       MonComptePage,
       OffresPage,
       TabsPage,
@@ -82,6 +86,7 @@ import {JsonService} from "../services/json.service";
     Ad,
     AdChat,
     AdService,
+    ChatService,
     AccountService,
     UserProfile
   ]

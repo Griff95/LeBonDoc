@@ -1,12 +1,16 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController, ModalController } from 'ionic-angular';
 import {Ad} from "../../../models/Ad";
+import {AdChat} from "../../../models/AdChat";
 import {UserProfile} from "../../../models/UserProfile";
 import {AdService} from "../../../services/ad.service";
+import {ChatService} from "../../../services/chat.service";
 import {AccountService} from "../../../services/account.service";
 import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
 import {JsonService} from "../../../services/json.service";
+import {ConversationComponent} from "../../../components/conversation/conversation";
+
 
 
 @Component({
@@ -27,10 +31,12 @@ export class OffreSimplePage implements OnInit {
   constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
               private adService: AdService,
+              private chatService: ChatService,
               private accountService: AccountService,
               private authService : AuthService,
               private zone: NgZone,
-              private jsonService : JsonService) {
+              private jsonService : JsonService,
+              private modalCtrl: ModalController) {
 
   }
 
@@ -89,8 +95,22 @@ export class OffreSimplePage implements OnInit {
 
   }
 
-  contactOwner(offre){
 
+
+  async contactOwner() {
+    this.dismissModal();
+    const conv = this.chatService.startOrGetChat(this.offre._id);
+    console.log(conv);
+    const modal = await this.modalCtrl.create({
+      component: ConversationComponent,
+      componentProps: { conv: conv }
+    });
+    modal.onDidDismiss(() => this.ngOnInit());
+    console.log("test");
+    return await modal.present().catch((error) => {
+      console.log(error);
+    });
+    console.log("test");
   }
 
   ngOnDestroy(){
