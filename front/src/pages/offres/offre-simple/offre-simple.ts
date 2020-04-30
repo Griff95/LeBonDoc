@@ -11,6 +11,7 @@ import {AuthService} from "../../../services/auth.service";
 import {JsonService} from "../../../services/json.service";
 import {ConversationComponent} from "../../../components/conversation/conversation";
 import {MessagesPage} from "../../messages/messages";
+import {TabsPage} from "../../tabs/tabs";
 
 
 
@@ -103,22 +104,12 @@ export class OffreSimplePage implements OnInit {
     //let test = 0;
     this.dismissModal();
     this.chatService.startOrGetChat(this.offre._id).then( (chat) => {
-      this.nav.push(MessagesPage);
+      this.nav.setRoot(TabsPage, {tabIndex: 3});
+      // this.nav.push(MessagesPage);
+      console.log(chat);
       let modal = this.modalCtrl.create(ConversationComponent, {conv: chat});
       modal.present();
     });
-    // console.log(conv);
-    // const modal = await this.modalCtrl.create({
-    //   // component: ConversationComponent,
-    //   // componentProps: { conv: conv }
-    // });
-    // modal.onDidDismiss(() => this.ngOnInit());
-    // console.log("test");
-    // return await modal.present().catch((error) => {
-    //   console.log(error);
-    // });
-    // console.log("test");
-
   }
 
   ngOnDestroy(){

@@ -4,6 +4,7 @@ import { MonComptePage } from '../moncompte/moncompte';
 import { FavorisPage } from '../favoris/favoris';
 import { DeposerPage } from '../deposer/deposer';
 import { MessagesPage } from '../messages/messages';
+import {NavParams} from "ionic-angular";
 
 
 
@@ -17,6 +18,14 @@ export class TabsPage {
   favorisPage = FavorisPage;
   messagesPage = MessagesPage;
   deposerPage = DeposerPage;
+  public tabIndex : Number = 0;
+
+  constructor(public navParams: NavParams) {
+    let tabIndex = this.navParams.get('tabIndex');
+    if (tabIndex) {
+      this.tabIndex = tabIndex;
+    }
+  }
   
 
 

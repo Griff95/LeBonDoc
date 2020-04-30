@@ -17,6 +17,7 @@ export class ConversationComponent{
   chatJson: any;
   conv: any;
   user: any;
+  userId;
 
   msgList: any;
   msgListSubscription: Subscription;
@@ -30,7 +31,7 @@ export class ConversationComponent{
 
 
   ngOnInit() {
-    const userId = this.authService.getUserId();
+    this.userId = this.authService.getUserId();
     this.conv = this.navParams.get('conv');
     console.log(this.conv);
 
