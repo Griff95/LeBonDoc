@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
-import {CommonModule} from 'angular/common';
 import { AdChat } from "../../models/AdChat";
 import { ChatService } from "../../services/chat.service";
 import {ModalController, NavParams, ViewController} from 'ionic-angular';
