@@ -15,6 +15,7 @@ import { AuthService } from '../services/auth.service';
 import {DeposerPage} from "../pages/deposer/deposer";
 import {FavorisPage} from "../pages/favoris/favoris";
 import {MessagesPage} from "../pages/messages/messages";
+import {ConversationPage} from "../pages/messages/conversation/conversation"
 import {MonComptePage} from "../pages/moncompte/moncompte";
 import {OffresPage} from "../pages/offres/offres";
 import {TabsPage} from "../pages/tabs/tabs";
@@ -43,6 +44,7 @@ import {JsonService} from "../services/json.service";
       DeposerPage,
       FavorisPage,
       MessagesPage,
+      ConversationPage,
       MonComptePage,
       OffresPage,
       TabsPage,
@@ -65,6 +67,7 @@ import {JsonService} from "../services/json.service";
       DeposerPage,
       FavorisPage,
       MessagesPage,
+      ConversationPage,
       MonComptePage,
       OffresPage,
       TabsPage,

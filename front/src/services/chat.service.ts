@@ -12,25 +12,33 @@ export class ChatService{
   constructor(private http: HttpClient) {
   }
 
+<<<<<<< Updated upstream
   getChat(idAd){
+=======
+  startOrGetChat(idAd){
+>>>>>>> Stashed changes
     return new Promise( (resolve, reject) => {
-        this.http.get('http://localhost:3000/api/startOrGetChat/' + idAd).subscribe(
+        this.http.get('http://localhost:3000/api/adchat/startOrGetChat/' + idAd).subscribe(
             (data: any[]) => {
-                console.log(data);
                 this.chats = data;
                 this.chatsList$.next(this.chats.slice());
+                console.log(data);
                 resolve(data);
-            },
-            (error) => {
-                reject(error);
             }
+            // (error) => {
+            //     reject(error);
+            // }
         )
     })
   }
 
   sendMessage(){
     return new Promise( (resolve, reject) => {
+<<<<<<< Updated upstream
         this.http.post('http://localhost:3000/api/sendMessage').subscribe(
+=======
+        this.http.post('http://localhost:3000/api/adchat/sendMessage', chatJson).subscribe(
+>>>>>>> Stashed changes
             (data) => {
                 resolve(data);
             },
