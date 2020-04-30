@@ -6,6 +6,9 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class ChatService{
 
+  chat: AdChat[];
+  msgList$ = new Subject<AdChat[]>();
+
   chats: AdChat[];
   chatsList$ = new Subject<AdChat[]>();
 
@@ -17,14 +20,30 @@ export class ChatService{
     return new Promise( (resolve, reject) => {
         this.http.get('http://localhost:3000/api/adchat/startOrGetChat/' + idAd).subscribe(
             (data: any[]) => {
-                this.chats = data;
-                this.chatsList$.next();
+                this.chat = data;
+                this.msgList$.next();
                 resolve(data);
             },
             (error) => {
                 reject(error);
             }
         )
+    })
+  }
+
+  getUserAdChats() {
+    return new Promise( (resolve, reject) => {
+      this.http.get('http://localhost:3000/api/userAdChats').subscribe(
+        (data: any[]) => {
+          this.chats = data;
+          this.chatsList$.next();
+          resolve(data)
+        },
+        (error) => {
+          reject(error);
+        }
+
+      )
     })
   }
 
@@ -40,5 +59,6 @@ export class ChatService{
         )
     })
   }
+
 
 }

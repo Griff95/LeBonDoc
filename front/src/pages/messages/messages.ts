@@ -3,7 +3,9 @@ import { AdChat } from "../../models/AdChat";
 import { ChatService } from "../../services/chat.service";
 import { ModalController, NavParams } from 'ionic-angular';
 import {Subscription} from "rxjs";
-import {ConversationComponent} from '../../components/conversation/conversation'
+import {ConversationComponent} from '../../components/conversation/conversation';
+import {AuthService} from "../../services/auth.service";
+
 
 @Component({
   selector: 'page-messages',
@@ -16,6 +18,7 @@ export class MessagesPage {
 
   constructor(public navParams: NavParams,
               private chatService: ChatService,
+              private authService: AuthService,
               private zone: NgZone,
               private modalCtrl: ModalController) {
   }
@@ -27,8 +30,8 @@ export class MessagesPage {
         this.chatsList = allChats;
       });
     });
-  }
 
+  }
 
   onLoadConv(conv: AdChat) {
     let modal = this.modalCtrl.create(ConversationComponent, {conv: conv});

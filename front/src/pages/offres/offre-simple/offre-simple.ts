@@ -1,5 +1,5 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import { NavParams, ViewController, ModalController } from 'ionic-angular';
+import { NavParams, ViewController, ModalController, NavController } from 'ionic-angular';
 import {Ad} from "../../../models/Ad";
 import {AdChat} from "../../../models/AdChat";
 import {UserProfile} from "../../../models/UserProfile";
@@ -34,6 +34,7 @@ export class OffreSimplePage implements OnInit {
               private adService: AdService,
               private chatService: ChatService,
               private accountService: AccountService,
+              private nav: NavController,
               private authService : AuthService,
               private zone: NgZone,
               private jsonService : JsonService,
@@ -113,6 +114,7 @@ export class OffreSimplePage implements OnInit {
     //   console.log(error);
     // });
     // console.log("test");
+    this.nav.push(MessagesPage);
     let modal = this.modalCtrl.create(ConversationComponent, {conv: conv});
     modal.present();
     modal.onDidDismiss(() => this.ngOnInit());
