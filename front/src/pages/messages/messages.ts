@@ -3,7 +3,7 @@ import { AdChat } from "../../models/AdChat";
 import { ChatService } from "../../services/chat.service";
 import { ModalController } from 'ionic-angular';
 import {Subscription} from "rxjs";
-import {ConversationPage} from '../../components/conversation/conversation'
+import {ConversationComponent} from '../../components/conversation/conversation'
 
 @Component({
   selector: 'page-messages',
@@ -29,7 +29,7 @@ export class MessagesPage {
 
 
   onLoadConv(conv: AdChat) {
-    let modal = this.modalCtrl.create(ConversationPage, {conv: conv});
+    let modal = this.modalCtrl.create(ConversationComponent, {conv: conv});
     modal.present();
     modal.onDidDismiss(() => this.ngOnInit());
   }

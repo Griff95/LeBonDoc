@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AdChat } from "../../../models/AdChat";
-import { ChatService } from "../../../services/chat.service";
+import { AdChat } from "../../models/AdChat";
+import { ChatService } from "../../services/chat.service";
 
 
 @Component({
@@ -8,7 +8,7 @@ import { ChatService } from "../../../services/chat.service";
   templateUrl: 'conversation.html'
 })
 
-export class ConversationPage{
+export class ConversationComponent{
 
   @Input() conv: any;
 

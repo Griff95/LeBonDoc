@@ -9,7 +9,7 @@ import {AccountService} from "../../../services/account.service";
 import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
 import {JsonService} from "../../../services/json.service";
-import {ConversationPage} from "../../../components/conversation/conversation";
+import {ConversationComponent} from "../../../components/conversation/conversation";
 
 
 
@@ -102,7 +102,7 @@ export class OffreSimplePage implements OnInit {
     const conv = this.chatService.startOrGetChat(this.offre._id);
     console.log(conv);
     const modal = await this.modalCtrl.create({
-      component: ConversationPage,
+      component: ConversationComponent,
       componentProps: { conv: conv }
     });
     modal.onDidDismiss(() => this.ngOnInit());
