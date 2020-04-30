@@ -18,13 +18,13 @@ export class ChatService{
         this.http.get('http://localhost:3000/api/adchat/startOrGetChat/' + idAd).subscribe(
             (data: any[]) => {
                 this.chats = data;
-                this.chatsList$.next(this.chats.slice());
+                this.chatsList$.next();
                 console.log(data);
                 resolve(data);
+            },
+            (error) => {
+                reject(error);
             }
-            // (error) => {
-            //     reject(error);
-            // }
         )
     })
   }

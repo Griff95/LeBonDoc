@@ -1,13 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-<<<<<<< Updated upstream
-import { AdChat } from "../../models/AdChat"
-import { ChatService } from "../../services/chat.service"
-=======
 import { AdChat } from "../../models/AdChat";
 import { ChatService } from "../../services/chat.service";
 import { ModalController } from 'ionic-angular';
 import {Subscription} from "rxjs";
->>>>>>> Stashed changes
+import {ConversationPage} from '../../components/conversation/conversation'
 
 @Component({
   selector: 'page-messages',
@@ -31,13 +27,11 @@ export class MessagesPage {
     });
   }
 
-<<<<<<< Updated upstream
-=======
+
   onLoadConv(conv: AdChat) {
-    let modal = this.modalCtrl.create(MessagesPage, {conv: conv});
+    let modal = this.modalCtrl.create(ConversationPage, {conv: conv});
     modal.present();
     modal.onDidDismiss(() => this.ngOnInit());
   }
 
->>>>>>> Stashed changes
 }

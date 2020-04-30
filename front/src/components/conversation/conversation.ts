@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { Component, OnInit, Input } from '@angular/core';
 import { AdChat } from "../../../models/AdChat";
 import { ChatService } from "../../../services/chat.service";
 
@@ -11,20 +10,15 @@ import { ChatService } from "../../../services/chat.service";
 
 export class ConversationPage{
 
+  @Input() conv: any;
 
   messageText: any;
   chatJson: any;
-  conv: AdChat;
 
 
-  constructor(private chatService: ChatService,
-              params: NavParams) {
-    console.log('conv');
-    let conv = params.get('conv');
-    console.log(conv);
+
+  constructor(private chatService: ChatService) {
   }
-
-
 
 
   ngOnInit() {
@@ -32,16 +26,11 @@ export class ConversationPage{
   }
 
 
-
-
-
-
-
-
   sendMessage() {
+
     let chatJson = {
       msg: this.messageText,
-      idChat: this.conv['_id']
+      idChat: this.conv._id
     };
     this.chatService.sendMessage(chatJson);
 
