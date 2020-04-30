@@ -56,7 +56,10 @@ export class ConversationComponent{
     console.log(this.conv);
     let chatJson = {msg: this.messageText, idChat: this.conv._id};
     this.chatService.sendMessage(JSON.stringify(chatJson)).then( (chat) => {
-      this.conv = chat;
+      this.zone.run( () => {
+          this.conv = chat;
+          this.msgList = this.conv.msg;
+      });
     });
   }
 
