@@ -76,6 +76,22 @@ import {JsonService} from "../services/json.service";
       DeposerFormPage,
       SearchPage
   ],
+  exports: [
+    MyApp,
+    HomePage,
+    ConnexionPage,
+    InscriptionPage,
+    DeposerPage,
+    FavorisPage,
+    MessagesPage,
+    ConversationComponent,
+    MonComptePage,
+    OffresPage,
+    TabsPage,
+    OffreSimplePage,
+    DeposerFormPage,
+    SearchPage
+  ],
   providers: [
     StatusBar,
     SplashScreen,
