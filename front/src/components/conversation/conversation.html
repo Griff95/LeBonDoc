@@ -1,7 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title><!-- {{ conv.user.type }} --> test
-    </ion-title>
+    <ion-buttons start>
+      <button ion-button clear (click)="dismissModal()">Fermer</button>
+    </ion-buttons>
+    <ion-title *ngIf="conv.ad.title">{{ conv.ad.title }}</ion-title>
 
   </ion-navbar>
 </ion-header>
@@ -46,7 +48,7 @@
 <ion-footer>
 
 
-  <ion-grid class="msg-grid">
+  <ion-grid class="msg-grid" style="background-color: rgba(127,127,127,0.4)">
     <ion-row>
 
       <ion-col col-10 class="input-col">

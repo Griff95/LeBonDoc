@@ -4,7 +4,7 @@ const AdChat = require('../models/adChat');
 
 exports.startOrGetChat = (req, res, next) => {
     console.log("startOrGetChat");
-    User.findById(req.body.userId).populate({ path: 'chats', populate: { path: 'user advertiser', model: 'User', select: 'name lastName'}}).then((user) => {
+    User.findById(req.body.userId).populate({ path: 'chats', populate: { path: 'user advertiser', model: 'User', select: 'name lastName'}}).populate({ path: 'chats', populate: { path: 'ad', model: 'Ad', select:'title'}}).then((user) => {
         // console.log('found user ' + user);
         // console.log('idAd is ' + req.params.idAd);
         // console.log('user.chats is ' + user.chats);
@@ -28,7 +28,7 @@ exports.startOrGetChat = (req, res, next) => {
                 .then(() => {
                     User.findByIdAndUpdate(req.body.userId, { $push: { chats: adChat } }).catch((error) => {res.status(400).json(error)});
                     User.findByIdAndUpdate(ad.advertiser, { $push: { chats: adChat } }).catch((error) => {res.status(400).json(error)});
-                    AdChat.findById(adChat._id).populate({ path: 'user advertiser', model: 'User', select: 'name lastName'}).then( (newChat) => {
+                    AdChat.findById(adChat._id).populate({ path: 'user advertiser', model: 'User', select: 'name lastName'}).populate({ path: 'chats', populate: { path: 'ad', model: 'Ad', select:'title'}}).then( (newChat) => {
                         res.status(201).json(newChat);
                     }).catch((error) => {res.status(400).json(error)});
                 }).catch((error) => {res.status(400).json(error)})
@@ -47,7 +47,7 @@ exports.sendMessage = (req, res, next) => {
                 msg: req.body.msg,
                 createdAt: Date()
             };
-            AdChat.findByIdAndUpdate(req.body.idChat, { $push: { msg: chatMsg }}, {new: true}).then((adChat) => {
+            AdChat.findByIdAndUpdate(req.body.idChat, { $push: { msg: chatMsg }}, {new: true}). populate({ path:'ad', model:'Ad', select:'title'}).then((adChat) => {
                 res.status(200).json(adChat);
             }).catch( (error) => { res.status(400).json(error)});
         }
@@ -57,7 +57,7 @@ exports.sendMessage = (req, res, next) => {
 
 exports.getUserAdChats = (req, res, next) => {
     console.log("getUserAdChats");
-    User.findById(req.body.userId).populate({ path: 'chats', populate: { path: 'user advertiser', model: 'User', select: 'name lastName'}}).then( (user) => {
+    User.findById(req.body.userId).populate({ path: 'chats', populate: { path: 'user advertiser', model: 'User', select: 'name lastName'}}).populate({ path: 'chats', populate: { path: 'ad', model: 'Ad', select:'title'}}).then( (user) => {
         res.status(201).json(user.chats);
     }).catch((error) => {res.status(400).json(error)});
 };

@@ -102,7 +102,11 @@ export class OffreSimplePage implements OnInit {
   async contactOwner() {
     //let test = 0;
     this.dismissModal();
-    const conv = this.chatService.startOrGetChat(this.offre._id);
+    this.chatService.startOrGetChat(this.offre._id).then( (chat) => {
+      this.nav.push(MessagesPage);
+      let modal = this.modalCtrl.create(ConversationComponent, {conv: chat});
+      modal.present();
+    });
     // console.log(conv);
     // const modal = await this.modalCtrl.create({
     //   // component: ConversationComponent,
@@ -114,10 +118,7 @@ export class OffreSimplePage implements OnInit {
     //   console.log(error);
     // });
     // console.log("test");
-    this.nav.push(MessagesPage);
-    let modal = this.modalCtrl.create(ConversationComponent, {conv: conv});
-    modal.present();
-    modal.onDidDismiss(() => this.ngOnInit());
+
   }
 
   ngOnDestroy(){

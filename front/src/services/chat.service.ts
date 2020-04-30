@@ -36,7 +36,7 @@ export class ChatService{
 
   getUserAdChats() {
     return new Promise( (resolve, reject) => {
-      this.http.get('http://localhost:3000/api/userAdChats/' + this.auth.getUserId()).subscribe(
+      this.http.get('http://localhost:3000/api/adchat/userAdChats/').subscribe(
         (data: any[]) => {
           this.chats = data;
           this.chatsList$.next(this.chats);

@@ -5,23 +5,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <div>
+<ion-content padding>
     <ion-list>
-      <ion-item text-wrap *ngFor="let conv of conversationsList" (click)="onLoadConv(conv)">
+      <ion-item text-wrap *ngFor="let conv of chatsList" (click)="onLoadConv(conv)">
         <ion-label>
-          <h2>{{ conv.user.name }}</h2>
-          <div style="font-size:11px">
-            <ion-note>{{ conv.msg[1] }}</ion-note>
+          <h2>Chat avec {{ conv.advertiser.name }} {{ conv.advertiser.lastName }}</h2>
+          <div style="font-size:15px">
+            <ion-note>{{ conv.ad.title }}</ion-note>
           </div>
         </ion-label>
       </ion-item>
     </ion-list>
-  </div>
 </ion-content>
-
-
-  <ion-footer>
-
-
-  </ion-footer>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { AdChat } from "../../models/AdChat";
 import { ChatService } from "../../services/chat.service";
-import { NavParams } from 'ionic-angular';
+import {ModalController, NavParams, ViewController} from 'ionic-angular';
 import {Subscription} from "rxjs";
 import {AuthService} from "../../services/auth.service";
 
@@ -24,20 +24,15 @@ export class ConversationComponent{
   constructor(public navParams: NavParams,
               private authService: AuthService,
               private chatService: ChatService,
-              private zone: NgZone) {
+              private zone: NgZone,
+              public viewCtrl : ViewController) {
   }
 
 
   ngOnInit() {
     const userId = this.authService.getUserId();
-    const conv = this.navParams.get('conv').then(
-        (data: AdChat) => {
-          this.conv = data;
-          console.log(data);
-        }
-       // (err) => {console.log(err.toString())}
-    );
-    console.log(conv);
+    this.conv = this.navParams.get('conv');
+    console.log(this.conv);
 
 
     this.msgListSubscription = this.chatService.msgList$.subscribe(
@@ -46,16 +41,18 @@ export class ConversationComponent{
         this.msgList = allChats;
       });
     });
-
-
-
-
   }
 
 
   sendMessage() {
     console.log(this.conv);
     let chatJson = {msg: this.messageText, idChat: this.conv._id};
-    this.chatService.sendMessage(JSON.stringify(chatJson));
+    this.chatService.sendMessage(JSON.stringify(chatJson)).then( (chat) => {
+      this.conv = chat;
+    });
+  }
+
+  dismissModal(){
+    this.viewCtrl.dismiss();
   }
 }

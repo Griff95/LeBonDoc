@@ -23,7 +23,7 @@ export class MessagesPage {
               private modalCtrl: ModalController) {
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.chatsListSubscription = this.chatService.chatsList$.subscribe(
       (allChats: AdChat[]) => {
       this.zone.run(() => {
@@ -38,7 +38,7 @@ export class MessagesPage {
   onLoadConv(conv: AdChat) {
     let modal = this.modalCtrl.create(ConversationComponent, {conv: conv});
     modal.present();
-    modal.onDidDismiss(() => this.ngOnInit());
+    modal.onDidDismiss(() => this.ionViewWillEnter());
   }
 
 }
