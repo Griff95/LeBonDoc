@@ -8,7 +8,7 @@
 <ion-content>
   <div>
     <ion-list>
-      <ion-item text-wrap *ngFor="let conv of conversationsList" (click)="onLoadConv(offre)">
+      <ion-item text-wrap *ngFor="let conv of conversationsList" (click)="onLoadConv(conv)">
         <ion-label>
           <h2>{{ conv.user.name }}</h2>
           <div style="font-size:11px">

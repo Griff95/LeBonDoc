@@ -30,6 +30,7 @@ export class MessagesPage {
         this.chatsList = allChats;
       });
     });
+    this.chatService.getUserAdChats();
 
   }
 
