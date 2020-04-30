@@ -26,6 +26,7 @@ import { SearchPage } from '../pages/offres/search/search';
 
 
 import {AdService} from "../services/ad.service";
+import {ChatService} from "../services/chat.service";
 import {AccountService} from "../services/account.service";
 
 import {Ad} from "../models/Ad";
@@ -85,6 +86,7 @@ import {JsonService} from "../services/json.service";
     Ad,
     AdChat,
     AdService,
+    ChatService,
     AccountService,
     UserProfile
   ]

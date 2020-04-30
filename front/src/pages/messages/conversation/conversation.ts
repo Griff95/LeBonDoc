@@ -1,20 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< Updated upstream
-import { AdChat } from "../../models/AdChat"
-=======
 import { NavParams } from 'ionic-angular';
 import { AdChat } from "../../../models/AdChat";
 import { ChatService } from "../../../services/chat.service";
->>>>>>> Stashed changes
 
 
 @Component({
   selector: 'page-conversation',
   templateUrl: 'conversation.html'
 })
-<<<<<<< Updated upstream
-export class MessagesPage {
-=======
+
 export class ConversationPage{
 
 
@@ -53,4 +47,3 @@ export class ConversationPage{
 
   }
 }
->>>>>>> Stashed changes
