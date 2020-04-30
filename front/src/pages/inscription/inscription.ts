@@ -71,6 +71,7 @@ export class InscriptionPage {
     const medicalField = this.authForm.get('medicalField').value;
     const department = this.authForm.get('department').value;
     const city = this.authForm.get('city').value;
+    const region = this.authForm.get('region').value;
 
     if (password == confirmPassword) {
       let newUser = {
@@ -82,6 +83,7 @@ export class InscriptionPage {
         medicalField: medicalField,
         postalCode: postalCode,
         department: department,
+        region: region,
         city: city
       };
 

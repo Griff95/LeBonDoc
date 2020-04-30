@@ -4,7 +4,7 @@ const Ad = require('../models/ad');
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
-    console.log("signup requested " + req.body.email);
+    console.log("signup requested " + JSON.stringify(req.body));
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
@@ -15,7 +15,9 @@ exports.signup = (req, res, next) => {
                 phone: req.body.phone,
                 city: req.body.city,
                 department: req.body.department,
-                postalCode: req.body.postalCode
+                postalCode: req.body.postalCode,
+                region: req.body.region,
+                medicalField: req.body.medicalField
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))

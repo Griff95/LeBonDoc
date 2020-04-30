@@ -19,7 +19,7 @@
         Résultat de votre recherche
       </ion-title>
     <ion-chip *ngIf=filtersApplied.medicalField>
-      <ion-label>{{ adService.DOMAINEMEDICAL[filtersApplied.medicalField-1] }}</ion-label>
+      <ion-label>{{ medicalField[filtersApplied.medicalField-1].title }}</ion-label>
       <ion-icon name="close" color="light" (click)=removeFilter(0)></ion-icon>
     </ion-chip>
     <ion-chip *ngIf=filtersApplied.postalCode>
@@ -27,11 +27,11 @@
       <ion-icon name="close" color="light" (click)=removeFilter(1)></ion-icon>
     </ion-chip>
     <ion-chip *ngIf=filtersApplied.adType>
-      <ion-label>{{ adService.TYPEOFFRE[filtersApplied.adType-1] }}</ion-label>
+      <ion-label>{{ adType[filtersApplied.adType-1].title }}</ion-label>
       <ion-icon name="close" color="light" (click)=removeFilter(2)></ion-icon>
     </ion-chip>
     <ion-chip *ngIf=filtersApplied.structureType>
-      <ion-label>{{ adService.HEALTHSTRUCTURETYPE[filtersApplied.structureType-1] }}</ion-label>
+      <ion-label>{{ structureType[filtersApplied.structureType-1].title }}</ion-label>
       <ion-icon name="close" color="light" (click)=removeFilter(3)></ion-icon>
     </ion-chip>
     <ion-list *ngIf="searchResultList">

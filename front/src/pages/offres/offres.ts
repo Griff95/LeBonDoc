@@ -8,6 +8,7 @@ import {Subscription} from "rxjs";
 import {AccountService} from "../../services/account.service";
 import {UserProfile} from "../../models/UserProfile";
 import {AuthService} from "../../services/auth.service";
+import {JsonService} from "../../services/json.service";
 
 @Component({
   selector: 'page-offres',
@@ -20,6 +21,9 @@ export class OffresPage implements OnInit, OnDestroy{
   mostRecent: Ad[];
   sameSpeciality: Ad[];
   searchResultList: Ad[];
+  structureType;
+  medicalField;
+  adType;
   filtersApplied = {
     medicalField: null,
     postalCode: null,
@@ -38,11 +42,18 @@ export class OffresPage implements OnInit, OnDestroy{
               private toastCtrl: ToastController,
               private loadingCtrl: LoadingController,
               private accountService: AccountService,
+              private jsonService: JsonService,
               private zone: NgZone) {
     this.displayResults = false;
   }
 
-  ngOnInit(){
+  ngOnInit(): void {
+    this.jsonService.getStructureTypes().then((data) => this.structureType = data);
+    this.jsonService.getMedicalFields().then((data) => this.medicalField = data);
+    this.jsonService.getAdTypes().then((data) => this.adType = data);
+  }
+
+  ionViewWillEnter(){
     this.mostRecentSubscription = this.adService.mostRecent$.subscribe(
         (mostRecentAds: Ad[]) => {
           this.zone.run(() => {
@@ -113,7 +124,7 @@ export class OffresPage implements OnInit, OnDestroy{
   onLoadOffre(offre: Ad) {
     let modal = this.modalCtrl.create(OffreSimplePage, {offre: offre});
     modal.present();
-    modal.onDidDismiss(() => this.ngOnInit());
+    modal.onDidDismiss(() => this.ionViewWillEnter());
   }
 
   ngOnDestroy(){

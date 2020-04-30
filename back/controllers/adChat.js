@@ -23,11 +23,14 @@ exports.startOrGetChat = (req, res, next) => {
                 advertiser: ad.advertiser,
                 ad: ad._id
             });
+            console.log("New AdChat is " + adChat);
             adChat.save()
                 .then(() => {
-                    User.findByIdAndUpdate(req.body.userId, { $push: { chats: adChat } } ).catch((error) => {res.status(400).json(error)});
+                    User.findByIdAndUpdate(req.body.userId, { $push: { chats: adChat } }).catch((error) => {res.status(400).json(error)});
                     User.findByIdAndUpdate(ad.advertiser, { $push: { chats: adChat } }).catch((error) => {res.status(400).json(error)});
-                    res.status(201).json(adChat);
+                    AdChat.findById(adChat._id).populate({ path: 'user advertiser', model: 'User', select: 'name lastName'}).then( (newChat) => {
+                        res.status(201).json(newChat);
+                    }).catch((error) => {res.status(400).json(error)});
                 }).catch((error) => {res.status(400).json(error)})
         }).catch((error) => {res.status(400).json(error)});
     }).catch((error) => {res.status(400).json(error)});
