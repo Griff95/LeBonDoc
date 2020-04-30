@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { CommonModule } from '@angular/common';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
@@ -56,7 +55,6 @@ import {JsonService} from "../services/json.service";
   ],
     imports: [
         BrowserModule,
-        CommonModule,
         IonicModule.forRoot(MyApp),
         IonicStorageModule.forRoot(),
         HttpClientModule
