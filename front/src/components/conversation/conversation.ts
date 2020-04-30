@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
+import {CommonModule} from 'angular/common';
 import { AdChat } from "../../models/AdChat";
 import { ChatService } from "../../services/chat.service";
 import {ModalController, NavParams, ViewController} from 'ionic-angular';
@@ -34,15 +35,22 @@ export class ConversationComponent{
     this.conv = this.navParams.get('conv');
     console.log(this.conv);
 
-
-    this.msgListSubscription = this.chatService.msgList$.subscribe(
-      (allChats: AdChat[]) => {
-      this.zone.run(() => {
-        this.msgList = allChats;
-      });
-    });
+    this.msgList = this.conv.msg;
   }
 
+
+  //   this.msgListSubscription = this.chatService.msgList$.subscribe(
+  //     (allChats: AdChat[]) => {
+  //     this.zone.run(() => {
+  //       this.msgList = allChats;
+  //     });
+  //   });
+  // }
+
+
+  checkUser(msg) {
+    return (msg.user == this.userId);
+  }
 
   sendMessage() {
     console.log(this.conv);

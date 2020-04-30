@@ -17,23 +17,28 @@
       <ion-item text-wrap *ngFor="let msg of msgList">
 
 
+        <ion-label>
+          <div *ngIf="checkUser(msg)" style="float: right; padding-right: 10px;">
+            <div style="font-size:9px">
+              <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
+            </div>
+            <div style="font-size:12px">
+              <ion-note>{{ msg.msg }}</ion-note>
+            </div>
+          </div>
 
-        <ion-label ngIf="msg.user == {{ userId }}" style="float: right; padding-right: 10px;">
-          <div style="font-size:8px">
-            <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
-          </div>
-          <div style="font-size:11px">
-            <ion-note>{{ msg.msg }}</ion-note>
-          </div>
         </ion-label>
 
-        <ion-label ngIf="!(msg.user == {{ userId }})" style="float: left; padding-left: 10px;">
-          <div style="font-size:8px">
-            <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
+        <ion-label>
+          <div *ngIf="!checkUser(msg)" style="float: left; padding-left: 10px;">
+            <div style="font-size:9px">
+              <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
+            </div>
+            <div style="font-size:12px">
+              <ion-note>{{ msg.msg }}</ion-note>
+            </div>
           </div>
-          <div style="font-size:11px">
-            <ion-note>{{ msg.msg }}</ion-note>
-          </div>
+
         </ion-label>
 
       </ion-item>
