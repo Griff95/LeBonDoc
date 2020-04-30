@@ -13,7 +13,7 @@ export class ConversationComponent{
 
   messageText: any;
   chatJson: any;
-
+  private conv: any;
 
   constructor(public navParams: NavParams,
               private chatService: ChatService) {
@@ -21,12 +21,18 @@ export class ConversationComponent{
 
 
   ngOnInit() {
-    console.log(this.navParams.get('conv'));
+    const conv = this.navParams.get('conv').then(
+        (data: AdChat) => {
+          this.conv = data;
+          console.log(data);
+        }, (err) => {console.log(err.toString())}
+    );
+    console.log(conv);
   }
 
 
   sendMessage() {
-
+    console.log(this.conv);
     let chatJson = {
       msg: this.messageText,
       idChat: this.conv._id

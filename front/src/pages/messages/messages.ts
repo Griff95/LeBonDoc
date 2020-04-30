@@ -13,7 +13,6 @@ export class MessagesPage {
 
   chatsList: AdChat[];
   chatsListSubscription: Subscription;
-  test: int;
 
   constructor(public navParams: NavParams,
               private chatService: ChatService,
@@ -22,7 +21,6 @@ export class MessagesPage {
   }
 
   ngOnInit() {
-    console.log(this.navParams.get('test'));
     this.chatsListSubscription = this.chatService.chatsList$.subscribe(
       (allChats: AdChat[]) => {
       this.zone.run(() => {

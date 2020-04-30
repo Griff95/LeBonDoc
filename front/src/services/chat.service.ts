@@ -19,7 +19,6 @@ export class ChatService{
             (data: any[]) => {
                 this.chats = data;
                 this.chatsList$.next();
-                console.log(data);
                 resolve(data);
             },
             (error) => {
