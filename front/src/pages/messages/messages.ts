@@ -1,7 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AdChat } from "../../models/AdChat";
-import { ChatService } from "../../services/chat.service";
-import { ModalController } from 'ionic-angular';
+import { AdChat } from "../../models/AdChat"
+import { ChatService } from "../../services/chat.service"
 
 @Component({
   selector: 'page-messages',
@@ -12,8 +11,7 @@ export class MessagesPage {
   chatsList: AdChat[];
 
   constructor(private chatService: ChatService,
-              private zone: NgZone,
-              private modalCtrl: ModalController) {
+              private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -23,12 +21,6 @@ export class MessagesPage {
         this.chatsList = allChats;
       });
     });
-  }
-
-  onLoadConv(conv) {
-    let modal = this.modalCtrl.create(MessagesPage, {conv: conv});
-    modal.present();
-    modal.onDidDismiss(() => this.ngOnInit());
   }
 
 }
