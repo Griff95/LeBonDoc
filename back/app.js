@@ -6,7 +6,7 @@ const cors = require('cors')
 const jsonRoutes = require('./routes/json');
 const userRoutes = require('./routes/user');
 const adRoutes = require('./routes/ad');
-const applicationRoutes = require('./routes/adChat');
+const adChatRoutes = require('./routes/adChat');
 
 const app = express();
 
@@ -26,6 +26,6 @@ app.use(bodyParser.json());
 app.use('/api/json', jsonRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/api/ad', adRoutes);
-app.use('/api/application', applicationRoutes);
+app.use('/api/adchat', adChatRoutes);
 
 module.exports = app;
