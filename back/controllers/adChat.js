@@ -4,7 +4,7 @@ const AdChat = require('../models/adChat');
 
 exports.startOrGetChat = (req, res, next) => {
     console.log("startOrGetChat");
-    User.findById(req.body.userId).populate("chats").then((user) => {
+    User.findById(req.body.userId).populate({ path: 'chats', populate: { path: 'user advertiser', model: 'User', select: 'name lastName'}}).then((user) => {
         // console.log('found user ' + user);
         // console.log('idAd is ' + req.params.idAd);
         // console.log('user.chats is ' + user.chats);
@@ -54,7 +54,7 @@ exports.sendMessage = (req, res, next) => {
 
 exports.getUserAdChats = (req, res, next) => {
     console.log("getUserAdChats");
-    User.findById(req.body.userId).populate("chats").then( (user) => {
+    User.findById(req.body.userId).populate({ path: 'chats', populate: { path: 'user advertiser', model: 'User', select: 'name lastName'}}).then( (user) => {
         res.status(201).json(user.chats);
     }).catch((error) => {res.status(400).json(error)});
 };
