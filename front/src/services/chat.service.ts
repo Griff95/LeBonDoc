@@ -29,7 +29,7 @@ export class ChatService{
     })
   }
 
-  sendMessage(){
+  sendMessage(chatJson){
     return new Promise( (resolve, reject) => {
         this.http.post('http://localhost:3000/api/adchat/sendMessage', chatJson).subscribe(
             (data) => {

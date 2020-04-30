@@ -1,7 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import { NavParams, ViewController, ModalController } from 'ionic-angular';
 import {Ad} from "../../../models/Ad";
-import {AdChat} from "../../../model/adChat";
+import {AdChat} from "../../../models/AdChat";
 import {UserProfile} from "../../../models/UserProfile";
 import {AdService} from "../../../services/ad.service";
 import {ChatService} from "../../../services/chat.service";

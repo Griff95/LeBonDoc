@@ -15,7 +15,8 @@ export class MessagesPage {
   chatsListSubscription: Subscription;
 
   constructor(private chatService: ChatService,
-              private zone: NgZone) {
+              private zone: NgZone,
+              private modalCtrl: ModalController) {
   }
 
   ngOnInit() {
