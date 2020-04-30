@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AdChat } from "../../models/AdChat";
 import { ChatService } from "../../services/chat.service";
-import { ModalController } from 'ionic-angular';
+import { ModalController, NavParams } from 'ionic-angular';
 import {Subscription} from "rxjs";
 import {ConversationComponent} from '../../components/conversation/conversation'
 
@@ -14,7 +14,8 @@ export class MessagesPage {
   chatsList: AdChat[];
   chatsListSubscription: Subscription;
 
-  constructor(private chatService: ChatService,
+  constructor(public navParams: NavParams,
+              private chatService: ChatService,
               private zone: NgZone,
               private modalCtrl: ModalController) {
   }

@@ -10,6 +10,7 @@ import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
 import {JsonService} from "../../../services/json.service";
 import {ConversationComponent} from "../../../components/conversation/conversation";
+import {MessagesPage} from "../../messages/messages";
 
 
 
@@ -98,19 +99,23 @@ export class OffreSimplePage implements OnInit {
 
 
   async contactOwner() {
+    //let test = 0;
     this.dismissModal();
     const conv = this.chatService.startOrGetChat(this.offre._id);
-    console.log(conv);
-    const modal = await this.modalCtrl.create({
-      component: ConversationComponent,
-      componentProps: { conv: conv }
-    });
+    // console.log(conv);
+    // const modal = await this.modalCtrl.create({
+    //   // component: ConversationComponent,
+    //   // componentProps: { conv: conv }
+    // });
+    // modal.onDidDismiss(() => this.ngOnInit());
+    // console.log("test");
+    // return await modal.present().catch((error) => {
+    //   console.log(error);
+    // });
+    // console.log("test");
+    let modal = this.modalCtrl.create(ConversationComponent, {conv: conv});
+    modal.present();
     modal.onDidDismiss(() => this.ngOnInit());
-    console.log("test");
-    return await modal.present().catch((error) => {
-      console.log(error);
-    });
-    console.log("test");
   }
 
   ngOnDestroy(){
