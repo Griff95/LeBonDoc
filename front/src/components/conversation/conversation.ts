@@ -33,10 +33,7 @@ export class ConversationComponent{
 
   sendMessage() {
     console.log(this.conv);
-    let chatJson = {
-      msg: this.messageText,
-      idChat: this.conv._id
-    };
+    let chatJson = {msg: this.messageText, idChat: this.conv._id};
     this.chatService.sendMessage(chatJson);
 
   }
