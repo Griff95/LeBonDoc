@@ -24,7 +24,7 @@ export class ChatService{
         this.http.get('http://localhost:3000/api/adchat/startOrGetChat/' + idAd).subscribe(
             (data: any[]) => {
                 this.chat = data;
-                this.msgList$.next();
+                this.msgList$.next(this.chat);
                 resolve(data);
             },
             (error) => {
@@ -36,10 +36,10 @@ export class ChatService{
 
   getUserAdChats() {
     return new Promise( (resolve, reject) => {
-      this.http.get('http://localhost:3000/api/userAdChats' + this.auth.getUserId()).subscribe(
+      this.http.get('http://localhost:3000/api/userAdChats/' + this.auth.getUserId()).subscribe(
         (data: any[]) => {
           this.chats = data;
-          this.chatsList$.next();
+          this.chatsList$.next(this.chats);
           resolve(data);
         },
         (error) => {
