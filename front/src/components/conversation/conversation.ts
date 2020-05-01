@@ -39,14 +39,6 @@ export class ConversationComponent{
   }
 
 
-  //   this.msgListSubscription = this.chatService.msgList$.subscribe(
-  //     (allChats: AdChat[]) => {
-  //     this.zone.run(() => {
-  //       this.msgList = allChats;
-  //     });
-  //   });
-  // }
-
 
   checkUser(msg) {
     return (msg.user == this.userId);

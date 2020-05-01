@@ -12,37 +12,32 @@
 
 <ion-content padding>
 
-  <div>
-    <ion-list>
-      <ion-item text-wrap *ngFor="let msg of msgList">
+  <div class="stream">
+    <ion-item text-wrap *ngFor="let msg of msgList" style="background-color:#ff6e0e;">
 
 
-        <ion-label>
-          <div *ngIf="!checkUser(msg)" style="float: right; padding-right: 10px;">
-            <div style="font-size:9px">
+          <ion-badge *ngIf="!checkUser(msg)" color="light" style="float:left;">
+            <div style="font-size:11px">
               <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
             </div>
-            <div style="font-size:12px">
+            <div style="font-size:16px">
               <ion-note>{{ msg.msg }}</ion-note>
             </div>
-          </div>
+          </ion-badge>
 
-        </ion-label>
 
-        <ion-label>
-          <div *ngIf="checkUser(msg)" style="float: left; padding-left: 10px;">
-            <div style="font-size:9px">
+
+          <ion-badge *ngIf="checkUser(msg)" color="primary" style="float:right; text-align:right;">
+            <div style="font-size:11px">
               <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
             </div>
-            <div style="font-size:12px">
+            <div style="font-size:16px">
               <ion-note>{{ msg.msg }}</ion-note>
             </div>
-          </div>
+          </ion-badge>
 
-        </ion-label>
 
       </ion-item>
-    </ion-list>
   </div>
 
 </ion-content>
