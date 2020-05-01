@@ -8,10 +8,10 @@
 <ion-content padding>
     <ion-list>
       <ion-item text-wrap *ngFor="let conv of chatsList" (click)="onLoadConv(conv)">
-        <ion-label>
-          <h2>Chat avec {{ (userId == conv.user._id) ? conv.advertiser.name + " " + conv.advertiser.lastName : conv.user.name + " " + conv.user.lastName }}</h2>
+        <ion-label ion-text>
+          <h2>{{ conv.ad.title }}</h2>
           <div style="font-size:15px">
-            <ion-note>{{ conv.ad.title }}</ion-note>
+            <ion-note>Chat avec {{ (userId == conv.user._id) ? conv.advertiser.name + " " + conv.advertiser.lastName : conv.user.name + " " + conv.user.lastName }}</ion-note>
           </div>
         </ion-label>
       </ion-item>
