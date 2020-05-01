@@ -53,6 +53,7 @@ export class ConversationComponent{
           this.msgList = this.conv.msg;
       });
     });
+    this.messageText = "";
   }
 
   dismissModal(){
