@@ -35,7 +35,7 @@
       <ion-icon name="close" color="light" (click)=removeFilter(3)></ion-icon>
     </ion-chip>
     <ion-list *ngIf="searchResultList">
-      <ion-item text-wrap *ngFor="let result of searchResultList | slice:0:10; let i=index " (click)="onLoadOffre(result)">
+      <ion-item text-wrap *ngFor="let result of searchResultList" (click)="onLoadOffre(result)">
         <ion-label>
           <h2>{{ result.title }}</h2>
           <div style="font-size:11px">

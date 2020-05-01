@@ -6,7 +6,7 @@
 
   <ion-content padding>
     <ion-list *ngIf="userAds">
-      <ion-item text-wrap *ngFor="let offre of userAds | slice:0:4; let i=index " (click)="onLoadOffre(offre)">
+      <ion-item text-wrap *ngFor="let offre of userAds" (click)="onLoadOffre(offre)">
         <ion-label>
           <h2>{{ offre.title }}</h2>
           <div style="font-size:11px">
