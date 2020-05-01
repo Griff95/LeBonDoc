@@ -48,7 +48,7 @@ export class OffreSimplePage implements OnInit {
       this.zone.run(() => {
         this.userProfil = profile;
         const heart = document.getElementById('fav-heart');
-        if (this.userProfil.favorites.includes(this.navParams.get('offre')._id)) {
+        if (this.userProfil.favorites.indexOf(this.navParams.get('offre')._id) !== -1) {
           heart.setAttribute("style", "color:blue");
         } else {
           heart.setAttribute("style", "color:black");
@@ -73,7 +73,7 @@ export class OffreSimplePage implements OnInit {
   favorites() {
     console.log(this.offre);
     const id = this.navParams.get('offre')._id;
-    if (this.userProfil.favorites.includes(id)) {
+    if (this.userProfil.favorites.indexOf(id) !== -1) {
       this.adService.removeFavorites(JSON.stringify({ id: id })).then(
           (data) => {
             this.accountService.getAccount(this.authService.getUserId());
