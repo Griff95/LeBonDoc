@@ -1,30 +1,33 @@
 .msg-grid {
-	padding: 0px!important;
+	padding: 0px;
 	border-top: solid 1px #d2cdcd;
 }
 .input-col {
 	padding-left: 10px;
+  background-color: white;
 }
 .send-col {
-	padding: 0px!important;
+	padding: 0px;
 }
 .send-col ion-button {
-	height: 100%!important;
-	margin: 0px!important;
-	border-radius: 0px !important;
+	height: 100%;
+	margin: 0px;
+	border-radius: 0px;
 }
 .send-col button {
-	border-radius: 0px !important;
+  height: 100%;
+	margin: 0px;
+	border-radius: 0px;
 }
 .send-col ion-icon {
-	font-size: 20px!important;
+	font-size: 200%;
 }
 .stream ion-item {
-    min-height: fit-content !important;
+    min-height: fit-content;
     height: 51px;
 }
 ion-badge {
-    padding: 10px!important;
+    padding: 10px;
     text-align: left;
     max-width: 80%;
 }

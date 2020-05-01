@@ -16,24 +16,21 @@
     <ion-item text-wrap *ngFor="let msg of msgList" style="background-color:#ff6e0e;">
 
 
-          <ion-badge *ngIf="!checkUser(msg)" color="light" style="float:left;">
-            <div style="font-size:11px">
-              <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
-            </div>
-            <div style="font-size:16px">
-              <ion-note>{{ msg.msg }}</ion-note>
-            </div>
+          <ion-badge *ngIf="!checkUser(msg)" color="light" style="float:left;transform: translateY(-2px);">
+
+              <p style="font-size:9px">Envoyé : {{ msg.createdAt }}</p>
+
+
+                  {{ msg.msg }}
           </ion-badge>
 
 
 
-          <ion-badge *ngIf="checkUser(msg)" color="primary" style="float:right; text-align:right;">
-            <div style="font-size:11px">
-              <ion-note>Envoyé : {{ msg.createdAt }}</ion-note>
-            </div>
-            <div style="font-size:16px">
-              <ion-note>{{ msg.msg }}</ion-note>
-            </div>
+          <ion-badge *ngIf="checkUser(msg)" color="primary" style="float:right; text-align:right;transform: translateY(-2px);">
+            <p style="font-size:9px">Envoyé : {{ msg.createdAt }}</p>
+
+
+            {{ msg.msg }}
           </ion-badge>
 
 
